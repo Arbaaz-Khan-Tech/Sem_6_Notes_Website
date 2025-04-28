@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervised vs Unsupervised Learning</title>
+    <link rel="stylesheet" href="supervised_vs_unsupervised.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+header {
+    background-color: var(--header-color);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    color: var(--secondary-color);
+}
+
+</style>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="ML_Questions.html">Back to ML Topics</a>
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Supervised vs Unsupervised Learning</h2>
+                <p>Understanding the fundamental differences between these two core ML paradigms</p>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <div class="comparison-container">
+                <div class="learning-type supervised">
+                    <div class="type-header">
+                        <i class="fas fa-tag type-icon"></i>
+                        <h2>Supervised Learning</h2>
+                        <p class="subtitle">"Learning with a Teacher"</p>
+                    </div>
+                    <div class="type-content">
+                        <div class="definition">
+                            <h3>Definition</h3>
+                            <p>Uses labeled data (input-output pairs) to train models for predicting outcomes.</p>
+                        </div>
+                        <div class="examples">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li>Spam Detection</li>
+                                <li>House Price Prediction</li>
+                                <li>Image Classification</li>
+                                <li>Sentiment Analysis</li>
+                            </ul>
+                        </div>
+                        <div class="algorithms">
+                            <h3>Common Algorithms</h3>
+                            <ul>
+                                <li>Linear Regression</li>
+                                <li>Support Vector Machines</li>
+                                <li>Decision Trees</li>
+                                <li>Neural Networks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="learning-type unsupervised">
+                    <div class="type-header">
+                        <i class="fas fa-search type-icon"></i>
+                        <h2>Unsupervised Learning</h2>
+                        <p class="subtitle">"Learning without a Teacher"</p>
+                    </div>
+                    <div class="type-content">
+                        <div class="definition">
+                            <h3>Definition</h3>
+                            <p>Finds patterns and structures in unlabeled data without predefined outputs.</p>
+                        </div>
+                        <div class="examples">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li>Customer Segmentation</li>
+                                <li>Anomaly Detection</li>
+                                <li>Topic Modeling</li>
+                                <li>Image Clustering</li>
+                            </ul>
+                        </div>
+                        <div class="algorithms">
+                            <h3>Common Algorithms</h3>
+                            <ul>
+                                <li>K-Means Clustering</li>
+                                <li>Principal Component Analysis</li>
+                                <li>DBSCAN</li>
+                                <li>Hierarchical Clustering</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="key-differences">
+            <div class="differences-container">
+                <h2>Key Differences</h2>
+                <div class="differences-grid">
+                    <div class="difference-card">
+                        <h3>Data Type</h3>
+                        <div class="comparison">
+                            <div class="supervised">
+                                <i class="fas fa-tag"></i>
+                                <p>Labeled Data (X → y)</p>
+                            </div>
+                            <div class="unsupervised">
+                                <i class="fas fa-search"></i>
+                                <p>Unlabeled Data (X only)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="difference-card">
+                        <h3>Goal</h3>
+                        <div class="comparison">
+                            <div class="supervised">
+                                <i class="fas fa-bullseye"></i>
+                                <p>Predict Known Outputs</p>
+                            </div>
+                            <div class="unsupervised">
+                                <i class="fas fa-puzzle-piece"></i>
+                                <p>Discover Hidden Patterns</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="difference-card">
+                        <h3>Applications</h3>
+                        <div class="comparison">
+                            <div class="supervised">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Classification & Regression</p>
+                            </div>
+                            <div class="unsupervised">
+                                <i class="fas fa-object-group"></i>
+                                <p>Clustering & Dimensionality Reduction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="real-world-analogies">
+            <div class="analogies-container">
+                <h2>Real-World Analogies</h2>
+                <div class="analogies-grid">
+                    <div class="analogy-card supervised">
+                        <i class="fas fa-book-reader analogy-icon"></i>
+                        <h3>Supervised Learning</h3>
+                        <p>Like a student learning with flashcards - each card has a question and its correct answer.</p>
+                        <div class="analogy-visual">
+                            <div class="flashcard">
+                                <div class="flashcard-front">
+                                    <i class="fas fa-question"></i>
+                                </div>
+                                <div class="flashcard-back">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analogy-card unsupervised">
+                        <i class="fas fa-puzzle-piece analogy-icon"></i>
+                        <h3>Unsupervised Learning</h3>
+                        <p>Like sorting a box of Legos - grouping similar pieces without instructions.</p>
+                        <div class="analogy-visual">
+                            <div class="lego-groups">
+                                <div class="lego-group red"></div>
+                                <div class="lego-group blue"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="decision-flowchart">
+            <div class="flowchart-container">
+                <h2>Which to Use?</h2>
+                <div class="flowchart">
+                    <div class="flow-step">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Start</p>
+                    </div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">
+                        <i class="fas fa-question-circle"></i>
+                        <p>Do you have labeled data?</p>
+                    </div>
+                    <div class="flow-branches">
+                        <div class="branch">
+                            <div class="flow-arrow"></div>
+                            <div class="flow-step yes">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Yes</p>
+                            </div>
+                            <div class="flow-arrow"></div>
+                            <div class="flow-step">
+                                <i class="fas fa-tag"></i>
+                                <p>Use Supervised Learning</p>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="flow-arrow"></div>
+                            <div class="flow-step no">
+                                <i class="fas fa-times-circle"></i>
+                                <p>No</p>
+                            </div>
+                            <div class="flow-arrow"></div>
+                            <div class="flow-step">
+                                <i class="fas fa-search"></i>
+                                <p>Use Unsupervised Learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <script src="supervised_vs_unsupervised.js"></script>
+</body>
+</html> 

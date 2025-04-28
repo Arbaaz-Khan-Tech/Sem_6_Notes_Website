@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Risk Matrix Styles */
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background-color: #e5e7eb;
+        }
+        .risk-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .risk-cell:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Risk Management</h1>
+               
+               
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/SEPM/sepm_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            SEPM
+                        </a>
+                    </nav>
+                    
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Ultimate Interactive Guide: Risk Management</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Master RMMM Plan & Common Risk Sources with interactive tools and examples</p>
+        </div>
+
+        <!-- RMMM Plan Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">1. RMMM Plan (Risk Mitigation, Monitoring, Management)</h3>
+
+                <!-- RMMM Components -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Risk Identification -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Risk Identification</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">List potential risks (e.g., scope creep, resource shortage)</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Brainstorming</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Checklists</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• SWOT Analysis</p>
+                        </div>
+                    </div>
+
+                    <!-- Risk Assessment -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Risk Assessment</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Evaluate impact and probability</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Risk Matrices</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Scoring Models</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Impact Analysis</p>
+                        </div>
+                    </div>
+
+                    <!-- Risk Mitigation -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Risk Mitigation</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Reduce risk likelihood/impact</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Contingency Plans</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Prototyping</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Training</p>
+                        </div>
+                    </div>
+
+                    <!-- Risk Monitoring -->
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Risk Monitoring</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Track risks throughout the project</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Regular Reviews</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Dashboards</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Progress Tracking</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flowchart -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-8">
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Risk Management Process Flow</h4>
+                    <div class="mermaid">
+                        flowchart TD
+                            A[Start] --> B[Risk Identification]
+                            B --> C[Risk Assessment]
+                            C --> D{Impact & Probability}
+                            D -->|High| E[Risk Mitigation]
+                            D -->|Medium| F[Risk Monitoring]
+                            D -->|Low| G[Accept Risk]
+                            E --> H[Implement Controls]
+                            F --> I[Regular Reviews]
+                            H --> J[Monitor Effectiveness]
+                            I --> K[Update Risk Status]
+                            J --> K
+                            K --> L{New Risks?}
+                            L -->|Yes| B
+                            L -->|No| M[End]
+                            style A fill:#f0f9ff,stroke:#0ea5e9
+                            style B fill:#fee2e2,stroke:#ef4444
+                            style C fill:#dcfce7,stroke:#22c55e
+                            style D fill:#fef3c7,stroke:#f59e0b
+                            style E fill:#dbeafe,stroke:#3b82f6
+                            style F fill:#e0e7ff,stroke:#6366f1
+                            style G fill:#f3e8ff,stroke:#a855f7
+                            style H fill:#dbeafe,stroke:#3b82f6
+                            style I fill:#e0e7ff,stroke:#6366f1
+                            style J fill:#dbeafe,stroke:#3b82f6
+                            style K fill:#e0e7ff,stroke:#6366f1
+                            style L fill:#fef3c7,stroke:#f59e0b
+                            style M fill:#f0f9ff,stroke:#0ea5e9
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "RMMM = <span class="text-red-500">R</span>ecognize → <span class="text-green-500">M</span>easure → <span class="text-blue-500">M</span>inimize → <span class="text-purple-500">M</span>onitor!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "RMMM = <span class="text-red-500">R</span>isk <span class="text-green-500">M</span>itigation, <span class="text-blue-500">M</span>onitoring, <span class="text-purple-500">M</span>anagement"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Risk Sources Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">2. Common Risk Sources</h3>
+
+                <!-- Risk Categories -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+                    <!-- Technical -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Technical</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">New technology fails, integration issues</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Prototype early</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Hire experts</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Test thoroughly</p>
+                        </div>
+                    </div>
+
+                    <!-- Project -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Project</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Deadline delays, budget overruns</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Agile sprints</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Buffer time</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Regular reviews</p>
+                        </div>
+                    </div>
+
+                    <!-- People -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">People</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Team turnover, skill gaps</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Training</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Team-building</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Documentation</p>
+                        </div>
+                    </div>
+
+                    <!-- Organizational -->
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Organizational</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Management changes, funding cuts</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Stakeholder alignment</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Contracts</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Clear communication</p>
+                        </div>
+                    </div>
+
+                    <!-- External -->
+                    <div class="bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-indigo-700 dark:text-indigo-400 mb-3">External</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Market shifts, legal changes</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Diversify vendors</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Legal review</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Market research</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "Risks lurk in <span class="text-red-500">Tech</span>, <span class="text-green-500">Projects</span>, <span class="text-blue-500">People</span>, <span class="text-purple-500">Orgs</span>, and <span class="text-indigo-500">External</span> worlds!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "TPPOE = <span class="text-red-500">T</span>echnical, <span class="text-green-500">P</span>roject, <span class="text-blue-500">P</span>eople, <span class="text-purple-500">O</span>rganizational, <span class="text-indigo-500">E</span>xternal"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Matrix Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">3. Risk Matrix Heatmap</h3>
+
+                <!-- Risk Matrix -->
+                <div class="risk-matrix mb-8">
+                    <!-- High Impact -->
+                    <div class="risk-cell bg-red-100 dark:bg-red-900/30">High Impact, Low Probability</div>
+                    <div class="risk-cell bg-red-200 dark:bg-red-800/30">High Impact, Medium Probability</div>
+                    <div class="risk-cell bg-red-300 dark:bg-red-700/30">High Impact, High Probability</div>
+
+                    <!-- Medium Impact -->
+                    <div class="risk-cell bg-yellow-100 dark:bg-yellow-900/30">Medium Impact, Low Probability</div>
+                    <div class="risk-cell bg-yellow-200 dark:bg-yellow-800/30">Medium Impact, Medium Probability</div>
+                    <div class="risk-cell bg-yellow-300 dark:bg-yellow-700/30">Medium Impact, High Probability</div>
+
+                    <!-- Low Impact -->
+                    <div class="risk-cell bg-green-100 dark:bg-green-900/30">Low Impact, Low Probability</div>
+                    <div class="risk-cell bg-green-200 dark:bg-green-800/30">Low Impact, Medium Probability</div>
+                    <div class="risk-cell bg-green-300 dark:bg-green-700/30">Low Impact, High Probability</div>
+                </div>
+
+                <!-- Matrix Legend -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Impact Levels</h4>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• High: Critical to project success</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Medium: Significant but manageable</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Low: Minor impact on project</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Probability Levels</h4>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• High: Very likely to occur</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Medium: Possible occurrence</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Low: Unlikely to occur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Analogies Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">4. Real-World Analogies</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">RMMM Plan</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like a fire drill (identify hazards → train → monitor)</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Technical Risks</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like building a bridge (test materials before full construction)</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Project Risks</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like planning a road trip (account for traffic, weather, and detours)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Re-render Mermaid diagrams when theme changes
+        themeToggle.addEventListener('click', () => {
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 100);
+        });
+    </script>
+</body>
+</html> 

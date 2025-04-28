@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyclomatic Complexity & CMM Model</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* CMM Level Cards */
+        .cmm-level {
+            transition: all 0.3s ease;
+        }
+        .cmm-level:hover {
+            transform: scale(1.02);
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .formula-box {
+            background: linear-gradient(135deg, #1a1b1e 0%, #2c2d31 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Cyclomatic Complexity & CMM Model</h1>
+                
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/SEPM/sepm_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            SEPM
+                        </a>
+                    </nav>
+                
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Cyclomatic Complexity & CMM Model</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Master code complexity metrics and process maturity models</p>
+        </div>
+
+        <!-- Cyclomatic Complexity Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">1. Cyclomatic Complexity</h3>
+
+                <!-- Key Concepts -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Control Flow Graph -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Control Flow Graph (CFG)</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Nodes = code blocks, Edges = execution paths</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Nodes represent code blocks</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Edges show execution flow</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Helps visualize code paths</p>
+                        </div>
+                    </div>
+
+                    <!-- Complexity Formula -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Complexity (M)</h4>
+                        <div class="formula-box">
+                            <p class="text-gray-800 dark:text-gray-200 text-center font-mono">
+                                M = E - N + 2P
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center">
+                                E = Edges, N = Nodes, P = Connected components
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Example: E=10, N=7, P=1 → M=5</p>
+                        </div>
+                    </div>
+
+                    <!-- Thresholds -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Thresholds</h4>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• 1-10: Simple code</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• 11-20: Moderate complexity</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• 21-50: Complex code</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• >50: High risk</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "Cyclomatic = <span class="text-red-500">Count</span> the <span class="text-green-500">Paths</span>! High M = <span class="text-blue-500">Messy</span> code!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "M = <span class="text-red-500">E</span>dges - <span class="text-green-500">N</span>odes + 2×<span class="text-blue-500">P</span>aths"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CMM Model Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">2. Capability Maturity Model (CMM)</h3>
+
+                <!-- CMM Levels -->
+                <div class="space-y-6 mb-8">
+                    <!-- Level 1 -->
+                    <div class="cmm-level bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🌪️</span>
+                            <h4 class="font-semibold text-red-700 dark:text-red-400">1. Initial</h4>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Chaotic processes, unpredictable outcomes</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Ad-hoc processes</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Unpredictable results</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• No formal procedures</p>
+                        </div>
+                    </div>
+
+                    <!-- Level 2 -->
+                    <div class="cmm-level bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">📋</span>
+                            <h4 class="font-semibold text-green-700 dark:text-green-400">2. Repeatable</h4>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Basic tracking and documentation</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Project milestones</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Basic documentation</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Reactive management</p>
+                        </div>
+                    </div>
+
+                    <!-- Level 3 -->
+                    <div class="cmm-level bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">📚</span>
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400">3. Defined</h4>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Standardized processes across organization</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Coding standards</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Process documentation</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Training programs</p>
+                        </div>
+                    </div>
+
+                    <!-- Level 4 -->
+                    <div class="cmm-level bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">📊</span>
+                            <h4 class="font-semibold text-purple-700 dark:text-purple-400">4. Managed</h4>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Metrics-driven process management</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Defect tracking</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Performance metrics</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Quality control</p>
+                        </div>
+                    </div>
+
+                    <!-- Level 5 -->
+                    <div class="cmm-level bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🚀</span>
+                            <h4 class="font-semibold text-indigo-700 dark:text-indigo-400">5. Optimizing</h4>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Continuous process improvement</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Process automation</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Risk management</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Innovation focus</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "CMM = <span class="text-red-500">Chaos</span> → <span class="text-green-500">Repeat</span> → <span class="text-blue-500">Define</span> → <span class="text-purple-500">Measure</span> → <span class="text-indigo-500">Optimize</span>!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "CMM Levels = <span class="text-red-500">I</span>nitial, <span class="text-green-500">R</span>epeatable, <span class="text-blue-500">D</span>efined, <span class="text-purple-500">M</span>anaged, <span class="text-indigo-500">O</span>ptimizing"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Analogies Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">3. Real-World Analogies</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Cyclomatic Complexity</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like maze difficulty (more paths = harder to navigate)</p>
+                    </div>
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">CMM Levels</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Level 1 = "Wild West" dev, Level 5 = "NASA-grade" processes</p>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Code Complexity</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like a complex recipe (more steps = harder to follow)</p>
+                    </div>
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Process Maturity</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like a restaurant's evolution from food truck to Michelin star</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+</body>
+</html> 

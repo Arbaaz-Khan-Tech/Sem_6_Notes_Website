@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensionality Reduction - ML Guide</title>
+    <link rel="stylesheet" href="dimensionality_reduction.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.1/dist/latex.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="ML_Questions.html" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Dimensionality Reduction</h1>
+            <p class="subtitle">Understanding PCA and its Applications</p>
+        </header>
+
+        <section class="intro">
+            <h2>What is PCA?</h2>
+            <div class="math-flow">
+                <div class="math-step">
+                    <span class="math-icon">📊</span>
+                    <p>Standardized Data</p>
+                </div>
+                <div class="math-arrow">→</div>
+                <div class="math-step">
+                    <span class="math-icon">📈</span>
+                    <p>Covariance Matrix</p>
+                </div>
+                <div class="math-arrow">→</div>
+                <div class="math-step">
+                    <span class="math-icon">🔍</span>
+                    <p>Eigenvectors/Values</p>
+                </div>
+                <div class="math-arrow">→</div>
+                <div class="math-step">
+                    <span class="math-icon">🎯</span>
+                    <p>Principal Components</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detailed-explanation">
+            <h2>Understanding PCA in Depth</h2>
+            <div class="explanation-content">
+                <div class="text-content">
+                    <p><span class="highlight">Principal Component Analysis (PCA)</span> is a powerful technique for reducing the dimensionality of data while preserving its most important features. Think of it as a <span class="highlight">smart camera</span> that takes the best possible picture of your data from the most informative angle.</p>
+                    
+                    <h3>Key Concepts:</h3>
+                    <ul>
+                        <li><span class="highlight">Principal Components</span>: These are the new axes that capture the maximum variance in your data. They're like the "best angles" to view your data from.</li>
+                        <li><span class="highlight">Eigenvalues</span>: Tell you how much variance each principal component explains. The larger the eigenvalue, the more important that component is.</li>
+                        <li><span class="highlight">Eigenvectors</span>: Define the direction of each principal component. They're like the "lens" through which we view the data.</li>
+                    </ul>
+
+                    <div class="important-note">
+                        <h4>Important Notes About PCA:</h4>
+                        <ul>
+                            <li>PCA works best with <span class="highlight">linear relationships</span> in your data</li>
+                            <li>Always <span class="highlight">standardize your data</span> before applying PCA</li>
+                            <li>The number of components should be chosen based on the <span class="highlight">cumulative variance explained</span></li>
+                            <li>PCA is sensitive to <span class="highlight">outliers</span> - clean your data first!</li>
+                        </ul>
+                    </div>
+
+                    <div class="shortcut-tips">
+                        <h3>Quick Shortcuts to Remember:</h3>
+                        <div class="shortcut-card">
+                            <span class="shortcut-icon">🎯</span>
+                            <p>"PCA = <span class="highlight">Data Squeeze</span>! Find the best angles to view your data."</p>
+                        </div>
+                        <div class="shortcut-card">
+                            <span class="shortcut-icon">📊</span>
+                            <p>"More variance = More important component"</p>
+                        </div>
+                        <div class="shortcut-card">
+                            <span class="shortcut-icon">🔍</span>
+                            <p>"Eigenvalues tell you how much each component matters"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-aids">
+                    <div class="visual-card">
+                        <h3>PCA Visualization</h3>
+                        <div class="pca-diagram">
+                            <!-- SVG will be inserted here by JavaScript -->
+                        </div>
+                        <p class="caption">How PCA transforms data into principal components</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-playground">
+            <h2>Interactive PCA Playground</h2>
+            <div class="playground-container">
+                <div class="data-explorer">
+                    <h3>Data Explorer</h3>
+                    <div class="upload-section">
+                        <input type="file" id="dataset-upload" accept=".csv,.json">
+                        <button class="demo-btn">Load Demo Dataset</button>
+                    </div>
+                    <div class="visualization-container">
+                        <div id="raw-data-viz"></div>
+                        <div id="pca-viz"></div>
+                    </div>
+                    <div class="controls">
+                        <label>Number of PCs: <input type="range" id="pc-slider" min="1" max="10" value="2"></label>
+                        <div id="variance-explained"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="applications">
+            <h2>PCA Applications</h2>
+            <div class="app-grid">
+                <div class="app-card">
+                    <span class="app-icon">🧬</span>
+                    <h3>Genomics</h3>
+                    <p>Visualizing gene expression clusters</p>
+                </div>
+                <div class="app-card">
+                    <span class="app-icon">💹</span>
+                    <h3>Finance</h3>
+                    <p>Portfolio risk factor analysis</p>
+                </div>
+                <div class="app-card">
+                    <span class="app-icon">📸</span>
+                    <h3>Computer Vision</h3>
+                    <p>Image compression (Eigenfaces)</p>
+                </div>
+                <div class="app-card">
+                    <span class="app-icon">📚</span>
+                    <h3>NLP</h3>
+                    <p>Topic modeling (Latent Semantic Analysis)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison">
+            <h2>PCA vs. Alternatives</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PCA</td>
+                            <td>Linear, fast, interpretable</td>
+                            <td>Fails on non-linear data</td>
+                        </tr>
+                        <tr>
+                            <td>t-SNE</td>
+                            <td>Great for visualization</td>
+                            <td>Computationally heavy</td>
+                        </tr>
+                        <tr>
+                            <td>Autoencoders</td>
+                            <td>Deep learning, non-linear</td>
+                            <td>Black-box, harder to interpret</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="memory-aid">
+            <h2>Quick Memory Aid</h2>
+            <div class="memory-content">
+                <p><span class="highlight">PCA</span> is like a <span class="highlight">data squeeze</span> - it finds the best angles to view your data!</p>
+                <p>Remember: <span class="highlight">Principal Components</span> are the directions of maximum variance 🧭</p>
+                <p><span class="highlight">Eigenvalues</span> tell you how much variance each PC explains 📏</p>
+                <p>Think of PCA as a <span class="highlight">smart camera</span> that takes the best possible picture of your data 📸</p>
+            </div>
+        </section>
+    </div>
+    <script src="dimensionality_reduction.js"></script>
+</body>
+</html> 

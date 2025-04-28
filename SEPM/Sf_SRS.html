@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Requirements Specification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Drag and Drop Styles */
+        .drag-item {
+            cursor: move;
+            user-select: none;
+        }
+        .drop-zone {
+            min-height: 100px;
+            border: 2px dashed #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.drag-over {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Software Requirements Specification</h1>
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/SEPM/sepm_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            SEPM
+                        </a>
+                    </nav>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Requirements Engineering & SRS</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Master SRS for Hospital/University Systems with interactive tools and examples</p>
+        </div>
+
+        <!-- SRS Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">1. SRS for Hospital/University Management Systems</h3>
+
+                <!-- SRS Components -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Functional Requirements -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Functional Requirements</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">System features and actions</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• User authentication</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Data management</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Process automation</p>
+                        </div>
+                    </div>
+
+                    <!-- Non-Functional Requirements -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Non-Functional Requirements</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Quality attributes</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Performance</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Security</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Scalability</p>
+                        </div>
+                    </div>
+
+                    <!-- Use Cases -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Use Cases</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">User-system interactions</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• User workflows</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• System responses</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Error handling</p>
+                        </div>
+                    </div>
+
+                    <!-- Constraints -->
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Constraints</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">System limitations</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Technical</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Legal</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Budget</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "SRS = <span class="text-red-500">F</span>unctions + <span class="text-green-500">Q</span>uality + <span class="text-blue-500">S</span>tories + <span class="text-purple-500">L</span>imits!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "SRS = <span class="text-red-500">S</span>ystem <span class="text-green-500">R</span>equirements <span class="text-blue-500">S</span>pecification"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirement Engineering Tasks Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">2. Requirement Engineering Tasks</h3>
+
+                <!-- Tasks Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Elicitation -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Elicitation</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Gather requirements from stakeholders</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Interviews</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Surveys</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Workshops</p>
+                        </div>
+                    </div>
+
+                    <!-- Analysis -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Analysis</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Validate and prioritize requirements</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• MoSCoW</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Impact Analysis</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Feasibility Study</p>
+                        </div>
+                    </div>
+
+                    <!-- Specification -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Specification</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Document requirements formally</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• UML Diagrams</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• User Stories</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• SRS Document</p>
+                        </div>
+                    </div>
+
+                    <!-- Validation -->
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Validation</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Ensure requirements align with goals</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Prototyping</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Reviews</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Testing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "Requirements = <span class="text-red-500">A</span>sk → <span class="text-green-500">C</span>heck → <span class="text-blue-500">W</span>rite → <span class="text-purple-500">V</span>erify!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "EASV = <span class="text-red-500">E</span>licitation, <span class="text-green-500">A</span>nalysis, <span class="text-blue-500">S</span>pecification, <span class="text-purple-500">V</span>alidation"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SRS Templates Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">3. SRS Templates</h3>
+
+                <!-- Template Comparison -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Hospital System -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Hospital System</h4>
+                        <div class="space-y-4">
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">"Secure patient data (HIPAA)"</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">"Appointment reminders (SMS)"</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">"Real-time bed tracking"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- University System -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4">University System</h4>
+                        <div class="space-y-4">
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">"Student portal (24/7 access)"</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">"Automated grading system"</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">"Course registration"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Analogies Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">4. Real-World Analogies</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">SRS</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like an architect's blueprint before building a house</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Elicitation</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like detective work uncovering hidden needs</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Validation</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like taste-testing a recipe before serving</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SRS Document Structure Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">5. SRS Document Structure</h3>
+
+                <!-- Document Sections -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <!-- Left Column -->
+                    <div class="space-y-6">
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">1. Introduction</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Purpose of the document</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Scope of the project</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Definitions and acronyms</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• References</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">2. System Description</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• System perspective</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• System interfaces</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• User interfaces</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Hardware interfaces</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">3. Functional Requirements</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• User classes and characteristics</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• System features</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• External interface requirements</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Performance requirements</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">4. Non-Functional Requirements</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Performance requirements</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Safety requirements</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Security requirements</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">• Software quality attributes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SRS Development Steps -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-4">SRS Development Steps</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-700 dark:text-red-400 font-semibold">1</div>
+                            <div class="ml-4">
+                                <h5 class="font-semibold text-red-700 dark:text-red-400">Gather Requirements</h5>
+                                <p class="text-gray-600 dark:text-gray-400">Collect all necessary information from stakeholders</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-700 dark:text-green-400 font-semibold">2</div>
+                            <div class="ml-4">
+                                <h5 class="font-semibold text-green-700 dark:text-green-400">Analyze Requirements</h5>
+                                <p class="text-gray-600 dark:text-gray-400">Evaluate and prioritize collected requirements</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-700 dark:text-blue-400 font-semibold">3</div>
+                            <div class="ml-4">
+                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">Document Requirements</h5>
+                                <p class="text-gray-600 dark:text-gray-400">Write clear and concise requirement specifications</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center text-purple-700 dark:text-purple-400 font-semibold">4</div>
+                            <div class="ml-4">
+                                <h5 class="font-semibold text-purple-700 dark:text-purple-400">Validate Requirements</h5>
+                                <p class="text-gray-600 dark:text-gray-400">Review and verify requirements with stakeholders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4 mt-8">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "SRS Steps = <span class="text-red-500">G</span>ather → <span class="text-green-500">A</span>nalyze → <span class="text-blue-500">D</span>ocument → <span class="text-purple-500">V</span>alidate"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "SRS Structure = <span class="text-red-500">I</span>ntro + <span class="text-green-500">S</span>ystem + <span class="text-blue-500">F</span>unctional + <span class="text-purple-500">N</span>on-Functional"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Questions</title>
+    <link rel="stylesheet" href="ml_questions.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ML Questions</h1>
+            <p>Important Topics & Previous Papers</p>
+        </div>
+        <nav>
+            <a href="/" class="nav-link">Home</a>
+            <a href="ml.html" class="nav-link">ML Concepts</a>
+            <a href="ML_Questions.html" class="nav-link active">Questions</a>
+        </nav>
+        <div class="theme-toggle">
+            <button id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Machine Learning Topics</h2>
+                <p>Comprehensive coverage of important concepts and frequently asked questions</p>
+            </div>
+        </section>
+
+        <section class="topics-section">
+            <div class="topics-container">
+                <div class="section-header">
+                    <h2>Previous Paper Topics</h2>
+                    <p>Frequently asked questions and their corresponding topics</p>
+                </div>
+
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <i class="fas fa-brain topic-icon"></i>
+                        <h3>Supervised vs. Unsupervised Learning</h3>
+                        <p>Differentiation and examples</p>
+                        <a href="/ML/supervised_vs_unsupervised.html" class="topic-link">Learn More</a>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fas fa-chart-line topic-icon"></i>
+                        <h3>Regression Techniques</h3>
+                        <p>Linear regression, Ridge vs. Lasso, Least squares</p>
+                        <a href="/ML/regression_techniques.html" class="topic-link">Learn More</a>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fas fa-network-wired topic-icon"></i>
+                        <h3>Neural Networks</h3>
+                        <p>Perceptron models, Backpropagation, Activation functions</p>
+                        <a href="/Ml/neural_networks.html" class="topic-link">Learn More</a>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fas fa-table topic-icon"></i>
+                        <h3>Matrix Operations</h3>
+                        <p>SVD applications, Matrix diagonalization</p>
+                        <a href="/ML/matrix_operations.html" class="topic-link">Learn More</a>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fas fa-chart-bar topic-icon"></i>
+                        <h3>Model Evaluation</h3>
+                        <p>Overfitting/underfitting, Performance metrics</p>
+                        <a href="/ML/model_operations.html" class="topic-link">Learn More</a>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fas fa-compress-alt topic-icon"></i>
+                        <h3>Dimensionality Reduction</h3>
+                        <p>PCA and its applications</p>
+                        <a href="/ML/dimensionality_reduction.html" class="topic-link">Learn More</a>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fas fa-cogs topic-icon"></i>
+                        <h3>Specific Algorithms</h3>
+                        <p>Hebbian Learning, SVM, McCulloch-Pitts model</p>
+                        <a href="/ML/specific_algorithms.html" class="topic-link">Learn More</a>
+                    </div>
+
+                  
+                </div>
+            </div>
+        </section>
+
+        <section class="cheatsheet">
+            <h2>Machine Learning Cheat Sheet</h2>
+            <p class="cheatsheet-subtitle">Based on Mumbai University Syllabus & Previous Year Papers</p>
+
+            <div class="cheatsheet-grid">
+                <!-- Core Concepts -->
+                <div class="cheatsheet-card">
+                    <h3>1. Core Concepts</h3>
+                    <div class="concept-table">
+                        <table>
+                            <tr>
+                                <th>Supervised</th>
+                                <th>Unsupervised</th>
+                                <th>Reinforcement</th>
+                            </tr>
+                            <tr>
+                                <td>Labeled data (e.g., regression, classification)</td>
+                                <td>No labels (e.g., clustering, PCA)</td>
+                                <td>Learns via rewards (e.g., Q-learning)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="key-differences">
+                        <h4>Key Differences:</h4>
+                        <ul>
+                            <li><span class="highlight">Supervised</span>: Predicts outcomes (Y) from inputs (X)</li>
+                            <li><span class="highlight">Unsupervised</span>: Finds hidden patterns (e.g., K-means)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Regression -->
+                <div class="cheatsheet-card">
+                    <h3>2. Regression</h3>
+                    <div class="formula-box">
+                        <h4>Linear Regression</h4>
+                        <p>\[Y = \beta_0 + \beta_1 X\]</p>
+                        <ul>
+                            <li>Least Squares Method: Minimizes \(\sum (Y_i - \hat{Y_i})^2\)</li>
+                            <li>Assumptions: Linear relationship, homoscedasticity, normality of residuals</li>
+                        </ul>
+                    </div>
+                    <div class="regularization">
+                        <h4>Regularization Techniques</h4>
+                        <div class="reg-table">
+                            <table>
+                                <tr>
+                                    <th>Ridge (L2)</th>
+                                    <th>Lasso (L1)</th>
+                                </tr>
+                                <tr>
+                                    <td>Penalizes \(\beta^2\) (shrinks coefficients)</td>
+                                    <td>Penalizes \(|\beta|\) (can zero out coefficients)</td>
+                                </tr>
+                                <tr>
+                                    <td>Prevents overfitting</td>
+                                    <td>Feature selection</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neural Networks -->
+                <div class="cheatsheet-card">
+                    <h3>3. Neural Networks</h3>
+                    <div class="perceptron">
+                        <h4>Perceptron Model</h4>
+                        <p>\[y = f(\sum w_i x_i + b)\]</p>
+                        <div class="activation-functions">
+                            <h5>Activation Functions:</h5>
+                            <ul>
+                                <li>Binary Step: \[f(x) = \begin{cases} 1 & \text{if } x \geq 0 \\ 0 & \text{otherwise} \end{cases}\]</li>
+                                <li>Sigmoid: \[f(x) = \frac{1}{1 + e^{-x}}\] (range: 0–1)</li>
+                                <li>ReLU: \[f(x) = \max(0, x)\]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matrix Operations -->
+                <div class="cheatsheet-card">
+                    <h3>4. Matrix Operations</h3>
+                    <div class="svd">
+                        <h4>Singular Value Decomposition (SVD)</h4>
+                        <p>\[A = U \Sigma V^T\]</p>
+                        <p>Applications: Dimensionality reduction, PCA, image compression</p>
+                    </div>
+                    <div class="eigenvalues">
+                        <h4>Eigenvalues & Diagonalization</h4>
+                        <p>For matrix \(A\), solve \(|A - \lambda I| = 0\) for eigenvalues (\(\lambda\))</p>
+                        <p>Diagonalization: \(A = PDP^{-1}\) (where \(D\) is diagonal)</p>
+                    </div>
+                </div>
+
+                <!-- Model Evaluation -->
+                <div class="cheatsheet-card">
+                    <h3>5. Model Evaluation</h3>
+                    <div class="metrics">
+                        <h4>Confusion Matrix Metrics</h4>
+                        <table>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Formula</th>
+                            </tr>
+                            <tr>
+                                <td>Accuracy</td>
+                                <td>\[\frac{TP + TN}{TP + TN + FP + FN}\]</td>
+                            </tr>
+                            <tr>
+                                <td>Precision</td>
+                                <td>\[\frac{TP}{TP + FP}\]</td>
+                            </tr>
+                            <tr>
+                                <td>Recall</td>
+                                <td>\[\frac{TP}{TP + FN}\]</td>
+                            </tr>
+                            <tr>
+                                <td>F1-Score</td>
+                                <td>\[2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}\]</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Formulas -->
+                <div class="cheatsheet-card">
+                    <h3>6. Quick Formulas</h3>
+                    <div class="formulas">
+                        <ul>
+                            <li>Linear Regression Coefficients:
+                                \[\beta_1 = r \frac{\sigma_y}{\sigma_x}, \beta_0 = \bar{y} - \beta_1 \bar{x}\]
+                            </li>
+                            <li>Correlation (r):
+                                \[r = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}\]
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exam-tips">
+                <h3>Exam Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-calculator"></i>
+                        <p>Practice Numericals: Regression, matrix diagonalization, PCA</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-draw-polygon"></i>
+                        <p>Draw Diagrams: Backpropagation, perceptron models, SVM margins</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-book"></i>
+                        <p>Memorize Formulas: Ridge/Lasso, activation functions, evaluation metrics</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="last-minute-notes">
+                <h3>Last-Minute Revision Notes</h3>
+                <div class="notes-grid">
+                    <div class="note-card">
+                        <h4>Overfitting</h4>
+                        <p>High training accuracy, low test accuracy → Use dropout/regularization</p>
+                    </div>
+                    <div class="note-card">
+                        <h4>Hebbian Learning</h4>
+                        <p>"Neurons that fire together, wire together"</p>
+                    </div>
+                    <div class="note-card">
+                        <h4>McCulloch-Pitts Model</h4>
+                        <p>Binary output based on weighted sum and threshold</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="predicted-paper">
+            <h2>Predicted 2025 Question Paper</h2>
+            <div class="paper-container">
+                <div class="paper-section">
+                    <h3>Section I (Compulsory)</h3>
+                    <h4>Q1. Attempt any FOUR:</h4>
+                    <ol type="a">
+                        <li>Differentiate supervised and unsupervised learning with examples.</li>
+                        <li>Explain Ridge vs. Lasso regression.</li>
+                        <li>Draw and explain the McCulloch-Pitts model for XOR gate.</li>
+                        <li>What is SVD? List its applications.</li>
+                        <li>Define overfitting and underfitting with diagrams.</li>
+                    </ol>
+                </div>
+
+                <div class="paper-section">
+                    <h3>Section II (Attempt any THREE)</h3>
+                    
+                    <div class="question">
+                        <h4>Q2.</h4>
+                        <ol type="a">
+                            <li>Derive the linear regression equation for given data (e.g., X = [2,4,6], Y = [3,5,7]).</li>
+                            <li>Explain the backpropagation algorithm with a flowchart.</li>
+                        </ol>
+                    </div>
+
+                    <div class="question">
+                        <h4>Q3.</h4>
+                        <ol type="a">
+                            <li>Diagonalize the matrix \( A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix} \).</li>
+                            <li>Explain SVM and its kernel trick.</li>
+                        </ol>
+                    </div>
+
+                    <div class="question">
+                        <h4>Q4.</h4>
+                        <ol type="a">
+                            <li>Implement ANDNOT function using a perceptron (weights = [1, -1], threshold = 0).</li>
+                            <li>Discuss PCA steps for dimensionality reduction on a sample dataset.</li>
+                        </ol>
+                    </div>
+
+                    <div class="question">
+                        <h4>Q5.</h4>
+                        <ol type="a">
+                            <li>Calculate Accuracy, Precision, Recall, and F1-score for a confusion matrix (TP=50, TN=30, FP=10, FN=20).</li>
+                            <li>Explain the Hebbian Learning Rule with an example.</li>
+                        </ol>
+                    </div>
+
+                    <div class="question">
+                        <h4>Q6.</h4>
+                        <ol type="a">
+                            <li>Short notes on:
+                                <ul>
+                                    <li>Activation functions (sigmoid, ReLU).</li>
+                                    <li>Curse of dimensionality.</li>
+                                    <li>Applications of neural networks.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <script src="ml_questions.js"></script>
+</body>
+</html> 

@@ -1,0 +1,444 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --card-background: #ffffff;
+    --highlight-color: #ffd700;
+    --navbar-background: #ffffff;
+    --navbar-text: #2c3e50;
+    --navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --highlight-red: #ff5733;
+    --highlight-green: #33ff57;
+    --highlight-blue: #3357ff;
+}
+
+[data-theme="dark"] {
+    --primary-color: #64b5f6;
+    --secondary-color: #b0bec5;
+    --accent-color: #ef5350;
+    --background-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-background: #2d2d2d;
+    --highlight-color: #ffd700;
+    --navbar-background: #2d2d2d;
+    --navbar-text: #e0e0e0;
+    --navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --highlight-red: #ff5733;
+    --highlight-green: #33ff57;
+    --highlight-blue: #3357ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+section {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* Model Content Layout */
+.model-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.text-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.text-content h3 {
+    color: var(--primary-color);
+    margin: 1.5rem 0 1rem;
+}
+
+.text-content ul {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.text-content ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.text-content ul li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+/* Formula Box */
+.formula-box {
+    background: rgba(74, 144, 226, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.formula-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.formula-box p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.formula-note {
+    color: var(--secondary-color);
+    font-style: italic;
+    margin: 1rem 0 0.5rem;
+}
+
+.formula-notes {
+    list-style-type: none;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.formula-notes li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.formula-notes li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+/* Dark theme adjustments for formulas */
+[data-theme="dark"] .formula-box {
+    background: rgba(100, 181, 246, 0.1);
+    border-left-color: var(--primary-color);
+}
+
+[data-theme="dark"] .formula-note {
+    color: var(--secondary-color);
+}
+
+/* Highlight Colors */
+.highlight-red {
+    color: var(--highlight-red);
+    font-weight: 500;
+}
+
+.highlight-green {
+    color: var(--highlight-green);
+    font-weight: 500;
+}
+
+.highlight-blue {
+    color: var(--highlight-blue);
+    font-weight: 500;
+}
+
+/* Interactive Demos */
+.interactive-demo {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-demo h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Gate Simulator */
+.gate-simulator {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputs, .weights, .threshold {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.output {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 5px;
+}
+
+/* Synapse Builder */
+.synapse-builder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.neurons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.neuron {
+    width: 100px;
+    height: 100px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.neuron:hover {
+    transform: scale(1.1);
+}
+
+.connection {
+    width: 200px;
+    height: 4px;
+    background: var(--secondary-color);
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+/* SVM Playground */
+.svm-playground {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#svm-viz {
+    width: 100%;
+    height: 300px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Comparison Table */
+.comparison-table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+th {
+    background: var(--primary-color);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* Challenges Section */
+.challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.challenge-card {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.challenge-demo {
+    height: 200px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: var(--navbar-background);
+    box-shadow: var(--navbar-shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--navbar-text);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--navbar-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .model-content {
+        grid-template-columns: 1fr;
+    }
+
+    .challenge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+} 

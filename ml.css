@@ -1,0 +1,6377 @@
+:root {
+    /* Light theme variables */
+    --bg-color: #f9f9f9;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.05);
+    --card-hover-shadow: rgba(0, 0, 0, 0.1);
+    --accent-color: #4a6cf7;
+    --secondary-color: #6c757d;
+    --border-color: #eaeaea;
+    --supervised-color: #4a6cf7;
+    --unsupervised-color: #ff9f43;
+    --supervised-gradient: linear-gradient(135deg, #4a6cf7, #6a5acd);
+    --unsupervised-gradient: linear-gradient(135deg, #ff9f43, #ff7b7b);
+    --hero-gradient: linear-gradient(135deg, #4a6cf7, #6a5acd);
+    --keyword-bg: rgba(74, 108, 247, 0.1);
+    --keyword-hover: rgba(74, 108, 247, 0.2);
+    --tooltip-bg: rgba(255, 255, 255, 0.95);
+    --tooltip-shadow: rgba(0, 0, 0, 0.1);
+    --quiz-correct: #20bf6b;
+    --quiz-incorrect: #fc5c65;
+    --quiz-neutral: #f1f3f5;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+    --card-bg: #1e1e1e;
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --card-hover-shadow: rgba(0, 0, 0, 0.3);
+    --accent-color: #6c8eff;
+    --secondary-color: #adb5bd;
+    --border-color: #2a2a2a;
+    --supervised-color: #6c8eff;
+    --unsupervised-color: #ffd166;
+    --supervised-gradient: linear-gradient(135deg, #6c8eff, #8a7aff);
+    --unsupervised-gradient: linear-gradient(135deg, #ffd166, #ff7b7b);
+    --hero-gradient: linear-gradient(135deg, #6c8eff, #8a7aff);
+    --keyword-bg: rgba(108, 142, 255, 0.2);
+    --keyword-hover: rgba(108, 142, 255, 0.3);
+    --tooltip-bg: rgba(30, 30, 30, 0.95);
+    --tooltip-shadow: rgba(0, 0, 0, 0.3);
+    --quiz-correct: #3ddc84;
+    --quiz-incorrect: #ff7b7b;
+    --quiz-neutral: #2a2a2a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+header {
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: -1px;
+}
+
+.logo p {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    font-weight: 300;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px var(--card-shadow);
+}
+
+.nav-link.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px var(--card-shadow);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle button:hover {
+    transform: rotate(45deg);
+    box-shadow: 0 5px 15px var(--card-hover-shadow);
+}
+
+main {
+    flex: 1;
+    padding: 2rem 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.section-intro {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    max-width: 800px;
+}
+
+/* Hero Section */
+.hero {
+    background: var(--hero-gradient);
+    color: white;
+    border-radius: 16px;
+    padding: 4rem 5%;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>') repeat;
+    opacity: 0.1;
+    animation: rotate 60s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.definition {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    max-width: 900px;
+}
+
+.keyword {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.3rem;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: help;
+}
+
+.keyword:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.keyword::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1rem;
+    background-color: var(--tooltip-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    box-shadow: 0 5px 15px var(--tooltip-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.keyword:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* Learning Comparison Section */
+.learning-comparison {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.split-screen {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.supervised-side, .unsupervised-side {
+    flex: 1;
+    padding: 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.supervised-side {
+    background: var(--supervised-gradient);
+}
+
+.unsupervised-side {
+    background: var(--unsupervised-gradient);
+}
+
+.side-header {
+    margin-bottom: 1.5rem;
+}
+
+.side-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.side-subtitle {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.side-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.example-box {
+    display: flex;
+    gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.example-icon {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-text h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: white;
+}
+
+.example-text ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.example-text li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.example-text li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.interactive-demo {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.demo-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.teacher-demo, .magnifying-glass-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.teacher-icon, .magnifying-glass-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.data-flow {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.data-item {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.data-item:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.data-item.labeled::after {
+    content: "🏷️";
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.model-box {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.model-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.model-output {
+    font-weight: 600;
+}
+
+.comparison-table {
+    margin: 3rem 0;
+}
+
+.comparison-table h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.comparison-table th {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+.comparison-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table tr:hover {
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease;
+}
+
+.comparison-table tr[data-row="data"]:hover td:nth-child(2) {
+    background-color: rgba(74, 108, 247, 0.1);
+}
+
+.comparison-table tr[data-row="data"]:hover td:nth-child(3) {
+    background-color: rgba(255, 159, 67, 0.1);
+}
+
+.comparison-table tr[data-row="goal"]:hover td:nth-child(2) {
+    background-color: rgba(74, 108, 247, 0.1);
+}
+
+.comparison-table tr[data-row="goal"]:hover td:nth-child(3) {
+    background-color: rgba(255, 159, 67, 0.1);
+}
+
+.comparison-table tr[data-row="algorithms"]:hover td:nth-child(2) {
+    background-color: rgba(74, 108, 247, 0.1);
+}
+
+.comparison-table tr[data-row="algorithms"]:hover td:nth-child(3) {
+    background-color: rgba(255, 159, 67, 0.1);
+}
+
+.decision-flowchart {
+    margin: 3rem 0;
+}
+
+.decision-flowchart h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.decision-flowchart p {
+    margin-bottom: 1.5rem;
+}
+
+.mermaid {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px var(--card-shadow);
+    margin: 2rem 0;
+    overflow-x: auto;
+}
+
+.real-world-analogy {
+    margin: 3rem 0;
+}
+
+.real-world-analogy h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.analogy-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.analogy-card {
+    flex: 1;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.analogy-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px var(--card-hover-shadow);
+}
+
+.analogy-card.supervised {
+    border-top: 5px solid var(--supervised-color);
+}
+
+.analogy-card.unsupervised {
+    border-top: 5px solid var(--unsupervised-color);
+}
+
+.analogy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.analogy-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.analogy-card p {
+    margin-bottom: 1.5rem;
+}
+
+.analogy-visual {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.flashcard {
+    width: 200px;
+    height: 120px;
+    margin: 0 auto;
+    perspective: 1000px;
+    position: relative;
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.flashcard-front {
+    background-color: var(--supervised-color);
+    color: white;
+    transform: rotateY(0deg);
+    transition: transform 0.6s;
+}
+
+.flashcard-back {
+    background-color: white;
+    color: var(--supervised-color);
+    transform: rotateY(180deg);
+    transition: transform 0.6s;
+}
+
+.flashcard:hover .flashcard-front {
+    transform: rotateY(180deg);
+}
+
+.flashcard:hover .flashcard-back {
+    transform: rotateY(0deg);
+}
+
+.lego-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lego-group {
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.lego-group.red {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.lego-group.blue {
+    background-color: rgba(0, 0, 255, 0.1);
+}
+
+.algorithm-showcase {
+    margin: 3rem 0;
+}
+
+.algorithm-showcase h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.algorithm-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.algorithm-tab {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.algorithm-tab:hover {
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px var(--card-shadow);
+}
+
+.algorithm-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.algorithm-panel {
+    display: none;
+}
+
+.algorithm-panel.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.algorithm-panel h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.algorithm-panel p {
+    margin-bottom: 1.5rem;
+}
+
+.algorithm-visual {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.svm-demo, .kmeans-demo {
+    display: flex;
+    justify-content: center;
+}
+
+.svm-plot, .kmeans-plot {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.plot-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.plot-point.class1 {
+    background-color: var(--supervised-color);
+}
+
+.plot-point.class2 {
+    background-color: var(--unsupervised-color);
+}
+
+.decision-boundary {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cluster-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.cluster-point.cluster1 {
+    background-color: var(--supervised-color);
+}
+
+.cluster-point.cluster2 {
+    background-color: var(--unsupervised-color);
+}
+
+.cluster-center {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+}
+
+.cluster-center.center1 {
+    background-color: var(--supervised-color);
+    top: 30%;
+    left: 30%;
+}
+
+.cluster-center.center2 {
+    background-color: var(--unsupervised-color);
+    top: 70%;
+    left: 70%;
+}
+
+.interactive-quiz {
+    margin: 3rem 0;
+}
+
+.interactive-quiz h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.interactive-quiz p {
+    margin-bottom: 1.5rem;
+}
+
+.quiz-container {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px var(--card-shadow);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-question {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--quiz-neutral);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+    background-color: var(--card-hover-shadow);
+}
+
+.option-label {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.quiz-result {
+    text-align: center;
+    display: none;
+}
+
+.result-text {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.try-again-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.try-again-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.dataset-toggle {
+    margin: 3rem 0;
+}
+
+.dataset-toggle h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.dataset-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.dataset-tab {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dataset-tab:hover {
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px var(--card-shadow);
+}
+
+.dataset-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.dataset-panel {
+    display: none;
+}
+
+.dataset-panel.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.dataset-info h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.dataset-info p {
+    margin-bottom: 1.5rem;
+}
+
+.dataset-visual {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.iris-flowers, .customer-segments {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.iris-flower, .customer-segment {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 120px;
+    transition: all 0.3s ease;
+}
+
+.iris-flower:hover, .customer-segment:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.iris-flower.setosa {
+    border-left: 4px solid var(--supervised-color);
+}
+
+.iris-flower.versicolor {
+    border-left: 4px solid var(--unsupervised-color);
+}
+
+.iris-flower.virginica {
+    border-left: 4px solid var(--accent-color);
+}
+
+footer {
+    padding: 2rem 5%;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .analogy-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    nav {
+        margin-top: 1rem;
+    }
+    
+    .hero {
+        padding: 3rem 5%;
+    }
+    
+    .definition {
+        font-size: 1.1rem;
+    }
+    
+    .split-screen {
+        flex-direction: column;
+    }
+    
+    .analogy-container {
+        flex-direction: column;
+    }
+}
+
+/* Linear Regression and Regularization Section */
+.regression-section {
+    padding: 3rem 0;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.regression-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.equation-box {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.equation-intro {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.math-equation {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.equation-goal {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-top: 0.5rem;
+}
+
+.equation-visual {
+    margin-top: 2rem;
+}
+
+.plot-container {
+    width: 100%;
+    height: 300px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.data-points {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.regression-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform-origin: left center;
+    animation: drawLine 2s ease-out forwards;
+}
+
+@keyframes drawLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.regularization-comparison {
+    margin: 3rem 0;
+}
+
+.reg-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.reg-tab {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reg-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.reg-content {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.reg-panel {
+    display: none;
+}
+
+.reg-panel.active {
+    display: block;
+}
+
+.reg-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.reg-icon {
+    font-size: 2rem;
+}
+
+.reg-equation {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.reg-visual {
+    margin-top: 2rem;
+}
+
+.coefficient-plot {
+    width: 100%;
+    height: 250px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.plot-axis {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.axis-label {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.ridge-curve, .lasso-curve {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--accent-color));
+    opacity: 0.3;
+    animation: drawCurve 2s ease-out forwards;
+}
+
+@keyframes drawCurve {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.reg-comparison-table {
+    margin: 3rem 0;
+}
+
+.reg-comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.reg-comparison-table th {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+.reg-comparison-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.reg-comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.reg-comparison-table tr:hover {
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease;
+}
+
+.interactive-regularization {
+    margin: 3rem 0;
+}
+
+.lambda-slider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.lambda-slider input[type="range"] {
+    flex: 1;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.lambda-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.lambda-value {
+    font-weight: 600;
+    min-width: 40px;
+    text-align: center;
+}
+
+.demo-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.before-after {
+    display: flex;
+    gap: 2rem;
+}
+
+.before, .after {
+    flex: 1;
+}
+
+.plot-before, .plot-after {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.regression-analogy {
+    margin: 3rem 0;
+}
+
+.regression-analogy .analogy-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.regression-analogy .analogy-card {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+.regression-analogy .analogy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.regression-analogy h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.regression-quiz {
+    margin: 3rem 0;
+}
+
+.regression-quiz .quiz-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.regression-quiz .quiz-question {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.regression-quiz .quiz-options {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.regression-quiz .quiz-option {
+    flex: 1;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.regression-quiz .quiz-option:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.regression-quiz .option-label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.regression-quiz .quiz-result {
+    text-align: center;
+}
+
+.regression-quiz .result-text {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.regression-quiz .try-again-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.regression-quiz .try-again-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+/* Enhanced Equation Box Styles */
+.plot-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.add-point-btn, .reset-points-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-point-btn:hover, .reset-points-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.equation-explanation {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.explanation-step {
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.explanation-step:hover {
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.explanation-step h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Enhanced Coefficient Plot Styles */
+.interactive-points {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.coeff-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.coeff-point:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.plot-legend {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: var(--card-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px var(--card-shadow);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-color.ridge {
+    background-color: var(--accent-color);
+}
+
+.legend-color.lasso {
+    background-color: var(--unsupervised-color);
+}
+
+/* Enhanced Analogy Card Styles */
+.analogy-interactive {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--card-shadow);
+}
+
+.house-slider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.size-slider {
+    flex: 1;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.size-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.size-value {
+    min-width: 60px;
+    text-align: right;
+    font-weight: 600;
+}
+
+.price-prediction {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.factor-weights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.weight-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.weight-bar {
+    flex: 1;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.feature-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.feature-item label {
+    cursor: pointer;
+}
+
+.feature-impact {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .analogy-container {
+        flex-direction: column;
+    }
+    
+    .house-slider {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .size-value {
+        text-align: center;
+    }
+}
+
+/* Perceptron Models and Logic Gates Section */
+.perceptron-section {
+    padding: 3rem 0;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.perceptron-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.perceptron-intro {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.perceptron-equation {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.equation-condition {
+    display: block;
+    margin-left: 2rem;
+}
+
+.equation-components {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.component-icon {
+    font-size: 1.5rem;
+}
+
+.component-label {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.component-desc {
+    color: var(--secondary-color);
+}
+
+/* Interactive Perceptron Demo */
+.perceptron-demo {
+    margin: 3rem 0;
+}
+
+.demo-controls {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.weight-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.slider-group label {
+    min-width: 100px;
+    font-weight: 600;
+}
+
+.weight-slider, .bias-slider {
+    flex: 1;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.weight-slider::-webkit-slider-thumb, .bias-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.weight-value, .bias-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.gate-selector {
+    display: flex;
+    gap: 1rem;
+}
+
+.gate-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gate-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.decision-boundary-plot {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.plot-area {
+    width: 100%;
+    height: 300px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.data-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.data-point:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.data-point::after {
+    content: attr(data-label);
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.decision-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.plot-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-color.class0 {
+    background-color: var(--unsupervised-color);
+}
+
+.legend-color.class1 {
+    background-color: var(--supervised-color);
+}
+
+/* Truth Table */
+.truth-table {
+    margin: 3rem 0;
+}
+
+.table-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    overflow-x: auto;
+}
+
+.truth-table table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.truth-table th {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+}
+
+.truth-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.truth-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* XOR Problem and Solution */
+.xor-section {
+    margin: 3rem 0;
+}
+
+.xor-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.xor-problem, .xor-solution {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.problem-icon, .solution-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.xor-plot {
+    margin-top: 1.5rem;
+}
+
+.mlp-visualization {
+    margin-top: 1.5rem;
+}
+
+.neural-network {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.layer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.neuron {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+/* Neural Network Analogy */
+.neural-analogy {
+    margin: 3rem 0;
+}
+
+.neural-analogy .analogy-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.neural-analogy .analogy-card {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+.chef-demo, .chefs-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.ingredient, .chef {
+    padding: 0.5rem 1rem;
+    background-color: var(--card-bg);
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.decision {
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+/* Train Your Perceptron Game */
+.perceptron-game {
+    margin: 3rem 0;
+}
+
+.game-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.game-instructions {
+    margin-bottom: 1.5rem;
+}
+
+.game-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    display: none;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.reset-btn, .check-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-btn {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.check-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .xor-content {
+        flex-direction: column;
+    }
+    
+    .neural-analogy .analogy-container {
+        flex-direction: column;
+    }
+    
+    .slider-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .gate-selector {
+        flex-direction: column;
+    }
+}
+
+/* Backpropagation Section */
+.backprop-section {
+    padding: 3rem 0;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.backprop-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.backprop-intro {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.backprop-equation {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+/* Interactive Flowchart */
+.backprop-flowchart {
+    margin: 3rem 0;
+}
+
+.flowchart-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.flow-step {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.flow-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px var(--card-shadow);
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.flow-step h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.step-math {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Live Gradient Calculation */
+.gradient-calc {
+    margin: 3rem 0;
+}
+
+.calc-controls {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.input-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.gradient-display {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.gradient-value, .loss-value {
+    text-align: center;
+}
+
+.gradient-value .label, .loss-value .label {
+    display: block;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.gradient-value .value, .loss-value .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.gradient-heatmap {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.heatmap-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.heatmap-cell {
+    flex: 1;
+    height: 100px;
+    background-color: var(--accent-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.heatmap-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.legend-color.high {
+    background-color: var(--accent-color);
+}
+
+.legend-color.low {
+    background-color: var(--secondary-color);
+}
+
+/* Neural Network Analogy */
+.backprop-analogy {
+    margin: 3rem 0;
+}
+
+.backprop-analogy .analogy-card {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+/* Common Problems & Fixes */
+.problems-fixes {
+    margin: 3rem 0;
+}
+
+.problem-cards {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.problem-card {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+.problem-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.solution-demo {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.activation-plot, .gradient-clip {
+    width: 100%;
+    height: 150px;
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.plot-line {
+    position: absolute;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.plot-line.sigmoid {
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.plot-line.relu {
+    width: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--unsupervised-color);
+}
+
+.clip-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.clip-boundary {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--unsupervised-color);
+    top: 30%;
+    transform: translateY(-50%);
+}
+
+/* Break the Network Game */
+.break-network-game {
+    margin: 3rem 0;
+}
+
+.game-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.game-instructions {
+    margin-bottom: 2rem;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.reset-btn, .train-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-btn {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.train-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.game-visualization {
+    margin-top: 2rem;
+}
+
+.loss-plot {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.plot-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.plot-points {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.weight-controls {
+    display: flex;
+    gap: 2rem;
+}
+
+/* Optimizer Comparison */
+.optimizer-comparison {
+    margin: 3rem 0;
+}
+
+.comparison-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.optimizer-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.optimizer-tab {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.optimizer-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.optimizer-visualization {
+    margin-top: 2rem;
+}
+
+.convergence-plot {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.plot-line.sgd {
+    background-color: var(--accent-color);
+}
+
+.plot-line.adam {
+    background-color: var(--unsupervised-color);
+}
+
+.optimizer-stats {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .flowchart-container {
+        flex-direction: column;
+    }
+    
+    .problem-cards {
+        flex-direction: column;
+    }
+    
+    .weight-controls {
+        flex-direction: column;
+    }
+}
+
+/* Activation Functions Section */
+.activation-section {
+    padding: 3rem 0;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.activation-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.activation-intro {
+    margin-bottom: 3rem;
+}
+
+.activation-intro .intro-text {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.activation-equation {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.equation-components {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.component-icon {
+    font-size: 1.5rem;
+}
+
+/* Function Plots */
+.function-plots {
+    margin-bottom: 3rem;
+}
+
+.plot-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.function-tabs {
+    display: flex;
+    gap: 1rem;
+}
+
+.function-tab {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.function-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.plot-options {
+    display: flex;
+    gap: 1rem;
+}
+
+.plot-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.plot-area {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.plot-axis {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.axis-label {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.function-plot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--accent-color));
+    opacity: 0.3;
+    animation: drawPlot 2s ease-out forwards;
+}
+
+@keyframes drawPlot {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.gradient-overlay, .dead-neuron-highlight {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gradient-overlay.active, .dead-neuron-highlight.active {
+    opacity: 0.2;
+}
+
+.plot-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-color.binary { background-color: var(--supervised-color); }
+.legend-color.bipolar { background-color: var(--unsupervised-color); }
+.legend-color.relu { background-color: var(--accent-color); }
+
+/* Function Comparison Table */
+.function-comparison {
+    margin-bottom: 3rem;
+}
+
+.function-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.function-comparison th {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+.function-comparison td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.function-comparison tr:last-child td {
+    border-bottom: none;
+}
+
+.pro, .con {
+    display: block;
+    margin: 0.25rem 0;
+}
+
+.pro { color: #20bf6b; }
+.con { color: #fc5c65; }
+
+/* Real-World Analogies */
+.activation-analogies {
+    margin-bottom: 3rem;
+}
+
+.analogy-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.analogy-card {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+.analogy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.analogy-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.analogy-visual {
+    margin-top: 1.5rem;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Performance Metrics */
+.performance-metrics {
+    margin-bottom: 3rem;
+}
+
+.metrics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.metric-chart {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.metric-chart h4 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.chart-container {
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 1rem;
+}
+
+.chart-bar {
+    width: 60px;
+    background-color: var(--accent-color);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: height 0.3s ease;
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.bar-value {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+/* Break the Network Challenge */
+.break-network-challenge {
+    margin-bottom: 3rem;
+}
+
+.challenge-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.challenge-instructions {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.challenge-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.start-btn, .reset-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover, .reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.network-visual {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+}
+
+.layer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.neuron {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.neuron.active {
+    opacity: 1;
+}
+
+.training-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Activation Explorer */
+.activation-explorer {
+    margin-bottom: 3rem;
+}
+
+.explorer-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.input-controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-slider, .lr-slider {
+    width: 200px;
+}
+
+.input-value, .lr-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.explorer-visualization {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.neuron-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-value, .output-value {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+}
+
+.activation-function {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.gradient-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.flow-arrow {
+    width: 2px;
+    height: 50px;
+    background-color: var(--accent-color);
+    position: relative;
+}
+
+.flow-arrow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--accent-color);
+}
+
+.gradient-value {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .analogy-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .metrics-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .network-visual {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Hebbian Learning Section */
+.hebbian-section {
+    padding: 3rem 0;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.hebbian-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hebbian-intro {
+    margin-bottom: 3rem;
+}
+
+.hebbian-intro .intro-text {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.hebbian-equation {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.equation-components {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.component-icon {
+    font-size: 1.5rem;
+}
+
+/* Interactive Synapse Demo */
+.synapse-demo {
+    margin-bottom: 3rem;
+}
+
+.demo-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.neuron-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.neuron-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.neuron-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.learning-rate {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lr-slider {
+    width: 200px;
+}
+
+.lr-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.neuron-visualization {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.neuron {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.neuron-body {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.neuron.active .neuron-body {
+    opacity: 1;
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.neuron-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+.synapse {
+    position: relative;
+    width: 200px;
+    height: 4px;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.synapse.active {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.weight-value {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+/* Key Properties */
+.hebbian-properties {
+    margin-bottom: 3rem;
+}
+
+.hebbian-properties table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.hebbian-properties th {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+.hebbian-properties td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hebbian-properties tr:last-child td {
+    border-bottom: none;
+}
+
+/* Real-World Analogies */
+.hebbian-analogies {
+    margin-bottom: 3rem;
+}
+
+.analogy-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.analogy-card {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+.analogy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.analogy-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.analogy-visual {
+    margin-top: 1.5rem;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pavlov-demo, .social-demo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.stimulus, .response, .person {
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.stimulus.active, .response.active {
+    transform: scale(1.2);
+}
+
+.connection {
+    font-size: 1.5rem;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.connection.active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Mathematical Walkthrough */
+.math-walkthrough {
+    margin-bottom: 3rem;
+}
+
+.walkthrough-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.step {
+    display: flex;
+    gap: 1rem;
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.step-content h4 {
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+/* Comparison Table */
+.comparison-table {
+    margin-bottom: 3rem;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.comparison-table th {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+.comparison-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Train a Hebbian Neuron Game */
+.hebbian-game {
+    margin-bottom: 3rem;
+}
+
+.game-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.game-instructions {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.start-btn, .reset-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover, .reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.pattern-cell {
+    aspect-ratio: 1;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pattern-cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.pattern-cell.active {
+    background-color: var(--accent-color);
+}
+
+.synapse-strength {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.strength-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.strength-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Neuroplasticity Timeline */
+.neuroplasticity-timeline {
+    margin-bottom: 3rem;
+}
+
+.timeline-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: translateY(-50%);
+}
+
+.timeline-point {
+    position: relative;
+    width: 200px;
+    text-align: center;
+}
+
+.timeline-point::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.point-label {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.point-content {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .analogy-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .timeline::before {
+        width: 2px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+    
+    .timeline-point {
+        width: 100%;
+    }
+    
+    .timeline-point::before {
+        left: 50%;
+    }
+    
+    .point-label {
+        left: 50%;
+    }
+    
+    .point-content {
+        left: 50%;
+    }
+}
+
+/* SVD Section */
+.svd-section {
+    padding: 3rem 0;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.svd-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.svd-intro {
+    margin-bottom: 3rem;
+}
+
+.svd-intro .intro-text {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.svd-equation {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.svd-equation p {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.equation-components {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.component-icon {
+    font-size: 1.5rem;
+}
+
+/* Interactive Matrix Decomposition */
+.matrix-decomposition {
+    margin-bottom: 3rem;
+}
+
+.decomposition-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.matrix-input {
+    flex: 1;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.matrix-cell {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Fira Code', monospace;
+}
+
+.decompose-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.decompose-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.singular-values {
+    flex: 1;
+}
+
+.value-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.value-bar {
+    position: relative;
+    height: 30px;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.bar-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 600;
+}
+
+.energy-retention {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.retention-value {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.decomposition-visualization {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.matrix-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.matrix {
+    flex: 1;
+    text-align: center;
+}
+
+.matrix h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+/* Geometric Interpretation */
+.geometric-interpretation {
+    margin-bottom: 3rem;
+}
+
+.interpretation-container {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.transformation-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.circle, .ellipse {
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    position: relative;
+}
+
+.ellipse {
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.unit-sphere, .transformed-sphere {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+.arrow {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.transformation-controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sigma-slider {
+    width: 150px;
+}
+
+.sigma-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Applications */
+.svd-applications {
+    margin-bottom: 3rem;
+}
+
+.application-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.application-card {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    text-align: center;
+}
+
+.app-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.application-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.app-visual {
+    margin-top: 1.5rem;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.compression-demo, .image-demo, .recommender-demo, .nlp-demo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.original-matrix, .compressed-matrix, .original-image, .compressed-image {
+    width: 100px;
+    height: 100px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.user-movie-grid, .word-doc-matrix {
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+}
+
+/* Image Compression Tool */
+.image-compression {
+    margin-bottom: 3rem;
+}
+
+.compression-tool {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.upload-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.upload-btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.compression-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.rank-slider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rank-slider input[type="range"] {
+    width: 200px;
+}
+
+.rank-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.compression-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.image-comparison {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.original, .compressed {
+    flex: 1;
+    text-align: center;
+}
+
+.image-container {
+    width: 100%;
+    height: 300px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+/* SVD vs. Eigen Decomposition */
+.comparison-section {
+    margin-bottom: 3rem;
+}
+
+.comparison-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.matrix-type {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.matrix-type h4 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.decomposition-result {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.eigen-decomp, .svd-decomp {
+    flex: 1;
+    text-align: center;
+}
+
+.eigen-decomp h5, .svd-decomp h5 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.result-matrix {
+    width: 100%;
+    height: 100px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .decomposition-controls {
+        flex-direction: column;
+    }
+    
+    .matrix-container {
+        flex-direction: column;
+    }
+    
+    .application-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .compression-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .compression-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .image-comparison {
+        flex-direction: column;
+    }
+    
+    .comparison-container {
+        flex-direction: column;
+    }
+}
+
+/* Overfitting and Underfitting Section */
+.fitting-section {
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    margin: 2rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+.fitting-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.fitting-definitions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.definition-card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-color);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.definition-card:hover {
+    transform: translateY(-5px);
+}
+
+.definition-card.overfitting {
+    border-left: 4px solid var(--error-color);
+}
+
+.definition-card.underfitting {
+    border-left: 4px solid var(--warning-color);
+}
+
+.definition-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.key-indicators {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.key-indicators ul {
+    list-style: none;
+    padding: 0;
+}
+
+.key-indicators li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.key-indicators li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+/* Model Fitting Demo */
+.model-fitting-demo {
+    margin: 2rem 0;
+}
+
+.demo-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.polynomial-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.degree-value {
+    min-width: 2rem;
+    text-align: center;
+}
+
+.fitting-visualization {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.plot-container {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.data-points {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.data-point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.model-curve {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--supervised-color);
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.plot-axes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.x-axis, .y-axis {
+    position: absolute;
+    background-color: var(--text-color);
+    opacity: 0.2;
+}
+
+.x-axis {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+}
+
+.y-axis {
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+}
+
+.loss-plot {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.training-loss, .validation-loss {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.training-loss {
+    background-color: var(--supervised-color);
+}
+
+.validation-loss {
+    background-color: var(--unsupervised-color);
+}
+
+.plot-legend {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+}
+
+.legend-color.training {
+    background-color: var(--supervised-color);
+}
+
+.legend-color.validation {
+    background-color: var(--unsupervised-color);
+}
+
+/* Real-World Analogies */
+.fitting-analogies {
+    margin: 2rem 0;
+}
+
+.analogy-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.analogy-card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-color);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.analogy-card:hover {
+    transform: translateY(-5px);
+}
+
+.analogy-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.analogy-visual {
+    margin-top: 1rem;
+    height: 200px;
+    position: relative;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Diagnostic Tools */
+.diagnostic-tools {
+    margin: 2rem 0;
+}
+
+.tools-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.tradeoff-graph {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.bias-curve, .variance-curve, .total-error-curve {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.bias-curve {
+    background-color: var(--warning-color);
+}
+
+.variance-curve {
+    background-color: var(--error-color);
+}
+
+.total-error-curve {
+    background-color: var(--accent-color);
+}
+
+.crosshair {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.matrix-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.matrix {
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.matrix-cell {
+    aspect-ratio: 1;
+    background-color: var(--card-bg);
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+/* Fixes in Action */
+.fixes-demo {
+    margin: 2rem 0;
+}
+
+.fixes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.lambda-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.lambda-value {
+    min-width: 3rem;
+    text-align: center;
+}
+
+.regularization-plot, .feature-plot {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.original-curve, .regularized-curve, .original-model, .enhanced-model {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.original-curve, .original-model {
+    background-color: var(--error-color);
+}
+
+.regularized-curve, .enhanced-model {
+    background-color: var(--success-color);
+}
+
+.feature-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.feature-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feature-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Doctor Diagnosis Game */
+.doctor-diagnosis-game {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.patient-model {
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.model-visualization {
+    height: 300px;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.model-visualization::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+    pointer-events: none;
+}
+
+.model-symptoms {
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.model-symptoms h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.model-symptoms ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.model-symptoms li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-color);
+}
+
+.model-symptoms li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.score-display {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
+}
+
+.diagnosis-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tool {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.tool:hover {
+    transform: translateX(5px);
+    border-color: var(--accent-color);
+}
+
+.tool-icon {
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.tool:hover .tool-icon {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.treatment-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.treatment-feedback.correct {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.treatment-feedback.incorrect {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .model-visualization {
+        height: 200px;
+    }
+    
+    .tool {
+        padding: 0.75rem;
+    }
+}
+
+/* Principal Component Analysis (PCA) Section */
+.pca-section {
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    margin: 2rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+.pca-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* What is PCA? */
+.pca-intro {
+    margin: 2rem 0;
+}
+
+.intro-card {
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.intro-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.math-core {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.math-flow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.math-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.math-step span {
+    font-size: 1.5rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.step-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.math-arrow {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+/* Interactive Geometric Demo */
+.geometric-demo {
+    margin: 2rem 0;
+}
+
+.demo-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.point-cloud {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.data-points {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.data-point {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.covariance-ellipse {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    border: 2px solid var(--text-secondary);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pc-arrows {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.pc-arrow {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background-color: var(--error-color);
+    transform-origin: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pc-arrow.pc1 {
+    transform: rotate(45deg);
+}
+
+.pc-arrow.pc2 {
+    transform: rotate(135deg);
+    background-color: var(--success-color);
+}
+
+.demo-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.step-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.step-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.step-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.dimension-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dim-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dim-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Scree Plot & Variance Explained */
+.scree-plot {
+    margin: 2rem 0;
+}
+
+.plot-container {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.scree-bars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.scree-bar {
+    flex: 1;
+    background-color: var(--accent-color);
+    transition: height 0.3s ease;
+}
+
+.variance-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--error-color);
+    transition: top 0.3s ease;
+}
+
+.plot-axes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.x-axis, .y-axis {
+    position: absolute;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.x-axis {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.y-axis {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.variance-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.variance-slider {
+    flex: 1;
+}
+
+.variance-value {
+    min-width: 3rem;
+    text-align: center;
+}
+
+/* Real-World Analogies */
+.pca-analogies {
+    margin: 2rem 0;
+}
+
+.analogy-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.analogy-card {
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.analogy-card:hover {
+    transform: translateY(-5px);
+}
+
+.analogy-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.analogy-visual {
+    margin-top: 1rem;
+    height: 200px;
+    position: relative;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.shadow-demo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hand {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shadow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: var(--text-secondary);
+    border-radius: 50%;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+}
+
+.recipe-demo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ingredients, .key-flavors {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ingredient, .key-flavor {
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+/* Common Pitfalls */
+.pca-pitfalls {
+    margin: 2rem 0;
+}
+
+.pitfall-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.pitfall-card {
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.pitfall-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.pitfall-visual {
+    margin-top: 1rem;
+    height: 200px;
+    position: relative;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.nonlinear-demo, .scaling-demo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.pca-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--error-color);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* PCA Your Selfie Tool */
+.pca-selfie {
+    margin: 2rem 0;
+}
+
+.selfie-tool {
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.upload-section {
+    margin-bottom: 1rem;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.compression-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.compression-stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.original, .compressed {
+    text-align: center;
+}
+
+.image-container {
+    aspect-ratio: 1;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+/* Biplot Explorer */
+.biplot-explorer {
+    margin: 2rem 0;
+}
+
+.explorer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.biplot {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.feature-arrows {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.feature-arrow {
+    position: absolute;
+    width: 2px;
+    height: 50px;
+    background-color: var(--accent-color);
+    transform-origin: center;
+}
+
+.feature-info {
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+}
+
+.feature-list {
+    margin-top: 1rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.feature-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .demo-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .explorer-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-comparison {
+        grid-template-columns: 1fr;
+    }
+} 
+
+/* Performance Metrics Section */
+.metrics-section {
+    padding: 2rem;
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.metrics-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Core Metrics */
+.core-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.metric-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.metric-formula {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.metric-details {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Confusion Matrix Demo */
+.confusion-matrix-demo {
+    margin: 2rem 0;
+}
+
+.matrix-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    aspect-ratio: 1;
+    max-width: 400px;
+}
+
+.matrix-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.matrix-cell.tp {
+    background-color: rgba(46, 204, 113, 0.2);
+    border: 2px solid #2ecc71;
+}
+
+.matrix-cell.fp {
+    background-color: rgba(241, 196, 15, 0.2);
+    border: 2px solid #f1c40f;
+}
+
+.matrix-cell.fn {
+    background-color: rgba(231, 76, 60, 0.2);
+    border: 2px solid #e74c3c;
+}
+
+.matrix-cell.tn {
+    background-color: rgba(52, 152, 219, 0.2);
+    border: 2px solid #3498db;
+}
+
+.matrix-controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+}
+
+.metrics-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+}
+
+/* PR & ROC Curves */
+.curves-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.curve-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.pr-curve, .roc-curve {
+    aspect-ratio: 1;
+    position: relative;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.curve-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.threshold-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+}
+
+.threshold-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.threshold-control input[type="range"] {
+    flex: 1;
+}
+
+/* Real-World Scenarios */
+.scenarios-section {
+    margin: 2rem 0;
+}
+
+.scenario-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.scenario-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scenario-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.scenario-metrics {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric-bar {
+    flex: 1;
+    height: 4px;
+    background-color: var(--bg-color);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.metric-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.recall-bar::after {
+    width: 80%;
+}
+
+.precision-bar::after {
+    width: 60%;
+}
+
+/* Metric Comparison */
+.metric-comparison {
+    margin: 2rem 0;
+}
+
+.radar-chart {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.chart-container {
+    aspect-ratio: 1;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.chart-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.model1-polygon, .model2-polygon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transition: all 0.3s ease;
+}
+
+.model1-polygon {
+    background-color: rgba(52, 152, 219, 0.2);
+    border: 2px solid #3498db;
+}
+
+.model2-polygon {
+    background-color: rgba(231, 76, 60, 0.2);
+    border: 2px solid #e74c3c;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+.legend-color.model1 {
+    background-color: #3498db;
+}
+
+.legend-color.model2 {
+    background-color: #e74c3c;
+}
+
+/* Build Your Metric Game */
+.metric-game {
+    margin: 2rem 0;
+}
+
+.game-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.game-instructions {
+    margin-bottom: 1rem;
+}
+
+.constraint {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.reset-btn, .check-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset-btn {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.check-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.game-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: none;
+}
+
+.game-feedback.correct {
+    background-color: rgba(46, 204, 113, 0.2);
+    border: 2px solid #2ecc71;
+    display: block;
+}
+
+.game-feedback.incorrect {
+    background-color: rgba(231, 76, 60, 0.2);
+    border: 2px solid #e74c3c;
+    display: block;
+}
+
+/* Imbalance Simulator */
+.imbalance-simulator {
+    margin: 2rem 0;
+}
+
+.simulator-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.class-ratio {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.class-ratio input[type="range"] {
+    flex: 1;
+}
+
+.imbalance-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.metric-chart {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.chart-bar {
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+    margin: 0.5rem 0;
+    transition: width 0.3s ease;
+}
+
+.chart-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .matrix-container {
+        grid-template-columns: 1fr;
+    }
+
+    .matrix-grid {
+        max-width: 100%;
+    }
+
+    .curves-section {
+        grid-template-columns: 1fr;
+    }
+
+    .scenario-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        max-width: 100%;
+    }
+} 
+
+/* McCulloch-Pitts Neuron Model Section */
+.mcp-section {
+    padding: 2rem;
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mcp-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* MCP Intro */
+.mcp-intro {
+    margin: 2rem 0;
+}
+
+.intro-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.intro-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.key-components {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.component-icon {
+    font-size: 1.5rem;
+}
+
+.component-info h4 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.component-info p {
+    margin: 0.5rem 0 0;
+    color: var(--text-secondary);
+}
+
+.mcp-equation {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.equation-condition {
+    display: block;
+    margin: 0.5rem 0;
+}
+
+/* Neuron Simulator */
+.neuron-simulator {
+    margin: 2rem 0;
+}
+
+.simulator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.neuron-visualization {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 2rem;
+}
+
+.input-layer {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
+.input-node {
+    width: 60px;
+    height: 60px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.node-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.node-label {
+    position: absolute;
+    bottom: -1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.connections {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--text-secondary);
+}
+
+.connection {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform-origin: left center;
+}
+
+.neuron-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.threshold-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+}
+
+.activation-value {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.output-node {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.simulator-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-controls, .weight-controls {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-switch label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-color);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch label::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input:checked + label {
+    background-color: var(--accent-color);
+}
+
+.toggle-switch input:checked + label::before {
+    transform: translateX(30px);
+}
+
+/* Logic Gates */
+.logic-gates {
+    margin: 2rem 0;
+}
+
+.gate-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.gate-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gate-card:hover {
+    transform: translateY(-5px);
+}
+
+.gate-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.gate-params {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+}
+
+.truth-table {
+    margin-top: 1rem;
+}
+
+.truth-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.truth-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+/* Decision Boundary */
+.decision-boundary {
+    margin: 2rem 0;
+}
+
+.plot-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.plot-area {
+    aspect-ratio: 1;
+    position: relative;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.data-point {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.data-point::after {
+    content: attr(data-label);
+    position: absolute;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.decision-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform-origin: left center;
+}
+
+/* Neuron Comparison */
+.neuron-comparison {
+    margin: 2rem 0;
+}
+
+.comparison-table {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background-color: var(--bg-color);
+}
+
+/* Historical Context */
+.historical-context {
+    margin: 2rem 0;
+}
+
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+}
+
+.timeline-point {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.timeline-point::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.point-content {
+    position: relative;
+    width: 45%;
+    margin-left: auto;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-point:nth-child(even) .point-content {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.paper-schematic {
+    aspect-ratio: 16/9;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Gate Challenge */
+.gate-challenge {
+    margin: 2rem 0;
+}
+
+.challenge-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.challenge-instructions {
+    margin-bottom: 1.5rem;
+}
+
+.target-gate {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.gate-hint {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.challenge-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: none;
+}
+
+.challenge-feedback.correct {
+    background-color: rgba(46, 204, 113, 0.2);
+    border: 2px solid #2ecc71;
+    display: block;
+}
+
+.challenge-feedback.incorrect {
+    background-color: rgba(231, 76, 60, 0.2);
+    border: 2px solid #e74c3c;
+    display: block;
+}
+
+/* Neuron Evolution */
+.neuron-evolution {
+    margin: 2rem 0;
+}
+
+.evolution-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.neuron-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.toggle-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.neuron-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.neuron {
+    text-align: center;
+}
+
+.neuron-visual {
+    aspect-ratio: 1;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.activation-step, .activation-sigmoid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+.activation-sigmoid {
+    clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .simulator-container {
+        grid-template-columns: 1fr;
+    }
+
+    .neuron-visualization {
+        aspect-ratio: 16/9;
+    }
+
+    .gate-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline::before {
+        left: 0;
+    }
+
+    .point-content {
+        width: 80%;
+        margin-left: 2rem;
+    }
+
+    .timeline-point:nth-child(even) .point-content {
+        margin-left: 2rem;
+        margin-right: 0;
+    }
+
+    .neuron-comparison {
+        grid-template-columns: 1fr;
+    }
+} 
+
+/* Delta Rule Section Styles */
+.delta-rule-section {
+    padding: 2rem;
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delta-rule-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.delta-intro {
+    margin-bottom: 2rem;
+}
+
+.intro-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.intro-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.key-formula {
+    margin: 2rem 0;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.key-formula h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.key-formula p {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.formula-components {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.component:hover {
+    transform: translateY(-2px);
+}
+
+.component-icon {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.delta-properties {
+    margin: 2rem 0;
+}
+
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.property-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-2px);
+}
+
+.property-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.property-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.property-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.property-card li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.property-card li::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+.important-concepts {
+    margin: 2rem 0;
+}
+
+.concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.concept-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.concept-card:hover {
+    transform: translateY(-2px);
+}
+
+.concept-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.concept-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.concept-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.concept-card li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.concept-card li::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+.applications {
+    margin: 2rem 0;
+}
+
+.app-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.app-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-2px);
+}
+
+.app-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.app-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.app-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.app-card li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.app-card li::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+.points-to-remember {
+    margin: 2rem 0;
+}
+
+.points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.point-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.point-card:hover {
+    transform: translateY(-2px);
+}
+
+.point-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.point-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.point-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.point-card li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.point-card li::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+@media (max-width: 768px) {
+    .formula-components {
+        grid-template-columns: 1fr;
+    }
+    
+    .properties-grid,
+    .concepts-grid,
+    .app-cards,
+    .points-grid {
+        grid-template-columns: 1fr;
+    }
+}

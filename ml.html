@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML - Machine Learning</title>
+    <link rel="stylesheet" href="ml.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <header>
+        <div class="logo">
+            <h1>ML</h1>
+            <p>Machine Learning</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#" class="nav-link active">ML</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section with Definition -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Machine Learning</h2>
+                <p class="definition">
+                    <span class="keyword" data-tooltip="Using data to improve performance">Learning</span> from 
+                    <span class="keyword" data-tooltip="Information used to train models">data</span> to 
+                    <span class="keyword" data-tooltip="Making predictions or decisions">predict</span> or 
+                    <span class="keyword" data-tooltip="Finding patterns in data">discover</span> patterns without being 
+                    <span class="keyword" data-tooltip="Explicitly programmed">explicitly programmed</span>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Supervised vs. Unsupervised Learning Section -->
+        <section class="learning-comparison">
+            <h2>Supervised vs. Unsupervised Learning</h2>
+            <p class="section-intro">Understanding the two core paradigms of machine learning:</p>
+            
+            <div class="split-screen">
+                <div class="supervised-side">
+                    <div class="side-header">
+                        <h3>Supervised Learning</h3>
+                        <p class="side-subtitle">"Learning with a Teacher"</p>
+                    </div>
+                    <div class="side-content">
+                        <p>Uses labeled data (input-output pairs) to train models.</p>
+                        <div class="example-box">
+                            <div class="example-icon">🏷️</div>
+                            <div class="example-text">
+                                <h4>Examples:</h4>
+                                <ul>
+                                    <li>Spam detection</li>
+                                    <li>House price prediction</li>
+                                    <li>Image classification</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="interactive-demo">
+                            <div class="demo-title">Interactive Demo</div>
+                            <div class="teacher-demo">
+                                <div class="teacher-icon">👩🏫</div>
+                                <div class="data-flow">
+                                    <div class="data-item labeled">Cat 🐱</div>
+                                    <div class="data-item labeled">Dog 🐕</div>
+                                    <div class="data-item labeled">Bird 🦜</div>
+                                </div>
+                                <div class="model-box">
+                                    <div class="model-label">Model</div>
+                                    <div class="model-output">Predicts: Cat</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="unsupervised-side">
+                    <div class="side-header">
+                        <h3>Unsupervised Learning</h3>
+                        <p class="side-subtitle">"Learning without a Teacher"</p>
+                    </div>
+                    <div class="side-content">
+                        <p>Finds patterns in unlabeled data.</p>
+                        <div class="example-box">
+                            <div class="example-icon">🔍</div>
+                            <div class="example-text">
+                                <h4>Examples:</h4>
+                                <ul>
+                                    <li>Customer segmentation</li>
+                                    <li>Anomaly detection</li>
+                                    <li>Topic modeling</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="interactive-demo">
+                            <div class="demo-title">Interactive Demo</div>
+                            <div class="magnifying-glass-demo">
+                                <div class="magnifying-glass-icon">🔎</div>
+                                <div class="data-flow">
+                                    <div class="data-item unlabeled">🔴</div>
+                                    <div class="data-item unlabeled">🔵</div>
+                                    <div class="data-item unlabeled">🔴</div>
+                                    <div class="data-item unlabeled">🔵</div>
+                                </div>
+                                <div class="model-box">
+                                    <div class="model-label">Model</div>
+                                    <div class="model-output">Groups: Red & Blue</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <h3>Key Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Supervised Learning</th>
+                            <th>Unsupervised Learning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-row="data">
+                            <td>Data</td>
+                            <td>Labeled (X → y)</td>
+                            <td>Unlabeled (X only)</td>
+                        </tr>
+                        <tr data-row="goal">
+                            <td>Goal</td>
+                            <td>Predict known outputs</td>
+                            <td>Discover hidden patterns</td>
+                        </tr>
+                        <tr data-row="algorithms">
+                            <td>Algorithms</td>
+                            <td>Linear Regression, SVM</td>
+                            <td>K-Means, PCA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="decision-flowchart">
+                <h3>Which to Use?</h3>
+                <p>A decision tree to help you choose the right approach:</p>
+                
+                <div class="mermaid">
+                    graph TD
+                        A[Start] --> B{Do you have labeled data?}
+                        B -->|Yes ✅| C[Supervised Learning]
+                        B -->|No ❌| D[Unsupervised Learning]
+                        
+                        C --> E[Classification/Regression]
+                        D --> F[Clustering/Dimensionality Reduction]
+                        
+                        style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+                        style B fill:#f9f9f9,stroke:#333,stroke-width:2px
+                        style C fill:#4a6cf7,color:white,stroke:#333,stroke-width:2px
+                        style D fill:#ff9f43,color:white,stroke:#333,stroke-width:2px
+                        style E fill:#4a6cf7,color:white,stroke:#333,stroke-width:2px
+                        style F fill:#ff9f43,color:white,stroke:#333,stroke-width:2px
+                </div>
+            </div>
+            
+            <div class="real-world-analogy">
+                <h3>Real-World Analogy</h3>
+                <div class="analogy-container">
+                    <div class="analogy-card supervised">
+                        <div class="analogy-icon">📝</div>
+                        <h4>Supervised = Flashcards</h4>
+                        <p>Learning with Q&A pairs, just like studying with flashcards.</p>
+                        <div class="analogy-visual">
+                            <div class="flashcard">
+                                <div class="flashcard-front">What is this?</div>
+                                <div class="flashcard-back">A cat</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analogy-card unsupervised">
+                        <div class="analogy-icon">🧩</div>
+                        <h4>Unsupervised = Sorting Legos</h4>
+                        <p>Grouping similar items without instructions, like sorting legos by color/shape.</p>
+                        <div class="analogy-visual">
+                            <div class="lego-groups">
+                                <div class="lego-group red">🔴🔴🔴</div>
+                                <div class="lego-group blue">🔵🔵🔵</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="algorithm-showcase">
+                <h3>Algorithm Showcase</h3>
+                <div class="algorithm-tabs">
+                    <button class="algorithm-tab active" data-algorithm="supervised">Supervised</button>
+                    <button class="algorithm-tab" data-algorithm="unsupervised">Unsupervised</button>
+                </div>
+                
+                <div class="algorithm-content">
+                    <div class="algorithm-panel active" data-algorithm="supervised">
+                        <h4>Support Vector Machine (SVM)</h4>
+                        <p>A supervised learning algorithm that finds the optimal hyperplane to separate classes.</p>
+                        <div class="algorithm-visual">
+                            <div class="svm-demo">
+                                <div class="svm-plot">
+                                    <div class="plot-point class1"></div>
+                                    <div class="plot-point class1"></div>
+                                    <div class="plot-point class1"></div>
+                                    <div class="plot-point class2"></div>
+                                    <div class="plot-point class2"></div>
+                                    <div class="plot-point class2"></div>
+                                    <div class="decision-boundary"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="algorithm-panel" data-algorithm="unsupervised">
+                        <h4>K-Means Clustering</h4>
+                        <p>An unsupervised learning algorithm that groups similar data points into clusters.</p>
+                        <div class="algorithm-visual">
+                            <div class="kmeans-demo">
+                                <div class="kmeans-plot">
+                                    <div class="cluster-point cluster1"></div>
+                                    <div class="cluster-point cluster1"></div>
+                                    <div class="cluster-point cluster1"></div>
+                                    <div class="cluster-point cluster2"></div>
+                                    <div class="cluster-point cluster2"></div>
+                                    <div class="cluster-point cluster2"></div>
+                                    <div class="cluster-center center1"></div>
+                                    <div class="cluster-center center2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="interactive-quiz">
+                <h3>Test Your Knowledge</h3>
+                <p>Is this supervised or unsupervised learning?</p>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p>Grouping news articles by topic without predefined categories.</p>
+                    </div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-option="supervised">
+                            <span class="option-label">A</span>
+                            <span class="option-text">Supervised Learning</span>
+                        </div>
+                        <div class="quiz-option" data-option="unsupervised">
+                            <span class="option-label">B</span>
+                            <span class="option-text">Unsupervised Learning</span>
+                        </div>
+                    </div>
+                    <div class="quiz-result">
+                        <p class="result-text"></p>
+                        <button class="try-again-btn">Try Another Question</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dataset-toggle">
+                <h3>Dataset Examples</h3>
+                <div class="dataset-tabs">
+                    <button class="dataset-tab active" data-dataset="iris">Iris Dataset</button>
+                    <button class="dataset-tab" data-dataset="customer">Customer Purchase History</button>
+                </div>
+                
+                <div class="dataset-content">
+                    <div class="dataset-panel active" data-dataset="iris">
+                        <div class="dataset-info">
+                            <h4>Iris Dataset</h4>
+                            <p>A classic dataset for classification tasks, containing measurements of iris flowers.</p>
+                            <div class="dataset-visual">
+                                <div class="iris-flowers">
+                                    <div class="iris-flower setosa">Setosa</div>
+                                    <div class="iris-flower versicolor">Versicolor</div>
+                                    <div class="iris-flower virginica">Virginica</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dataset-panel" data-dataset="customer">
+                        <div class="dataset-info">
+                            <h4>Customer Purchase History</h4>
+                            <p>Transaction data showing what customers buy, useful for segmentation.</p>
+                            <div class="dataset-visual">
+                                <div class="customer-segments">
+                                    <div class="customer-segment">Budget Shoppers</div>
+                                    <div class="customer-segment">Luxury Buyers</div>
+                                    <div class="customer-segment">Occasional Shoppers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Linear Regression and Regularization Section -->
+        <section class="regression-section">
+            <h2>Linear Regression and Regularization</h2>
+            <p class="section-intro">Understanding linear regression, Ridge vs. Lasso, and the power of regularization:</p>
+            
+            <div class="regression-content">
+                <!-- Linear Regression Equation -->
+                <div class="equation-box">
+                    <h3>Linear Regression Equation</h3>
+                    <p class="equation-intro">Predicts a continuous output using a straight line:</p>
+                    <div class="math-equation">
+                        <p>ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ</p>
+                        <p class="equation-goal">Goal: Minimize Mean Squared Error (MSE) → min∑(yᵢ - ŷᵢ)²</p>
+                    </div>
+                    <div class="equation-visual">
+                        <div class="plot-container">
+                            <div class="data-points">
+                                <div class="point" data-x="0.2" data-y="0.3"></div>
+                                <div class="point" data-x="0.4" data-y="0.5"></div>
+                                <div class="point" data-x="0.6" data-y="0.7"></div>
+                                <div class="point" data-x="0.8" data-y="0.9"></div>
+                                <div class="point" data-x="1.0" data-y="1.1"></div>
+                            </div>
+                            <div class="regression-line"></div>
+                            <div class="plot-controls">
+                                <button class="add-point-btn">Add Point</button>
+                                <button class="reset-points-btn">Reset</button>
+                            </div>
+                        </div>
+                        <div class="equation-explanation">
+                            <div class="explanation-step" data-step="1">
+                                <h4>Step 1: Data Points</h4>
+                                <p>Each point represents a data sample with input (x) and output (y) values.</p>
+                            </div>
+                            <div class="explanation-step" data-step="2">
+                                <h4>Step 2: Line of Best Fit</h4>
+                                <p>The regression line minimizes the sum of squared errors between points and the line.</p>
+                            </div>
+                            <div class="explanation-step" data-step="3">
+                                <h4>Step 3: Prediction</h4>
+                                <p>Use the line to predict y values for new x inputs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ridge vs. Lasso Comparison -->
+                <div class="regularization-comparison">
+                    <h3>Ridge vs. Lasso Regularization</h3>
+                    <div class="reg-tabs">
+                        <button class="reg-tab active" data-reg="ridge">Ridge (L2)</button>
+                        <button class="reg-tab" data-reg="lasso">Lasso (L1)</button>
+                    </div>
+                    
+                    <div class="reg-content">
+                        <div class="reg-panel active" data-reg="ridge">
+                            <div class="reg-header">
+                                <div class="reg-icon">🏔️</div>
+                                <h4>Ridge Regression (L2)</h4>
+                            </div>
+                            <p>Prevents overfitting by shrinking coefficients (but never to zero).</p>
+                            <div class="reg-equation">
+                                <p>min(∑(yᵢ - ŷᵢ)² + λ∑βⱼ²)</p>
+                            </div>
+                            <div class="reg-visual">
+                                <div class="coefficient-plot">
+                                    <div class="plot-axis">
+                                        <div class="axis-label">Coefficient Value</div>
+                                        <div class="axis-label">λ (Regularization Strength)</div>
+                                    </div>
+                                    <div class="ridge-curve"></div>
+                                    <div class="interactive-points">
+                                        <div class="coeff-point" data-coeff="0.8"></div>
+                                        <div class="coeff-point" data-coeff="0.6"></div>
+                                        <div class="coeff-point" data-coeff="0.4"></div>
+                                        <div class="coeff-point" data-coeff="0.2"></div>
+                                    </div>
+                                    <div class="plot-legend">
+                                        <div class="legend-item">
+                                            <span class="legend-color ridge"></span>
+                                            <span>Ridge (L2)</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color lasso"></span>
+                                            <span>Lasso (L1)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reg-panel" data-reg="lasso">
+                            <div class="reg-header">
+                                <div class="reg-icon">✂️</div>
+                                <h4>Lasso Regression (L1)</h4>
+                            </div>
+                            <p>Forces some coefficients to zero for feature selection.</p>
+                            <div class="reg-equation">
+                                <p>min(∑(yᵢ - ŷᵢ)² + λ∑|βⱼ|)</p>
+                            </div>
+                            <div class="reg-visual">
+                                <div class="coefficient-plot">
+                                    <div class="plot-axis">
+                                        <div class="axis-label">Coefficient Value</div>
+                                        <div class="axis-label">λ (Regularization Strength)</div>
+                                    </div>
+                                    <div class="lasso-curve"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Differences Table -->
+                <div class="reg-comparison-table">
+                    <h3>Key Differences</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Ridge (L2)</th>
+                                <th>Lasso (L1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-row="penalty">
+                                <td>Penalty Term</td>
+                                <td>λ∑βⱼ²</td>
+                                <td>λ∑|βⱼ|</td>
+                            </tr>
+                            <tr data-row="coefficients">
+                                <td>Coefficients</td>
+                                <td>Shrinks but ≠ 0</td>
+                                <td>Can shrink to exactly 0</td>
+                            </tr>
+                            <tr data-row="use-case">
+                                <td>Use Case</td>
+                                <td>Many small useful features</td>
+                                <td>Few strong features</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Interactive Regularization Demo -->
+                <div class="interactive-regularization">
+                    <h3>Interactive Regularization Demo</h3>
+                    <div class="lambda-slider">
+                        <label for="lambda">λ (Regularization Strength):</label>
+                        <input type="range" id="lambda" min="0" max="1" step="0.1" value="0">
+                        <span class="lambda-value">0</span>
+                    </div>
+                    <div class="demo-container">
+                        <div class="before-after">
+                            <div class="before">
+                                <h4>Before Regularization</h4>
+                                <div class="plot-before"></div>
+                            </div>
+                            <div class="after">
+                                <h4>After Regularization</h4>
+                                <div class="plot-after"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-World Analogy -->
+                <div class="regression-analogy">
+                    <h3>Real-World Analogy</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card" data-analogy="linear">
+                            <div class="analogy-icon">🏠</div>
+                            <h4>Linear Regression = House Pricing</h4>
+                            <p>Guessing house price based on size (no constraints).</p>
+                            <div class="analogy-interactive">
+                                <div class="house-slider">
+                                    <label>House Size (sq ft):</label>
+                                    <input type="range" min="500" max="5000" value="2000" class="size-slider">
+                                    <span class="size-value">2000</span>
+                                </div>
+                                <div class="price-prediction">
+                                    <p>Predicted Price: <span class="predicted-price">$300,000</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card" data-analogy="ridge">
+                            <div class="analogy-icon">⚖️</div>
+                            <h4>Ridge = Balanced Pricing</h4>
+                            <p>Adding a rule: "No single factor can dominate pricing."</p>
+                            <div class="analogy-interactive">
+                                <div class="factor-weights">
+                                    <div class="weight-item">
+                                        <span>Size:</span>
+                                        <div class="weight-bar" style="width: 60%"></div>
+                                    </div>
+                                    <div class="weight-item">
+                                        <span>Location:</span>
+                                        <div class="weight-bar" style="width: 40%"></div>
+                                    </div>
+                                    <div class="weight-item">
+                                        <span>Age:</span>
+                                        <div class="weight-bar" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card" data-analogy="lasso">
+                            <div class="analogy-icon">🎯</div>
+                            <h4>Lasso = Focused Pricing</h4>
+                            <p>Forcing some factors (e.g., 'garage size') to be ignored.</p>
+                            <div class="analogy-interactive">
+                                <div class="feature-selector">
+                                    <div class="feature-item">
+                                        <input type="checkbox" id="size" checked>
+                                        <label for="size">Size</label>
+                                    </div>
+                                    <div class="feature-item">
+                                        <input type="checkbox" id="location" checked>
+                                        <label for="location">Location</label>
+                                    </div>
+                                    <div class="feature-item">
+                                        <input type="checkbox" id="garage" checked>
+                                        <label for="garage">Garage</label>
+                                    </div>
+                                </div>
+                                <div class="feature-impact">
+                                    <p>Active Features: <span class="active-features">3</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Widget -->
+                <div class="regression-quiz">
+                    <h3>Test Your Knowledge</h3>
+                    <div class="quiz-container">
+                        <div class="quiz-question">
+                            <p>Which method would you use when you have 100 features but suspect only 10 matter?</p>
+                        </div>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="ridge">
+                                <span class="option-label">A</span>
+                                <span class="option-text">Ridge Regression</span>
+                            </div>
+                            <div class="quiz-option" data-option="lasso">
+                                <span class="option-label">B</span>
+                                <span class="option-text">Lasso Regression</span>
+                            </div>
+                        </div>
+                        <div class="quiz-result">
+                            <p class="result-text"></p>
+                            <button class="try-again-btn">Try Another Question</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perceptron Models and Logic Gates Section -->
+        <section class="perceptron-section">
+            <h2>Perceptron Models and Logic Gates</h2>
+            <p class="section-intro">Understanding how perceptrons work with AND, OR, and XOR gates through interactive visualizations:</p>
+            
+            <div class="perceptron-content">
+                <!-- What is a Perceptron? -->
+                <div class="perceptron-intro">
+                    <h3>What is a Perceptron?</h3>
+                    <p class="intro-text">A single-layer neural network that classifies linearly separable data.</p>
+                    <div class="perceptron-equation">
+                        <p>Output = {
+                            <span class="equation-condition">1 if ∑wᵢxᵢ + b ≥ 0</span>
+                            <span class="equation-condition">0 otherwise</span>
+                        }</p>
+                        <div class="equation-components">
+                            <div class="component">
+                                <span class="component-icon">⚖️</span>
+                                <span class="component-label">Weights (wᵢ):</span>
+                                <span class="component-desc">Importance of inputs</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-icon">🎯</span>
+                                <span class="component-label">Bias (b):</span>
+                                <span class="component-desc">Shifts decision boundary</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Perceptron Demo -->
+                <div class="perceptron-demo">
+                    <h3>Interactive Perceptron Demo</h3>
+                    <div class="demo-controls">
+                        <div class="weight-sliders">
+                            <div class="slider-group">
+                                <label>Weight 1 (w₁):</label>
+                                <input type="range" min="-2" max="2" step="0.1" value="1" class="weight-slider" data-weight="1">
+                                <span class="weight-value">1.0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>Weight 2 (w₂):</label>
+                                <input type="range" min="-2" max="2" step="0.1" value="1" class="weight-slider" data-weight="2">
+                                <span class="weight-value">1.0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>Bias (b):</label>
+                                <input type="range" min="-2" max="2" step="0.1" value="-1" class="bias-slider">
+                                <span class="bias-value">-1.0</span>
+                            </div>
+                        </div>
+                        <div class="gate-selector">
+                            <button class="gate-btn active" data-gate="and">AND Gate</button>
+                            <button class="gate-btn" data-gate="or">OR Gate</button>
+                            <button class="gate-btn" data-gate="xor">XOR Gate</button>
+                        </div>
+                    </div>
+                    <div class="decision-boundary-plot">
+                        <div class="plot-area">
+                            <div class="data-point" data-x="0" data-y="0" data-label="0,0"></div>
+                            <div class="data-point" data-x="0" data-y="1" data-label="0,1"></div>
+                            <div class="data-point" data-x="1" data-y="0" data-label="1,0"></div>
+                            <div class="data-point" data-x="1" data-y="1" data-label="1,1"></div>
+                            <div class="decision-line"></div>
+                        </div>
+                        <div class="plot-legend">
+                            <div class="legend-item">
+                                <span class="legend-color class0"></span>
+                                <span>Output = 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color class1"></span>
+                                <span>Output = 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Truth Table -->
+                <div class="truth-table">
+                    <h3>Logic Gate Truth Tables</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>x₁</th>
+                                    <th>x₂</th>
+                                    <th>AND</th>
+                                    <th>OR</th>
+                                    <th>XOR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>❌</td>
+                                    <td>❌</td>
+                                    <td>❌</td>
+                                </tr>
+                                <tr>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>❌</td>
+                                    <td>✅</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>❌</td>
+                                    <td>✅</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>✅</td>
+                                    <td>✅</td>
+                                    <td>❌</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- XOR Problem and Solution -->
+                <div class="xor-section">
+                    <h3>XOR Problem and Solution</h3>
+                    <div class="xor-content">
+                        <div class="xor-problem">
+                            <div class="problem-icon">❌</div>
+                            <h4>Problem: Not Linearly Separable</h4>
+                            <p>No single line can separate XOR outputs.</p>
+                            <div class="xor-plot">
+                                <div class="plot-area">
+                                    <div class="data-point" data-x="0" data-y="0" data-label="0,0"></div>
+                                    <div class="data-point" data-x="0" data-y="1" data-label="0,1"></div>
+                                    <div class="data-point" data-x="1" data-y="0" data-label="1,0"></div>
+                                    <div class="data-point" data-x="1" data-y="1" data-label="1,1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="xor-solution">
+                            <div class="solution-icon">💡</div>
+                            <h4>Solution: Multi-Layer Perceptron</h4>
+                            <p>Add hidden layers to create non-linear decision boundaries.</p>
+                            <div class="mlp-visualization">
+                                <div class="neural-network">
+                                    <div class="layer input-layer">
+                                        <div class="neuron">x₁</div>
+                                        <div class="neuron">x₂</div>
+                                    </div>
+                                    <div class="layer hidden-layer">
+                                        <div class="neuron">h₁</div>
+                                        <div class="neuron">h₂</div>
+                                    </div>
+                                    <div class="layer output-layer">
+                                        <div class="neuron">y</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neural Network Analogy -->
+                <div class="neural-analogy">
+                    <h3>Neural Network Analogy</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card">
+                            <div class="analogy-icon">👨‍🍳</div>
+                            <h4>Single-Layer (Perceptron)</h4>
+                            <p>A chef tasting soup (salt + pepper → tasty?)</p>
+                            <div class="analogy-visual">
+                                <div class="chef-demo">
+                                    <div class="ingredient">Salt</div>
+                                    <div class="ingredient">Pepper</div>
+                                    <div class="decision">Tasty?</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card">
+                            <div class="analogy-icon">👨‍🍳👨‍🍳</div>
+                            <h4>Multi-Layer (XOR)</h4>
+                            <p>Two chefs debating (salt XOR pepper → spicy?)</p>
+                            <div class="analogy-visual">
+                                <div class="chefs-demo">
+                                    <div class="chef">Chef 1</div>
+                                    <div class="chef">Chef 2</div>
+                                    <div class="decision">Spicy?</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Train Your Perceptron Game -->
+                <div class="perceptron-game">
+                    <h3>Train Your Perceptron</h3>
+                    <div class="game-container">
+                        <div class="game-instructions">
+                            <p>Adjust the weights and bias to fit the decision boundary for the selected gate.</p>
+                            <div class="game-feedback"></div>
+                        </div>
+                        <div class="game-controls">
+                            <button class="reset-btn">Reset</button>
+                            <button class="check-btn">Check Solution</button>
+                        </div>
+                        <div class="game-stats">
+                            <div class="stat">
+                                <span class="stat-label">Attempts:</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Best Score:</span>
+                                <span class="stat-value">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Backpropagation Section -->
+        <section class="backprop-section">
+            <h2>Backpropagation in Neural Networks</h2>
+            <p class="section-intro">Understanding how neural networks learn through error backpropagation:</p>
+            
+            <div class="backprop-content">
+                <!-- What is Backpropagation? -->
+                <div class="backprop-intro">
+                    <h3>What is Backpropagation?</h3>
+                    <p class="intro-text">The algorithm that trains neural networks by propagating errors backward to adjust weights.</p>
+                    <div class="backprop-equation">
+                        <p>Goal: Minimize loss by updating weights (W) using gradient descent.</p>
+                        <div class="equation-components">
+                            <div class="component">
+                                <span class="component-icon">🔄</span>
+                                <span class="component-label">Key Steps:</span>
+                                <span class="component-desc">Forward Pass → Loss Calculation → Backward Pass → Weight Update</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Flowchart -->
+                <div class="backprop-flowchart">
+                    <h3>Step-by-Step Process</h3>
+                    <div class="flowchart-container">
+                        <div class="flow-step" data-step="forward">
+                            <div class="step-icon">➡️</div>
+                            <h4>Forward Pass</h4>
+                            <p>Compute predictions (ŷ) via layers</p>
+                            <div class="step-math">
+                                <p>ŷ = σ(W₂ · σ(W₁X + b₁) + b₂)</p>
+                            </div>
+                        </div>
+                        <div class="flow-step" data-step="loss">
+                            <div class="step-icon">📊</div>
+                            <h4>Loss Calculation</h4>
+                            <p>Compare ŷ to true y</p>
+                            <div class="step-math">
+                                <p>L = 1/N ∑(yᵢ - ŷᵢ)²</p>
+                            </div>
+                        </div>
+                        <div class="flow-step" data-step="backward">
+                            <div class="step-icon">⬅️</div>
+                            <h4>Backward Pass</h4>
+                            <p>Calculate gradients layer-by-layer</p>
+                            <div class="step-math">
+                                <p>∂L/∂W = ∂L/∂ŷ · ∂ŷ/∂W</p>
+                            </div>
+                        </div>
+                        <div class="flow-step" data-step="update">
+                            <div class="step-icon">⚖️</div>
+                            <h4>Weight Update</h4>
+                            <p>Adjust weights using gradients</p>
+                            <div class="step-math">
+                                <p>W_new = W_old - α∂L/∂W</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Gradient Calculation -->
+                <div class="gradient-calc">
+                    <h3>Live Gradient Calculation</h3>
+                    <div class="calc-controls">
+                        <div class="input-sliders">
+                            <div class="slider-group">
+                                <label>Input (X):</label>
+                                <input type="range" min="-2" max="2" step="0.1" value="0" class="input-slider" data-input="x">
+                                <span class="input-value">0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>Weight (W):</label>
+                                <input type="range" min="-2" max="2" step="0.1" value="1" class="weight-slider" data-weight="w">
+                                <span class="weight-value">1.0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>Learning Rate (α):</label>
+                                <input type="range" min="0" max="1" step="0.1" value="0.1" class="lr-slider">
+                                <span class="lr-value">0.1</span>
+                            </div>
+                        </div>
+                        <div class="gradient-display">
+                            <div class="gradient-value">
+                                <span class="label">Gradient:</span>
+                                <span class="value">0.0</span>
+                            </div>
+                            <div class="loss-value">
+                                <span class="label">Loss:</span>
+                                <span class="value">0.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gradient-heatmap">
+                        <div class="heatmap-container">
+                            <div class="heatmap-cell" data-weight="w1"></div>
+                            <div class="heatmap-cell" data-weight="w2"></div>
+                            <div class="heatmap-cell" data-weight="w3"></div>
+                            <div class="heatmap-cell" data-weight="w4"></div>
+                        </div>
+                        <div class="heatmap-legend">
+                            <div class="legend-item">
+                                <span class="legend-color high"></span>
+                                <span>High Gradient</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color low"></span>
+                                <span>Low Gradient</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neural Network Analogy -->
+                <div class="backprop-analogy">
+                    <h3>Neural Network Analogy</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card">
+                            <div class="analogy-icon">👨‍🍳</div>
+                            <h4>Chef Tasting Soup</h4>
+                            <p>Forward pass = Cooking</p>
+                            <p>Loss = "Too salty!"</p>
+                            <p>Backward pass = Adjusting salt/spices</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Problems & Fixes -->
+                <div class="problems-fixes">
+                    <h3>Common Problems & Fixes</h3>
+                    <div class="problem-cards">
+                        <div class="problem-card">
+                            <div class="problem-icon">📉</div>
+                            <h4>Vanishing Gradients</h4>
+                            <p>Solution: Use ReLU activation</p>
+                            <div class="solution-demo">
+                                <div class="activation-plot">
+                                    <div class="plot-line sigmoid"></div>
+                                    <div class="plot-line relu"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="problem-card">
+                            <div class="problem-icon">💥</div>
+                            <h4>Exploding Gradients</h4>
+                            <p>Solution: Gradient clipping</p>
+                            <div class="solution-demo">
+                                <div class="gradient-clip">
+                                    <div class="clip-line"></div>
+                                    <div class="clip-boundary"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Break the Network Game -->
+                <div class="break-network-game">
+                    <h3>Break the Network Game</h3>
+                    <div class="game-container">
+                        <div class="game-instructions">
+                            <p>Set bad weights manually and watch the loss explode!</p>
+                            <div class="game-controls">
+                                <button class="reset-btn">Reset</button>
+                                <button class="train-btn">Train</button>
+                            </div>
+                        </div>
+                        <div class="game-visualization">
+                            <div class="loss-plot">
+                                <div class="plot-line"></div>
+                                <div class="plot-points"></div>
+                            </div>
+                            <div class="weight-controls">
+                                <div class="weight-slider">
+                                    <label>Weight 1</label>
+                                    <input type="range" min="-5" max="5" step="0.1" value="1">
+                                </div>
+                                <div class="weight-slider">
+                                    <label>Weight 2</label>
+                                    <input type="range" min="-5" max="5" step="0.1" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optimizer Comparison -->
+                <div class="optimizer-comparison">
+                    <h3>Compare Optimizers</h3>
+                    <div class="comparison-container">
+                        <div class="optimizer-tabs">
+                            <button class="optimizer-tab active" data-optimizer="sgd">SGD</button>
+                            <button class="optimizer-tab" data-optimizer="adam">Adam</button>
+                        </div>
+                        <div class="optimizer-visualization">
+                            <div class="convergence-plot">
+                                <div class="plot-line sgd"></div>
+                                <div class="plot-line adam"></div>
+                            </div>
+                            <div class="optimizer-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Iterations:</span>
+                                    <span class="stat-value">0</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Final Loss:</span>
+                                    <span class="stat-value">0.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activation Functions Section -->
+        <section class="activation-section">
+            <h2>Activation Functions</h2>
+            <p class="section-intro">Understanding how different activation functions shape neural network behavior through interactive visualizations and real-world analogies:</p>
+            
+            <div class="activation-content">
+                <!-- What is an Activation Function? -->
+                <div class="activation-intro">
+                    <h3>What is an Activation Function?</h3>
+                    <p class="intro-text">A mathematical gate that decides if a neuron should fire (output a signal).</p>
+                    <div class="activation-equation">
+                        <p>Purpose: Introduces non-linearity → Enables learning complex patterns</p>
+                        <div class="equation-components">
+                            <div class="component">
+                                <span class="component-icon">⚡</span>
+                                <span class="component-label">Key Role:</span>
+                                <span class="component-desc">Transforms input into output signal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Function Plots -->
+                <div class="function-plots">
+                    <h3>Interactive Function Plots</h3>
+                    <div class="plot-controls">
+                        <div class="function-tabs">
+                            <button class="function-tab active" data-function="binary">Binary Step</button>
+                            <button class="function-tab" data-function="bipolar">Bipolar Sigmoid</button>
+                            <button class="function-tab" data-function="relu">ReLU</button>
+                        </div>
+                        <div class="plot-options">
+                            <label>
+                                <input type="checkbox" id="showGradient"> Show Gradient
+                            </label>
+                            <label>
+                                <input type="checkbox" id="showDeadNeurons"> Show Dead Neurons
+                            </label>
+                        </div>
+                    </div>
+                    <div class="plot-container">
+                        <div class="plot-area">
+                            <div class="plot-axis">
+                                <div class="axis-label">Input (x)</div>
+                                <div class="axis-label">Output f(x)</div>
+                            </div>
+                            <div class="function-plot"></div>
+                            <div class="gradient-overlay"></div>
+                            <div class="dead-neuron-highlight"></div>
+                        </div>
+                        <div class="plot-legend">
+                            <div class="legend-item">
+                                <span class="legend-color binary"></span>
+                                <span>Binary Step</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color bipolar"></span>
+                                <span>Bipolar Sigmoid</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color relu"></span>
+                                <span>ReLU</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Function Comparison Table -->
+                <div class="function-comparison">
+                    <h3>Key Activation Functions</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Equation</th>
+                                <th>Range</th>
+                                <th>Pros & Cons</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-function="binary">
+                                <td>Binary Step</td>
+                                <td>f(x) = {1 if x ≥ 0, 0 otherwise}</td>
+                                <td>[0, 1]</td>
+                                <td>
+                                    <span class="pro">✅ Simple</span>
+                                    <span class="con">❌ No gradients</span>
+                                </td>
+                                <td>Perceptrons</td>
+                            </tr>
+                            <tr data-function="bipolar">
+                                <td>Bipolar Sigmoid</td>
+                                <td>f(x) = (1-e⁻ˣ)/(1+e⁻ˣ)</td>
+                                <td>[-1, 1]</td>
+                                <td>
+                                    <span class="pro">✅ Smooth gradients</span>
+                                    <span class="con">❌ Vanishing gradients</span>
+                                </td>
+                                <td>Shallow networks</td>
+                            </tr>
+                            <tr data-function="relu">
+                                <td>ReLU</td>
+                                <td>f(x) = max(0,x)</td>
+                                <td>[0, ∞)</td>
+                                <td>
+                                    <span class="pro">✅ Fast</span>
+                                    <span class="con">❌ Dead neurons</span>
+                                </td>
+                                <td>Deep learning</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Real-World Analogies -->
+                <div class="activation-analogies">
+                    <h3>Real-World Analogies</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card" data-function="binary">
+                            <div class="analogy-icon">💡</div>
+                            <h4>Binary Step = Light Switch</h4>
+                            <p>ON/OFF behavior, no in-between states</p>
+                            <div class="analogy-visual">
+                                <div class="light-switch">
+                                    <div class="switch-state">OFF</div>
+                                    <div class="switch-toggle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card" data-function="bipolar">
+                            <div class="analogy-icon">🌡️</div>
+                            <h4>Bipolar Sigmoid = Thermostat</h4>
+                            <p>Gradual heating/cooling, smooth transitions</p>
+                            <div class="analogy-visual">
+                                <div class="thermostat">
+                                    <div class="temp-gauge"></div>
+                                    <div class="temp-value">20°C</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card" data-function="relu">
+                            <div class="analogy-icon">🚰</div>
+                            <h4>ReLU = Water Pipe</h4>
+                            <p>Flow ≥ 0, blocked otherwise</p>
+                            <div class="analogy-visual">
+                                <div class="water-pipe">
+                                    <div class="water-flow"></div>
+                                    <div class="pipe-valve"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="performance-metrics">
+                    <h3>Performance Comparison</h3>
+                    <div class="metrics-container">
+                        <div class="metric-chart">
+                            <h4>Training Speed</h4>
+                            <div class="chart-container">
+                                <div class="chart-bar" data-function="binary" style="height: 40%">
+                                    <span class="bar-label">Binary</span>
+                                    <span class="bar-value">40%</span>
+                                </div>
+                                <div class="chart-bar" data-function="bipolar" style="height: 70%">
+                                    <span class="bar-label">Bipolar</span>
+                                    <span class="bar-value">70%</span>
+                                </div>
+                                <div class="chart-bar" data-function="relu" style="height: 100%">
+                                    <span class="bar-label">ReLU</span>
+                                    <span class="bar-value">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-chart">
+                            <h4>MNIST Accuracy</h4>
+                            <div class="chart-container">
+                                <div class="chart-bar" data-function="binary" style="height: 60%">
+                                    <span class="bar-label">Binary</span>
+                                    <span class="bar-value">60%</span>
+                                </div>
+                                <div class="chart-bar" data-function="bipolar" style="height: 85%">
+                                    <span class="bar-label">Bipolar</span>
+                                    <span class="bar-value">85%</span>
+                                </div>
+                                <div class="chart-bar" data-function="relu" style="height: 98%">
+                                    <span class="bar-label">ReLU</span>
+                                    <span class="bar-value">98%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Break the Network Challenge -->
+                <div class="break-network-challenge">
+                    <h3>Break the Network Challenge</h3>
+                    <div class="challenge-container">
+                        <div class="challenge-instructions">
+                            <p>Use binary step in a deep network and watch it fail to learn!</p>
+                            <div class="challenge-controls">
+                                <button class="start-btn">Start Challenge</button>
+                                <button class="reset-btn">Reset</button>
+                            </div>
+                        </div>
+                        <div class="challenge-visualization">
+                            <div class="network-visual">
+                                <div class="layer input-layer">
+                                    <div class="neuron"></div>
+                                    <div class="neuron"></div>
+                                </div>
+                                <div class="layer hidden-layer">
+                                    <div class="neuron"></div>
+                                    <div class="neuron"></div>
+                                </div>
+                                <div class="layer output-layer">
+                                    <div class="neuron"></div>
+                                </div>
+                            </div>
+                            <div class="training-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Epochs:</span>
+                                    <span class="stat-value">0</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Loss:</span>
+                                    <span class="stat-value">0.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activation Explorer -->
+                <div class="activation-explorer">
+                    <h3>Activation Explorer</h3>
+                    <div class="explorer-container">
+                        <div class="input-controls">
+                            <div class="slider-group">
+                                <label>Input (x):</label>
+                                <input type="range" min="-5" max="5" step="0.1" value="0" class="input-slider">
+                                <span class="input-value">0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>Learning Rate (α):</label>
+                                <input type="range" min="0" max="1" step="0.1" value="0.1" class="lr-slider">
+                                <span class="lr-value">0.1</span>
+                            </div>
+                        </div>
+                        <div class="explorer-visualization">
+                            <div class="neuron-demo">
+                                <div class="input-value">x = 0</div>
+                                <div class="activation-function"></div>
+                                <div class="output-value">f(x) = 0</div>
+                            </div>
+                            <div class="gradient-flow">
+                                <div class="flow-arrow"></div>
+                                <div class="gradient-value">∂f/∂x = 0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hebbian Learning Section -->
+        <section class="hebbian-section">
+            <h2>Hebbian Learning</h2>
+            <p class="section-intro">Understanding how neurons wire together through correlated firing, with interactive visualizations and real-world analogies:</p>
+            
+            <div class="hebbian-content">
+                <!-- What is Hebbian Learning? -->
+                <div class="hebbian-intro">
+                    <h3>What is Hebbian Learning?</h3>
+                    <p class="intro-text">"Neurons that fire together, wire together."</p>
+                    <div class="hebbian-equation">
+                        <p>Core Idea: Synapses strengthen when pre- and post-synaptic neurons activate simultaneously</p>
+                        <div class="equation-components">
+                            <div class="component">
+                                <span class="component-icon">🔥</span>
+                                <span class="component-label">Mathematical Form:</span>
+                                <span class="component-desc">Δwᵢⱼ = η · xᵢ · yⱼ</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-icon">⚡</span>
+                                <span class="component-label">Where:</span>
+                                <span class="component-desc">wᵢⱼ: Synaptic weight, η: Learning rate, xᵢ/yⱼ: Neuron activations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Synapse Demo -->
+                <div class="synapse-demo">
+                    <h3>Interactive Synapse Demo</h3>
+                    <div class="demo-controls">
+                        <div class="neuron-controls">
+                            <button class="neuron-btn" data-neuron="A">Activate Neuron A</button>
+                            <button class="neuron-btn" data-neuron="B">Activate Neuron B</button>
+                        </div>
+                        <div class="learning-rate">
+                            <label>Learning Rate (η):</label>
+                            <input type="range" min="0" max="1" step="0.1" value="0.1" class="lr-slider">
+                            <span class="lr-value">0.1</span>
+                        </div>
+                    </div>
+                    <div class="neuron-visualization">
+                        <div class="neuron neuron-A">
+                            <div class="neuron-body"></div>
+                            <div class="neuron-label">A</div>
+                        </div>
+                        <div class="synapse">
+                            <div class="synapse-line"></div>
+                            <div class="weight-value">w = 0.2</div>
+                        </div>
+                        <div class="neuron neuron-B">
+                            <div class="neuron-body"></div>
+                            <div class="neuron-label">B</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Properties -->
+                <div class="hebbian-properties">
+                    <h3>Key Properties</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Explanation</th>
+                                <th>Visual Cue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Associative</td>
+                                <td>Links co-occurring inputs (e.g., "Pavlov's dog" bell + food)</td>
+                                <td>🐶 + 🔔 → 🍖</td>
+                            </tr>
+                            <tr>
+                                <td>Local</td>
+                                <td>Weight updates depend only on local neuron activity</td>
+                                <td>🧠⚡🧠</td>
+                            </tr>
+                            <tr>
+                                <td>Unsupervised</td>
+                                <td>Learns patterns without labeled data</td>
+                                <td>🏷️❌ → 🔍✨</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Real-World Analogies -->
+                <div class="hebbian-analogies">
+                    <h3>Real-World Analogies</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card">
+                            <div class="analogy-icon">🐶</div>
+                            <h4>Pavlov's Dog</h4>
+                            <p>Bell (🔔) + Food (🍖) → Dog salivates (🐶💧)</p>
+                            <div class="analogy-visual">
+                                <div class="pavlov-demo">
+                                    <div class="stimulus bell">🔔</div>
+                                    <div class="stimulus food">🍖</div>
+                                    <div class="response">🐶💧</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card">
+                            <div class="analogy-icon">👥</div>
+                            <h4>Social Networks</h4>
+                            <p>Friends who interact often → stronger connection</p>
+                            <div class="analogy-visual">
+                                <div class="social-demo">
+                                    <div class="person">👤</div>
+                                    <div class="connection">🤝</div>
+                                    <div class="person">👤</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mathematical Walkthrough -->
+                <div class="math-walkthrough">
+                    <h3>Mathematical Walkthrough</h3>
+                    <div class="walkthrough-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Initial Weights</h4>
+                                <p>w = 0.2</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Inputs</h4>
+                                <p>xᵢ = 1.0, yⱼ = 0.8</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Update</h4>
+                                <p>Δw = 0.1 · 1.0 · 0.8 = 0.08</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>New Weight</h4>
+                                <p>w = 0.28</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison to Backpropagation -->
+                <div class="comparison-table">
+                    <h3>Comparison to Backpropagation</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Hebbian</th>
+                                <th>Backpropagation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Update Rule</td>
+                                <td>Local updates (no global error)</td>
+                                <td>Global error propagation</td>
+                            </tr>
+                            <tr>
+                                <td>Learning Type</td>
+                                <td>Unsupervised</td>
+                                <td>Supervised</td>
+                            </tr>
+                            <tr>
+                                <td>Biological Plausibility</td>
+                                <td>High</td>
+                                <td>Low</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Train a Hebbian Neuron Game -->
+                <div class="hebbian-game">
+                    <h3>Train a Hebbian Neuron</h3>
+                    <div class="game-container">
+                        <div class="game-instructions">
+                            <p>Click patterns to strengthen synapses and learn to recognize horizontal lines</p>
+                            <div class="game-controls">
+                                <button class="start-btn">Start Training</button>
+                                <button class="reset-btn">Reset</button>
+                            </div>
+                        </div>
+                        <div class="game-visualization">
+                            <div class="pattern-grid">
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                                <div class="pattern-cell"></div>
+                            </div>
+                            <div class="synapse-strength">
+                                <div class="strength-bar"></div>
+                                <div class="strength-value">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neuroplasticity Timeline -->
+                <div class="neuroplasticity-timeline">
+                    <h3>Neuroplasticity Timeline</h3>
+                    <div class="timeline-container">
+                        <div class="timeline">
+                            <div class="timeline-point" data-time="0">
+                                <div class="point-label">Birth</div>
+                                <div class="point-content">Initial random connections</div>
+                            </div>
+                            <div class="timeline-point" data-time="1">
+                                <div class="point-label">Early Development</div>
+                                <div class="point-content">Visual cortex tuning</div>
+                            </div>
+                            <div class="timeline-point" data-time="2">
+                                <div class="point-label">Learning</div>
+                                <div class="point-content">Pattern recognition</div>
+                            </div>
+                            <div class="timeline-point" data-time="3">
+                                <div class="point-label">Maturity</div>
+                                <div class="point-content">Stable connections</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SVD Section -->
+        <section class="svd-section">
+            <h2>Singular Value Decomposition (SVD)</h2>
+            <p class="section-intro">Understanding how SVD breaks down matrices into interpretable components through interactive visualizations and real-world applications:</p>
+            
+            <div class="svd-content">
+                <!-- What is SVD? -->
+                <div class="svd-intro">
+                    <h3>What is SVD?</h3>
+                    <p class="intro-text">"A matrix factorization method that breaks any matrix into three interpretable components."</p>
+                    <div class="svd-equation">
+                        <p>A = UΣVᵀ</p>
+                        <div class="equation-components">
+                            <div class="component">
+                                <span class="component-icon">🧩</span>
+                                <span class="component-label">U:</span>
+                                <span class="component-desc">Left singular vectors (orthonormal basis for column space)</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-icon">📊</span>
+                                <span class="component-label">Σ:</span>
+                                <span class="component-desc">Diagonal matrix of singular values (scaling factors)</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-icon">🧩</span>
+                                <span class="component-label">Vᵀ:</span>
+                                <span class="component-desc">Right singular vectors (orthonormal basis for row space)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Matrix Decomposition -->
+                <div class="matrix-decomposition">
+                    <h3>Interactive Matrix Decomposition</h3>
+                    <div class="decomposition-controls">
+                        <div class="matrix-input">
+                            <label>Enter Matrix A (3x3):</label>
+                            <div class="matrix-grid">
+                                <input type="number" class="matrix-cell" data-row="0" data-col="0" value="1">
+                                <input type="number" class="matrix-cell" data-row="0" data-col="1" value="2">
+                                <input type="number" class="matrix-cell" data-row="0" data-col="2" value="3">
+                                <input type="number" class="matrix-cell" data-row="1" data-col="0" value="4">
+                                <input type="number" class="matrix-cell" data-row="1" data-col="1" value="5">
+                                <input type="number" class="matrix-cell" data-row="1" data-col="2" value="6">
+                                <input type="number" class="matrix-cell" data-row="2" data-col="0" value="7">
+                                <input type="number" class="matrix-cell" data-row="2" data-col="1" value="8">
+                                <input type="number" class="matrix-cell" data-row="2" data-col="2" value="9">
+                            </div>
+                            <button class="decompose-btn">Decompose</button>
+                        </div>
+                        <div class="singular-values">
+                            <h4>Singular Values (Σ)</h4>
+                            <div class="value-bars">
+                                <div class="value-bar" data-index="0">
+                                    <div class="bar-fill"></div>
+                                    <div class="bar-label">σ₁</div>
+                                </div>
+                                <div class="value-bar" data-index="1">
+                                    <div class="bar-fill"></div>
+                                    <div class="bar-label">σ₂</div>
+                                </div>
+                                <div class="value-bar" data-index="2">
+                                    <div class="bar-fill"></div>
+                                    <div class="bar-label">σ₃</div>
+                                </div>
+                            </div>
+                            <div class="energy-retention">
+                                <span>Energy Retention:</span>
+                                <span class="retention-value">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="decomposition-visualization">
+                        <div class="matrix-container">
+                            <div class="matrix A">
+                                <h4>Matrix A</h4>
+                                <div class="matrix-grid"></div>
+                            </div>
+                            <div class="matrix U">
+                                <h4>Matrix U</h4>
+                                <div class="matrix-grid"></div>
+                            </div>
+                            <div class="matrix Sigma">
+                                <h4>Matrix Σ</h4>
+                                <div class="matrix-grid"></div>
+                            </div>
+                            <div class="matrix VT">
+                                <h4>Matrix Vᵀ</h4>
+                                <div class="matrix-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geometric Interpretation -->
+                <div class="geometric-interpretation">
+                    <h3>Geometric Interpretation</h3>
+                    <div class="interpretation-container">
+                        <div class="transformation-visual">
+                            <div class="circle">
+                                <div class="unit-sphere"></div>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="ellipse">
+                                <div class="transformed-sphere"></div>
+                            </div>
+                        </div>
+                        <div class="transformation-controls">
+                            <div class="slider-group">
+                                <label>σ₁:</label>
+                                <input type="range" min="0" max="2" step="0.1" value="1" class="sigma-slider" data-index="0">
+                                <span class="sigma-value">1.0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>σ₂:</label>
+                                <input type="range" min="0" max="2" step="0.1" value="1" class="sigma-slider" data-index="1">
+                                <span class="sigma-value">1.0</span>
+                            </div>
+                            <div class="slider-group">
+                                <label>σ₃:</label>
+                                <input type="range" min="0" max="2" step="0.1" value="1" class="sigma-slider" data-index="2">
+                                <span class="sigma-value">1.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications -->
+                <div class="svd-applications">
+                    <h3>Applications</h3>
+                    <div class="application-cards">
+                        <div class="application-card" data-app="compression">
+                            <div class="app-icon">🗜️</div>
+                            <h4>Data Compression</h4>
+                            <p>Dimensionality reduction (PCA = SVD on centered data)</p>
+                            <div class="app-visual">
+                                <div class="compression-demo">
+                                    <div class="original-matrix">Original</div>
+                                    <div class="arrow">→</div>
+                                    <div class="compressed-matrix">Compressed</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="application-card" data-app="image">
+                            <div class="app-icon">🖼️</div>
+                            <h4>Image Processing</h4>
+                            <p>Denoising/compression (e.g., JPEG)</p>
+                            <div class="app-visual">
+                                <div class="image-demo">
+                                    <div class="original-image">Original</div>
+                                    <div class="arrow">→</div>
+                                    <div class="compressed-image">Compressed</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="application-card" data-app="recommender">
+                            <div class="app-icon">🎬</div>
+                            <h4>Recommender Systems</h4>
+                            <p>Collaborative filtering (Netflix/Amazon recommendations)</p>
+                            <div class="app-visual">
+                                <div class="recommender-demo">
+                                    <div class="user-movie-grid"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="application-card" data-app="nlp">
+                            <div class="app-icon">📚</div>
+                            <h4>Natural Language Processing</h4>
+                            <p>Latent Semantic Analysis (LSA) for topic modeling</p>
+                            <div class="app-visual">
+                                <div class="nlp-demo">
+                                    <div class="word-doc-matrix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Compression Tool -->
+                <div class="image-compression">
+                    <h3>Compress Your Image</h3>
+                    <div class="compression-tool">
+                        <div class="upload-section">
+                            <input type="file" id="imageUpload" accept="image/*">
+                            <label for="imageUpload" class="upload-btn">Choose Image</label>
+                        </div>
+                        <div class="compression-controls">
+                            <div class="rank-slider">
+                                <label>Rank (k):</label>
+                                <input type="range" min="1" max="100" value="50" class="rank-slider">
+                                <span class="rank-value">50</span>
+                            </div>
+                            <div class="compression-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Original Size:</span>
+                                    <span class="stat-value">0 KB</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Compressed Size:</span>
+                                    <span class="stat-value">0 KB</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Compression Ratio:</span>
+                                    <span class="stat-value">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-comparison">
+                            <div class="original">
+                                <h4>Original</h4>
+                                <div class="image-container"></div>
+                            </div>
+                            <div class="compressed">
+                                <h4>Compressed</h4>
+                                <div class="image-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SVD vs. Eigen Decomposition -->
+                <div class="comparison-section">
+                    <h3>SVD vs. Eigen Decomposition</h3>
+                    <div class="comparison-container">
+                        <div class="matrix-type">
+                            <h4>Symmetric Matrix</h4>
+                            <div class="matrix-grid"></div>
+                            <div class="decomposition-result">
+                                <div class="eigen-decomp">
+                                    <h5>Eigen Decomposition</h5>
+                                    <div class="result-matrix"></div>
+                                </div>
+                                <div class="svd-decomp">
+                                    <h5>SVD</h5>
+                                    <div class="result-matrix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="matrix-type">
+                            <h4>Rectangular Matrix</h4>
+                            <div class="matrix-grid"></div>
+                            <div class="decomposition-result">
+                                <div class="eigen-decomp">
+                                    <h5>Eigen Decomposition</h5>
+                                    <div class="result-matrix"></div>
+                                </div>
+                                <div class="svd-decomp">
+                                    <h5>SVD</h5>
+                                    <div class="result-matrix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overfitting and Underfitting Section -->
+        <section class="fitting-section">
+            <div class="fitting-content">
+                <h2>Overfitting and Underfitting</h2>
+                
+                <!-- Definitions -->
+                <div class="fitting-definitions">
+                    <div class="definition-card overfitting">
+                        <div class="definition-icon">🧠💥</div>
+                        <h3>Overfitting</h3>
+                        <p>Model memorizes training data (high variance) but fails on new data.</p>
+                        <div class="key-indicators">
+                            <h4>Key Indicators:</h4>
+                            <ul>
+                                <li>Training accuracy ≫ Test accuracy</li>
+                                <li>Model follows noise (jagged curve fitting all outliers)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="definition-card underfitting">
+                        <div class="definition-icon">🧠❌</div>
+                        <h3>Underfitting</h3>
+                        <p>Model is too simple (high bias) to capture patterns even in training data.</p>
+                        <div class="key-indicators">
+                            <h4>Key Indicators:</h4>
+                            <ul>
+                                <li>Poor performance on both training and test data</li>
+                                <li>Oversimplified trend (straight line for complex data)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Model Fitting Demo -->
+                <div class="model-fitting-demo">
+                    <h3>Interactive Model Fitting</h3>
+                    <div class="demo-controls">
+                        <div class="polynomial-control">
+                            <label for="degree-slider">Polynomial Degree:</label>
+                            <input type="range" id="degree-slider" min="1" max="15" value="1">
+                            <span class="degree-value">1</span>
+                        </div>
+                        <div class="data-controls">
+                            <button class="add-point-btn">Add Point</button>
+                            <button class="reset-points-btn">Reset</button>
+                        </div>
+                    </div>
+                    <div class="fitting-visualization">
+                        <div class="plot-container">
+                            <div class="data-points"></div>
+                            <div class="model-curve"></div>
+                            <div class="plot-axes">
+                                <div class="x-axis">X</div>
+                                <div class="y-axis">Y</div>
+                            </div>
+                        </div>
+                        <div class="loss-plot">
+                            <div class="training-loss"></div>
+                            <div class="validation-loss"></div>
+                            <div class="plot-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color training"></span>
+                                    <span>Training Loss</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color validation"></span>
+                                    <span>Validation Loss</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-World Analogies -->
+                <div class="fitting-analogies">
+                    <h3>Real-World Analogies</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card overfitting">
+                            <div class="analogy-icon">🎓📚❌</div>
+                            <h4>Rote Learning</h4>
+                            <p>Like a student who memorizes answers without understanding concepts.</p>
+                            <div class="analogy-visual">
+                                <div class="student">
+                                    <div class="student-head"></div>
+                                    <div class="student-body"></div>
+                                </div>
+                                <div class="books"></div>
+                                <div class="test-paper"></div>
+                            </div>
+                        </div>
+                        <div class="analogy-card underfitting">
+                            <div class="analogy-icon">🤷‍♂️📝</div>
+                            <h4>Guessing Blindly</h4>
+                            <p>Like answering "C" to every question without reading them.</p>
+                            <div class="analogy-visual">
+                                <div class="student">
+                                    <div class="student-head"></div>
+                                    <div class="student-body"></div>
+                                </div>
+                                <div class="answer-sheet"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diagnostic Tools -->
+                <div class="diagnostic-tools">
+                    <h3>Diagnostic Tools</h3>
+                    <div class="tools-container">
+                        <div class="bias-variance-tradeoff">
+                            <h4>Bias-Variance Tradeoff</h4>
+                            <div class="tradeoff-graph">
+                                <div class="bias-curve"></div>
+                                <div class="variance-curve"></div>
+                                <div class="total-error-curve"></div>
+                                <div class="crosshair"></div>
+                                <div class="axes">
+                                    <div class="x-axis">Model Complexity</div>
+                                    <div class="y-axis">Error</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="confusion-matrix-comparison">
+                            <h4>Confusion Matrix Comparison</h4>
+                            <div class="matrix-container">
+                                <div class="matrix overfit">
+                                    <h5>Overfit Model</h5>
+                                    <div class="matrix-grid"></div>
+                                </div>
+                                <div class="matrix underfit">
+                                    <h5>Underfit Model</h5>
+                                    <div class="matrix-grid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fixes in Action -->
+                <div class="fixes-demo">
+                    <h3>Fixes in Action</h3>
+                    <div class="fixes-container">
+                        <div class="regularization-demo">
+                            <h4>Regularization</h4>
+                            <div class="lambda-control">
+                                <label for="lambda-slider">Regularization Strength (λ):</label>
+                                <input type="range" id="lambda-slider" min="0" max="10" step="0.1" value="0">
+                                <span class="lambda-value">0.0</span>
+                            </div>
+                            <div class="regularization-plot">
+                                <div class="original-curve"></div>
+                                <div class="regularized-curve"></div>
+                            </div>
+                        </div>
+                        <div class="feature-engineering-demo">
+                            <h4>Feature Engineering</h4>
+                            <div class="feature-controls">
+                                <button class="feature-btn" data-feature="polynomial">Add Polynomial Features</button>
+                                <button class="feature-btn" data-feature="interaction">Add Interaction Terms</button>
+                            </div>
+                            <div class="feature-plot">
+                                <div class="original-model"></div>
+                                <div class="enhanced-model"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor Diagnosis Game -->
+                <div class="doctor-diagnosis-game">
+                    <h3>Doctor Diagnosis Game</h3>
+                    <div class="game-container">
+                        <div class="patient-model">
+                            <div class="model-visualization"></div>
+                            <div class="model-symptoms"></div>
+                        </div>
+                        <div class="diagnosis-tools">
+                            <div class="tool" data-tool="regularization">
+                                <div class="tool-icon">🛑</div>
+                                <span>Regularization</span>
+                            </div>
+                            <div class="tool" data-tool="features">
+                                <div class="tool-icon">➕</div>
+                                <span>Add Features</span>
+                            </div>
+                            <div class="tool" data-tool="data">
+                                <div class="tool-icon">📊</div>
+                                <span>More Data</span>
+                            </div>
+                        </div>
+                        <div class="treatment-feedback"></div>
+                    </div>
+                </div>
+
+                <!-- Dataset Playground -->
+                <div class="dataset-playground">
+                    <h3>Dataset Playground</h3>
+                    <div class="playground-container">
+                        <div class="dataset-selector">
+                            <button class="dataset-btn active" data-dataset="linear">Linear Data</button>
+                            <button class="dataset-btn" data-dataset="sine">Sine Wave</button>
+                            <button class="dataset-btn" data-dataset="noisy">Noisy Data</button>
+                        </div>
+                        <div class="dataset-visualization">
+                            <div class="data-points"></div>
+                            <div class="model-fit"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Principal Component Analysis (PCA) Section -->
+        <section class="pca-section">
+            <div class="pca-content">
+                <h2>Principal Component Analysis (PCA)</h2>
+                
+                <!-- What is PCA? -->
+                <div class="pca-intro">
+                    <div class="intro-card">
+                        <div class="intro-icon">🧭</div>
+                        <h3>What is PCA?</h3>
+                        <p>A technique to project high-dimensional data into a lower-dimensional space while preserving maximum variance.</p>
+                        <div class="math-core">
+                            <h4>Mathematical Core:</h4>
+                            <div class="math-flow">
+                                <div class="math-step">
+                                    <span>X</span>
+                                    <span class="step-label">Data</span>
+                                </div>
+                                <div class="math-arrow">→</div>
+                                <div class="math-step">
+                                    <span>X̄</span>
+                                    <span class="step-label">Centered</span>
+                                </div>
+                                <div class="math-arrow">→</div>
+                                <div class="math-step">
+                                    <span>Σ</span>
+                                    <span class="step-label">Covariance</span>
+                                </div>
+                                <div class="math-arrow">→</div>
+                                <div class="math-step">
+                                    <span>V</span>
+                                    <span class="step-label">Eigenvectors</span>
+                                </div>
+                                <div class="math-arrow">→</div>
+                                <div class="math-step">
+                                    <span>Y</span>
+                                    <span class="step-label">Projected</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Geometric Demo -->
+                <div class="geometric-demo">
+                    <h3>Interactive Geometric Demo</h3>
+                    <div class="demo-container">
+                        <div class="point-cloud">
+                            <div class="data-points"></div>
+                            <div class="covariance-ellipse"></div>
+                            <div class="pc-arrows">
+                                <div class="pc-arrow pc1"></div>
+                                <div class="pc-arrow pc2"></div>
+                            </div>
+                        </div>
+                        <div class="demo-controls">
+                            <div class="step-controls">
+                                <button class="step-btn" data-step="center">Center Data</button>
+                                <button class="step-btn" data-step="covariance">Show Covariance</button>
+                                <button class="step-btn" data-step="pcs">Show PCs</button>
+                            </div>
+                            <div class="dimension-control">
+                                <label>Dimensions:</label>
+                                <button class="dim-btn active" data-dim="2d">2D</button>
+                                <button class="dim-btn" data-dim="3d">3D</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scree Plot & Variance Explained -->
+                <div class="scree-plot">
+                    <h3>Variance Explained</h3>
+                    <div class="plot-container">
+                        <div class="scree-bars"></div>
+                        <div class="variance-line"></div>
+                        <div class="plot-axes">
+                            <div class="x-axis">Principal Components</div>
+                            <div class="y-axis">Variance (%)</div>
+                        </div>
+                    </div>
+                    <div class="variance-controls">
+                        <label>Retain Variance:</label>
+                        <input type="range" min="0" max="100" value="95" class="variance-slider">
+                        <span class="variance-value">95%</span>
+                    </div>
+                </div>
+
+                <!-- Real-World Analogies -->
+                <div class="pca-analogies">
+                    <h3>Real-World Analogies</h3>
+                    <div class="analogy-container">
+                        <div class="analogy-card">
+                            <div class="analogy-icon">🎭</div>
+                            <h4>Shadow Puppets</h4>
+                            <p>Like finding the best angle to cast a shadow that preserves the most important features of a 3D object.</p>
+                            <div class="analogy-visual">
+                                <div class="shadow-demo">
+                                    <div class="hand"></div>
+                                    <div class="shadow"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analogy-card">
+                            <div class="analogy-icon">🍰</div>
+                            <h4>Cake Recipe</h4>
+                            <p>Like reducing 10 ingredients to 3 key flavors that define 90% of the cake's taste.</p>
+                            <div class="analogy-visual">
+                                <div class="recipe-demo">
+                                    <div class="ingredients"></div>
+                                    <div class="key-flavors"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Pitfalls -->
+                <div class="pca-pitfalls">
+                    <h3>Common Pitfalls</h3>
+                    <div class="pitfall-cards">
+                        <div class="pitfall-card">
+                            <div class="pitfall-icon">⚠️</div>
+                            <h4>Non-Linear Data</h4>
+                            <p>PCA assumes linear relationships. For non-linear data, consider Kernel PCA.</p>
+                            <div class="pitfall-visual">
+                                <div class="nonlinear-demo">
+                                    <div class="data-points"></div>
+                                    <div class="pca-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pitfall-card">
+                            <div class="pitfall-icon">📏</div>
+                            <h4>Feature Scaling</h4>
+                            <p>Always standardize features before PCA to ensure equal importance.</p>
+                            <div class="pitfall-visual">
+                                <div class="scaling-demo">
+                                    <div class="unscaled"></div>
+                                    <div class="scaled"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PCA Your Selfie Tool -->
+                <div class="pca-selfie">
+                    <h3>PCA Your Selfie</h3>
+                    <div class="selfie-tool">
+                        <div class="upload-section">
+                            <input type="file" id="selfieUpload" accept="image/*">
+                            <label for="selfieUpload" class="upload-btn">Upload Selfie</label>
+                        </div>
+                        <div class="compression-controls">
+                            <div class="variance-slider">
+                                <label>Retain Variance:</label>
+                                <input type="range" min="0" max="100" value="95" class="variance-slider">
+                                <span class="variance-value">95%</span>
+                            </div>
+                            <div class="compression-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Original Size:</span>
+                                    <span class="stat-value">0 KB</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Compressed Size:</span>
+                                    <span class="stat-value">0 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-comparison">
+                            <div class="original">
+                                <h4>Original</h4>
+                                <div class="image-container"></div>
+                            </div>
+                            <div class="compressed">
+                                <h4>PCA Compressed</h4>
+                                <div class="image-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biplot Explorer -->
+                <div class="biplot-explorer">
+                    <h3>Biplot Explorer</h3>
+                    <div class="explorer-container">
+                        <div class="biplot">
+                            <div class="data-points"></div>
+                            <div class="feature-arrows"></div>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Feature Contributions</h4>
+                            <div class="feature-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics Section -->
+        <section class="metrics-section">
+            <div class="metrics-content">
+                <h2>Performance Metrics</h2>
+                <p class="section-intro">Understanding classification metrics through interactive visualizations and real-world examples.</p>
+
+                <!-- Core Metrics -->
+                <div class="core-metrics">
+                    <div class="metric-card accuracy">
+                        <div class="metric-icon">🎯</div>
+                        <h3>Accuracy</h3>
+                        <div class="metric-formula">
+                            <p>\(\frac{TP + TN}{TP + TN + FP + FN}\)</p>
+                        </div>
+                        <div class="metric-details">
+                            <p><strong>Best When:</strong> Balanced classes</p>
+                            <p><strong>Limitation:</strong> Misleading for imbalanced data</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card precision">
+                        <div class="metric-icon">🔍</div>
+                        <h3>Precision</h3>
+                        <div class="metric-formula">
+                            <p>\(\frac{TP}{TP + FP}\)</p>
+                        </div>
+                        <div class="metric-details">
+                            <p><strong>Best When:</strong> False positives are costly</p>
+                            <p><strong>Limitation:</strong> Ignores false negatives</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card recall">
+                        <div class="metric-icon">🚨</div>
+                        <h3>Recall</h3>
+                        <div class="metric-formula">
+                            <p>\(\frac{TP}{TP + FN}\)</p>
+                        </div>
+                        <div class="metric-details">
+                            <p><strong>Best When:</strong> False negatives are costly</p>
+                            <p><strong>Limitation:</strong> Ignores false positives</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card f1">
+                        <div class="metric-icon">⚖️</div>
+                        <h3>F1-Score</h3>
+                        <div class="metric-formula">
+                            <p>\(2 \times \frac{Precision \times Recall}{Precision + Recall}\)</p>
+                        </div>
+                        <div class="metric-details">
+                            <p><strong>Best When:</strong> Balance between precision and recall</p>
+                            <p><strong>Limitation:</strong> Hard to interpret alone</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Confusion Matrix -->
+                <div class="confusion-matrix-demo">
+                    <h3>Interactive Confusion Matrix</h3>
+                    <div class="matrix-container">
+                        <div class="matrix-grid">
+                            <div class="matrix-cell tp" data-value="0">TP</div>
+                            <div class="matrix-cell fp" data-value="0">FP</div>
+                            <div class="matrix-cell fn" data-value="0">FN</div>
+                            <div class="matrix-cell tn" data-value="0">TN</div>
+                        </div>
+                        <div class="matrix-controls">
+                            <div class="control-group">
+                                <label>True Positives</label>
+                                <input type="range" min="0" max="100" value="0" class="tp-slider">
+                                <span class="tp-value">0</span>
+                            </div>
+                            <div class="control-group">
+                                <label>False Positives</label>
+                                <input type="range" min="0" max="100" value="0" class="fp-slider">
+                                <span class="fp-value">0</span>
+                            </div>
+                            <div class="control-group">
+                                <label>False Negatives</label>
+                                <input type="range" min="0" max="100" value="0" class="fn-slider">
+                                <span class="fn-value">0</span>
+                            </div>
+                            <div class="control-group">
+                                <label>True Negatives</label>
+                                <input type="range" min="0" max="100" value="0" class="tn-slider">
+                                <span class="tn-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metrics-display">
+                        <div class="metric-value">
+                            <span class="label">Accuracy:</span>
+                            <span class="value accuracy-value">0%</span>
+                        </div>
+                        <div class="metric-value">
+                            <span class="label">Precision:</span>
+                            <span class="value precision-value">0%</span>
+                        </div>
+                        <div class="metric-value">
+                            <span class="label">Recall:</span>
+                            <span class="value recall-value">0%</span>
+                        </div>
+                        <div class="metric-value">
+                            <span class="label">F1-Score:</span>
+                            <span class="value f1-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PR & ROC Curves -->
+                <div class="curves-section">
+                    <div class="curve-container">
+                        <h3>Precision-Recall Curve</h3>
+                        <div class="pr-curve">
+                            <div class="curve-area"></div>
+                            <div class="threshold-line"></div>
+                        </div>
+                        <div class="threshold-control">
+                            <label>Decision Threshold</label>
+                            <input type="range" min="0" max="100" value="50" class="threshold-slider">
+                            <span class="threshold-value">0.5</span>
+                        </div>
+                    </div>
+                    <div class="curve-container">
+                        <h3>ROC Curve</h3>
+                        <div class="roc-curve">
+                            <div class="curve-area"></div>
+                            <div class="auc-value">AUC: 0.5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-World Scenarios -->
+                <div class="scenarios-section">
+                    <h3>Real-World Scenarios</h3>
+                    <div class="scenario-cards">
+                        <div class="scenario-card medical">
+                            <div class="scenario-icon">🏥</div>
+                            <h4>Medical Test</h4>
+                            <p>High recall is crucial - missing a disease (false negative) is worse than a false alarm.</p>
+                            <div class="scenario-metrics">
+                                <div class="metric-bar recall-bar"></div>
+                                <div class="metric-bar precision-bar"></div>
+                            </div>
+                        </div>
+                        <div class="scenario-card spam">
+                            <div class="scenario-icon">📧</div>
+                            <h4>Spam Filter</h4>
+                            <p>High precision is important - marking legitimate emails as spam hurts user trust.</p>
+                            <div class="scenario-metrics">
+                                <div class="metric-bar precision-bar"></div>
+                                <div class="metric-bar recall-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metric Comparison -->
+                <div class="metric-comparison">
+                    <h3>Model Comparison</h3>
+                    <div class="radar-chart">
+                        <div class="chart-container">
+                            <div class="chart-area">
+                                <div class="model1-polygon"></div>
+                                <div class="model2-polygon"></div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color model1"></span>
+                                    <span>Model A</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color model2"></span>
+                                    <span>Model B</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Build Your Metric Game -->
+                <div class="metric-game">
+                    <h3>Build Your Metric</h3>
+                    <div class="game-container">
+                        <div class="game-instructions">
+                            <p>Optimize your model for the given constraints:</p>
+                            <div class="constraint">Maximize F1-Score while keeping False Positives < 10%</div>
+                        </div>
+                        <div class="game-controls">
+                            <button class="reset-btn">Reset</button>
+                            <button class="check-btn">Check Solution</button>
+                        </div>
+                        <div class="game-feedback"></div>
+                    </div>
+                </div>
+
+                <!-- Imbalance Simulator -->
+                <div class="imbalance-simulator">
+                    <h3>Class Imbalance Simulator</h3>
+                    <div class="simulator-container">
+                        <div class="class-ratio">
+                            <label>Class Ratio</label>
+                            <input type="range" min="1" max="99" value="50" class="ratio-slider">
+                            <span class="ratio-value">50:50</span>
+                        </div>
+                        <div class="imbalance-metrics">
+                            <div class="metric-chart accuracy-chart">
+                                <div class="chart-bar"></div>
+                                <span class="chart-label">Accuracy</span>
+                            </div>
+                            <div class="metric-chart f1-chart">
+                                <div class="chart-bar"></div>
+                                <span class="chart-label">F1-Score</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- McCulloch-Pitts Neuron Model Section -->
+        <section class="mcp-section">
+            <div class="mcp-content">
+                <h2>McCulloch-Pitts Neuron Model</h2>
+                <p class="section-intro">Understanding the first mathematical model of a biological neuron through interactive visualizations and historical context.</p>
+
+                <!-- What is the MCP Model? -->
+                <div class="mcp-intro">
+                    <div class="intro-card">
+                        <div class="intro-icon">🧠</div>
+                        <h3>What is the MCP Model?</h3>
+                        <p>The first mathematical model of a biological neuron (1943), using binary inputs/outputs and threshold logic.</p>
+                        <div class="key-components">
+                            <div class="component">
+                                <div class="component-icon">🔘</div>
+                                <div class="component-info">
+                                    <h4>Binary Inputs (x₁, x₂)</h4>
+                                    <p>0 (inactive) or 1 (active)</p>
+                                </div>
+                            </div>
+                            <div class="component">
+                                <div class="component-icon">⚖️</div>
+                                <div class="component-info">
+                                    <h4>Weights (w₁, w₂)</h4>
+                                    <p>Synaptic strengths (excitatory/inhibitory)</p>
+                                </div>
+                            </div>
+                            <div class="component">
+                                <div class="component-icon">🎯</div>
+                                <div class="component-info">
+                                    <h4>Threshold (θ)</h4>
+                                    <p>Activation threshold</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mcp-equation">
+                            <p>Output (y) = {
+                                <span class="equation-condition">1 if ∑wᵢxᵢ ≥ θ</span>
+                                <span class="equation-condition">0 otherwise</span>
+                            }</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delta Rule Section -->
+        <section class="delta-rule-section">
+            <div class="delta-rule-content">
+                <div class="delta-intro">
+                    <div class="intro-card">
+                        <i class="fas fa-calculator intro-icon"></i>
+                        <h2>Delta Rule (LMS Algorithm)</h2>
+                        <p>The Delta Rule, also known as the Least Mean Squares (LMS) algorithm, is a fundamental learning rule in neural networks that adjusts weights to minimize the error between predicted and actual outputs.</p>
+                    </div>
+                </div>
+
+                <div class="key-formula">
+                    <h3>Core Formula</h3>
+                    <p>Δw = η * (t - y) * x</p>
+                    <div class="formula-components">
+                        <div class="component">
+                            <i class="fas fa-arrow-right component-icon"></i>
+                            <span>Δw: Weight change</span>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-tachometer-alt component-icon"></i>
+                            <span>η: Learning rate</span>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-bullseye component-icon"></i>
+                            <span>t: Target output</span>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-chart-line component-icon"></i>
+                            <span>y: Actual output</span>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-input-numeric component-icon"></i>
+                            <span>x: Input value</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="delta-properties">
+                    <h3>Key Properties</h3>
+                    <div class="properties-grid">
+                        <div class="property-card">
+                            <i class="fas fa-bullseye property-icon"></i>
+                            <h4>Convergence</h4>
+                            <p>Guaranteed convergence to optimal weights for linearly separable problems</p>
+                            <ul>
+                                <li>Converges when learning rate is small enough</li>
+                                <li>May oscillate if learning rate is too large</li>
+                                <li>Convergence speed depends on data distribution</li>
+                            </ul>
+                        </div>
+                        <div class="property-card">
+                            <i class="fas fa-chart-line property-icon"></i>
+                            <h4>Error Minimization</h4>
+                            <p>Minimizes mean squared error between predicted and actual outputs</p>
+                            <ul>
+                                <li>Uses gradient descent approach</li>
+                                <li>Updates weights in direction of steepest descent</li>
+                                <li>Error decreases monotonically</li>
+                            </ul>
+                        </div>
+                        <div class="property-card">
+                            <i class="fas fa-cogs property-icon"></i>
+                            <h4>Adaptability</h4>
+                            <p>Can adapt to changing input patterns in real-time</p>
+                            <ul>
+                                <li>Online learning capability</li>
+                                <li>Handles non-stationary data</li>
+                                <li>Continuous weight updates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="important-concepts">
+                    <h3>V.V.IMP Concepts</h3>
+                    <div class="concepts-grid">
+                        <div class="concept-card">
+                            <i class="fas fa-exclamation-triangle concept-icon"></i>
+                            <h4>Learning Rate Selection</h4>
+                            <ul>
+                                <li>Too large: Unstable learning, oscillations</li>
+                                <li>Too small: Slow convergence</li>
+                                <li>Optimal: Depends on data characteristics</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <i class="fas fa-balance-scale concept-icon"></i>
+                            <h4>Bias-Variance Tradeoff</h4>
+                            <ul>
+                                <li>High learning rate: High variance</li>
+                                <li>Low learning rate: High bias</li>
+                                <li>Need to balance both</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <i class="fas fa-chart-bar concept-icon"></i>
+                            <h4>Error Surface</h4>
+                            <ul>
+                                <li>Convex for linear problems</li>
+                                <li>Multiple local minima possible</li>
+                                <li>Gradient guides weight updates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="applications">
+                    <h3>Real-World Applications</h3>
+                    <div class="app-cards">
+                        <div class="app-card">
+                            <i class="fas fa-headphones app-icon"></i>
+                            <h4>Noise Cancellation</h4>
+                            <p>Adaptive filters in headphones and microphones</p>
+                            <ul>
+                                <li>Real-time noise reduction</li>
+                                <li>Adapts to changing noise patterns</li>
+                                <li>Used in modern audio devices</li>
+                            </ul>
+                        </div>
+                        <div class="app-card">
+                            <i class="fas fa-chart-line app-icon"></i>
+                            <h4>Stock Prediction</h4>
+                            <p>Time series forecasting in financial markets</p>
+                            <ul>
+                                <li>Price trend prediction</li>
+                                <li>Risk assessment</li>
+                                <li>Portfolio optimization</li>
+                            </ul>
+                        </div>
+                        <div class="app-card">
+                            <i class="fas fa-robot app-icon"></i>
+                            <h4>Control Systems</h4>
+                            <p>Adaptive control in robotics and automation</p>
+                            <ul>
+                                <li>Robot motion control</li>
+                                <li>System parameter adaptation</li>
+                                <li>Real-time optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="points-to-remember">
+                    <h3>Points to Remember</h3>
+                    <div class="points-grid">
+                        <div class="point-card">
+                            <i class="fas fa-check-circle point-icon"></i>
+                            <h4>Advantages</h4>
+                            <ul>
+                                <li>Simple implementation</li>
+                                <li>Online learning capability</li>
+                                <li>Convergence guarantees</li>
+                                <li>Memory efficient</li>
+                            </ul>
+                        </div>
+                        <div class="point-card">
+                            <i class="fas fa-times-circle point-icon"></i>
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>Only works for linear problems</li>
+                                <li>Sensitive to learning rate</li>
+                                <li>May get stuck in local minima</li>
+                                <li>Requires careful tuning</li>
+                            </ul>
+                        </div>
+                        <div class="point-card">
+                            <i class="fas fa-lightbulb point-icon"></i>
+                            <h4>Best Practices</h4>
+                            <ul>
+                                <li>Start with small learning rate</li>
+                                <li>Normalize input data</li>
+                                <li>Monitor convergence</li>
+                                <li>Use validation set</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 Baaz. All rights reserved.</p>
+    </footer>
+
+    <script src="ml.js"></script>
+</body>
+</html> 

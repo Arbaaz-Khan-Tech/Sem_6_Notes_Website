@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specific Algorithms - ML Guide</title>
+    <link rel="stylesheet" href="specific_algorithms.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.1/dist/latex.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="ML_Questions.html" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Specific Algorithms</h1>
+            <p class="subtitle">Understanding Hebbian Learning, SVM, and McCulloch-Pitts Model</p>
+        </header>
+
+        <section class="mcp-model">
+            <h2>McCulloch-Pitts Model (1943)</h2>
+            <div class="model-content">
+                <div class="text-content">
+                    <p>The <span class="highlight-red">first mathematical neuron</span> — binary logic gates made simple!</p>
+                    
+                    <h3>Key Concepts:</h3>
+                    <ul>
+                        <li><span class="highlight-red">Binary Inputs/Outputs</span>: Only accepts and outputs 0 (inactive) or 1 (active)</li>
+                        <li><span class="highlight-green">Fixed Weights</span>: No learning — weights are manually set</li>
+                        <li><span class="highlight-blue">Threshold Logic</span>: Fires if weighted sum ≥ threshold (θ)</li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <h4>Formula:</h4>
+                        <p>\[y = \begin{cases} 1 & \text{if } \sum_{i} w_i x_i \geq \theta \\ 0 & \text{otherwise} \end{cases}\]</p>
+                    </div>
+
+                    <div class="shortcut-tips">
+                        <h3>Quick Shortcuts to Remember:</h3>
+                        <div class="shortcut-card">
+                            <span class="shortcut-icon">🧠</span>
+                            <p>"MCP = Fancy If-Else! <span class="highlight-red">Weights</span> = Importance, <span class="highlight-blue">Threshold</span> = Gatekeeper"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Logic Gate Simulator</h3>
+                    <div class="gate-simulator">
+                        <div class="inputs">
+                            <label>Input 1: <input type="checkbox" id="input1"></label>
+                            <label>Input 2: <input type="checkbox" id="input2"></label>
+                        </div>
+                        <div class="weights">
+                            <label>Weight 1: <input type="range" id="weight1" min="-2" max="2" step="0.1" value="1"></label>
+                            <label>Weight 2: <input type="range" id="weight2" min="-2" max="2" step="0.1" value="1"></label>
+                        </div>
+                        <div class="threshold">
+                            <label>Threshold: <input type="range" id="threshold" min="0" max="2" step="0.1" value="1"></label>
+                        </div>
+                        <div class="output">
+                            <h4>Output: <span id="output">0</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hebbian-learning">
+            <h2>Hebbian Learning (1949)</h2>
+            <div class="model-content">
+                <div class="text-content">
+                    <p>"<span class="highlight-red">Neurons that fire together, wire together!</span>"</p>
+                    
+                    <h3>Key Concepts:</h3>
+                    <ul>
+                        <li><span class="highlight-red">Unsupervised Learning</span>: No labels needed — learns from input patterns</li>
+                        <li><span class="highlight-green">Local Updates</span>: Synapses strengthen based on co-activation</li>
+                        <li><span class="highlight-blue">Biological Basis</span>: Models how real neurons adapt (neuroplasticity)</li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <h4>Formula:</h4>
+                        <p>\[\Delta w_{ij} = \eta \cdot x_i \cdot y_j\]</p>
+                        <p class="formula-note">where:</p>
+                        <ul class="formula-notes">
+                            <li>\(\Delta w_{ij}\) is the weight change</li>
+                            <li>\(\eta\) is the learning rate</li>
+                            <li>\(x_i\) is the input activation</li>
+                            <li>\(y_j\) is the output activation</li>
+                        </ul>
+                    </div>
+
+                    <div class="shortcut-tips">
+                        <h3>Quick Shortcuts to Remember:</h3>
+                        <div class="shortcut-card">
+                            <span class="shortcut-icon">🔌</span>
+                            <p>"Hebb = Brain's WiFi! <span class="highlight-red">Stronger signals</span> = <span class="highlight-green">Stronger connection</span>"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Synapse Builder</h3>
+                    <div class="synapse-builder">
+                        <div class="neurons">
+                            <div class="neuron" id="neuron1">Neuron 1</div>
+                            <div class="neuron" id="neuron2">Neuron 2</div>
+                        </div>
+                        <div class="connection" id="connection"></div>
+                        <div class="controls">
+                            <label>Learning Rate (η): <input type="range" id="learningRate" min="0" max="1" step="0.1" value="0.5"></label>
+                            <button id="activateBtn">Activate Neurons</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="svm">
+            <h2>Support Vector Machines (SVM)</h2>
+            <div class="model-content">
+                <div class="text-content">
+                    <p>"<span class="highlight-red">The maximal margin classifier</span> — finding the best decision boundary"</p>
+                    
+                    <h3>Key Concepts:</h3>
+                    <ul>
+                        <li><span class="highlight-red">Hyperplane</span>: Decision boundary \(w^T x + b = 0\)</li>
+                        <li><span class="highlight-green">Margin Maximization</span>: Widest possible gap between classes</li>
+                        <li><span class="highlight-blue">Kernel Trick</span>: Maps data to higher dimensions (e.g., RBF kernel)</li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <h4>Optimization Problem:</h4>
+                        <p>\[\min_{w,b} \frac{1}{2} \|w\|^2 \text{ subject to } y_i(w^T x_i + b) \geq 1 \text{ for all } i\]</p>
+                        <p class="formula-note">where:</p>
+                        <ul class="formula-notes">
+                            <li>\(w\) is the weight vector</li>
+                            <li>\(b\) is the bias term</li>
+                            <li>\(x_i\) are the training points</li>
+                            <li>\(y_i\) are the class labels (-1 or 1)</li>
+                        </ul>
+                    </div>
+
+                    <div class="shortcut-tips">
+                        <h3>Quick Shortcuts to Remember:</h3>
+                        <div class="shortcut-card">
+                            <span class="shortcut-icon">⚔️</span>
+                            <p>"SVM = <span class="highlight-red">Street Builder</span>! Widest road between classes"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Decision Boundary Playground</h3>
+                    <div class="svm-playground">
+                        <div id="svm-viz"></div>
+                        <div class="controls">
+                            <label>Kernel: 
+                                <select id="kernelSelect">
+                                    <option value="linear">Linear</option>
+                                    <option value="rbf">RBF</option>
+                                </select>
+                            </label>
+                            <button id="addPointBtn">Add Point</button>
+                            <button id="clearBtn">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison">
+            <h2>Algorithm Comparison</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Strengths</th>
+                            <th>Weaknesses</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>McCulloch-Pitts</td>
+                            <td>Simple, foundational</td>
+                            <td>No learning, binary only</td>
+                            <td>Logic gates</td>
+                        </tr>
+                        <tr>
+                            <td>Hebbian</td>
+                            <td>Biologically plausible</td>
+                            <td>No error correction</td>
+                            <td>Unsupervised learning</td>
+                        </tr>
+                        <tr>
+                            <td>SVM</td>
+                            <td>Robust, kernel magic</td>
+                            <td>Slow for large datasets</td>
+                            <td>Small/medium datasets</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="challenges">
+            <h2>Interactive Challenges</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <h3>Build a XOR Gate</h3>
+                    <p>Why MCP fails (needs multi-layer)</p>
+                    <div class="challenge-demo" id="xor-challenge"></div>
+                </div>
+                <div class="challenge-card">
+                    <h3>Break the SVM</h3>
+                    <p>Overlap data to see slack variables kick in</p>
+                    <div class="challenge-demo" id="svm-challenge"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="specific_algorithms.js"></script>
+</body>
+</html> 

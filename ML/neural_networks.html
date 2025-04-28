@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks - ML Notes</title>
+    <link rel="stylesheet" href="neural_networks.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="ML_Questions.html">Back to ML Topics</a>
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Neural Networks</h1>
+            <p>Understanding the building blocks of deep learning through interactive demos and visualizations</p>
+        </section>
+
+        <section class="core-concepts">
+            <h2>Core Concepts (V.V.IMP)</h2>
+            
+            <div class="concept-card perceptron">
+                <h3>Perceptron Models</h3>
+                <p>The building block of neural networks — a single-layer binary classifier.</p>
+                
+                <div class="formula">
+                    <p>Output = \[
+                        \begin{cases}
+                        1 & \text{if } \sum w_ix_i + b \geq 0 \\
+                        0 & \text{otherwise}
+                        \end{cases}
+                    \]</p>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="perceptron-visualization">
+                        <canvas id="perceptronCanvas"></canvas>
+                        <div class="controls">
+                            <button id="resetPerceptron">Reset</button>
+                            <button id="toggleGate">Toggle AND/OR</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <h4>Shortcut to Remember:</h4>
+                    <p>"Perceptron = Fancy If-Else. Weights = Importance, Bias = Threshold!"</p>
+                </div>
+            </div>
+
+            <div class="concept-card backpropagation">
+                <h3>Backpropagation</h3>
+                <p>How neural networks learn from mistakes by propagating errors backward.</p>
+
+                <div class="key-steps">
+                    <div class="step">
+                        <i class="fas fa-forward"></i>
+                        <h4>Forward Pass</h4>
+                        <p>Compute prediction</p>
+                    </div>
+                    <div class="step">
+                        <i class="fas fa-calculator"></i>
+                        <h4>Calculate Loss</h4>
+                        <p>MSE/Cross-Entropy</p>
+                    </div>
+                    <div class="step">
+                        <i class="fas fa-backward"></i>
+                        <h4>Backward Pass</h4>
+                        <p>Update weights using chain rule</p>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="backprop-visualization">
+                        <canvas id="backpropCanvas"></canvas>
+                        <div class="controls">
+                            <button id="toggleForwardBackward">Toggle Forward/Backward</button>
+                            <button id="resetBackprop">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <h4>Shortcut to Remember:</h4>
+                    <p>"Backprop = Blame Game! Distribute error to guilty weights."</p>
+                </div>
+            </div>
+
+            <div class="concept-card activation-functions">
+                <h3>Activation Functions</h3>
+                <p>Non-linear 'switches' that decide neuron output.</p>
+
+                <div class="function-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Formula</th>
+                                <th>Range</th>
+                                <th>Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sigmoid</td>
+                                <td>\[\frac{1}{1 + e^{-x}}\]</td>
+                                <td>(0,1)</td>
+                                <td>Probability</td>
+                            </tr>
+                            <tr>
+                                <td>ReLU</td>
+                                <td>\[\max(0, x)\]</td>
+                                <td>[0, ∞)</td>
+                                <td>Deep Networks</td>
+                            </tr>
+                            <tr>
+                                <td>Tanh</td>
+                                <td>\[\frac{e^x - e^{-x}}{e^x + e^{-x}}\]</td>
+                                <td>(-1,1)</td>
+                                <td>Hidden Layers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="activation-visualization">
+                        <canvas id="activationCanvas"></canvas>
+                        <div class="controls">
+                            <select id="activationSelect">
+                                <option value="sigmoid">Sigmoid</option>
+                                <option value="relu">ReLU</option>
+                                <option value="tanh">Tanh</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-aid">
+                    <h4>Shortcut to Remember:</h4>
+                    <p>"Sigmoid = Squish, ReLU = Chop, Tanh = Stretch!"</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-playground">
+            <h2>Interactive Neural Network Playground</h2>
+            
+            <div class="network-builder">
+                <div class="layer-controls">
+                    <button id="addLayer">Add Layer</button>
+                    <button id="removeLayer">Remove Layer</button>
+                    <input type="number" id="neuronsPerLayer" min="1" max="10" value="3">
+                </div>
+                
+                <div class="network-visualization">
+                    <canvas id="networkCanvas"></canvas>
+                </div>
+
+                <div class="training-controls">
+                    <button id="trainNetwork">Train</button>
+                    <button id="resetNetwork">Reset</button>
+                    <div class="accuracy-display">
+                        Accuracy: <span id="accuracyValue">0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="points-to-remember">
+            <h2>Points to Remember (V.V.IMP)</h2>
+            
+            <div class="points-grid">
+                <div class="point-card">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Perceptrons</h3>
+                    <p>Linear classifiers → Can't solve XOR (need MLP)</p>
+                </div>
+                
+                <div class="point-card">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Backpropagation</h3>
+                    <p>Uses chain rule → Requires differentiable activations</p>
+                </div>
+                
+                <div class="point-card">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>ReLU > Sigmoid</h3>
+                    <p>Avoids vanishing gradients in deep nets</p>
+                </div>
+                
+                <div class="point-card">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Bias Matters</h3>
+                    <p>Shifts decision boundary → Don't forget it!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="memory-aids">
+            <h2>Memory Aids & Quick References</h2>
+            
+            <div class="memory-content">
+                <div class="memory-card">
+                    <h3>Perceptron Basics</h3>
+                    <p>A <span class="highlight">perceptron</span> is like a <span class="highlight">decision maker</span> that:</p>
+                    <ul>
+                        <li>Takes <span class="highlight">inputs</span> and multiplies them by <span class="highlight">weights</span></li>
+                        <li>Adds a <span class="highlight">bias</span> term to shift the decision boundary</li>
+                        <li>Uses a <span class="highlight">step function</span> to make binary decisions</li>
+                    </ul>
+                    <p class="mnemonic">Remember: <span class="highlight">"P = Wx + b"</span> (Perceptron = Weights × inputs + bias)</p>
+                </div>
+
+                <div class="memory-card">
+                    <h3>Backpropagation Steps</h3>
+                    <p>Think of backpropagation as a <span class="highlight">blame game</span>:</p>
+                    <ol>
+                        <li><span class="highlight">Forward Pass</span>: Make a prediction</li>
+                        <li><span class="highlight">Calculate Error</span>: How wrong was the prediction?</li>
+                        <li><span class="highlight">Backward Pass</span>: Blame the weights that caused the error</li>
+                        <li><span class="highlight">Update Weights</span>: Adjust weights to reduce error</li>
+                    </ol>
+                    <p class="mnemonic">Remember: <span class="highlight">"Forward → Error → Backward → Update"</span></p>
+                </div>
+
+                <div class="memory-card">
+                    <h3>Activation Functions</h3>
+                    <p>Each activation function has a specific purpose:</p>
+                    <ul>
+                        <li><span class="highlight">Sigmoid</span>: Squishes values between 0 and 1 (like a probability)</li>
+                        <li><span class="highlight">ReLU</span>: Kills negative values, keeps positives (like a water filter)</li>
+                        <li><span class="highlight">Tanh</span>: Squishes values between -1 and 1 (like a stretched sigmoid)</li>
+                    </ul>
+                    <p class="mnemonic">Remember: <span class="highlight">"Sigmoid = Squish, ReLU = Kill Negatives, Tanh = Stretch"</span></p>
+                </div>
+
+                <div class="memory-card">
+                    <h3>Common Pitfalls</h3>
+                    <p>Watch out for these common mistakes:</p>
+                    <ul>
+                        <li><span class="highlight">Vanishing Gradients</span>: When using sigmoid in deep networks</li>
+                        <li><span class="highlight">Overfitting</span>: When network memorizes training data</li>
+                        <li><span class="highlight">Learning Rate</span>: Too high = overshooting, too low = slow learning</li>
+                    </ul>
+                    <p class="mnemonic">Remember: <span class="highlight">"Use ReLU for deep nets, regularize to prevent overfitting"</span></p>
+                </div>
+            </div>
+        </section>
+
+        <div class="points-popup">
+            <div class="popup-content">
+                <h3>V.V.IMP Points to Remember!</h3>
+                <ul>
+                    <li>Perceptrons are linear classifiers</li>
+                    <li>Backpropagation uses chain rule</li>
+                    <li>ReLU is better than Sigmoid for deep networks</li>
+                    <li>Always include bias terms</li>
+                </ul>
+                <button class="close-popup">Got it!</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="neural_networks.js"></script>
+</body>
+</html> 

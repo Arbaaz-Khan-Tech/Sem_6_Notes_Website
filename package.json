@@ -1,0 +1,12 @@
+{
+  "name": "studyhub",
+  "version": "1.0.0",
+  "description": "A modern landing page for StudyHub with dynamic subject selection",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+} 

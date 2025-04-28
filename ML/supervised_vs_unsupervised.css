@@ -1,0 +1,533 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --text-color: #2c3e50;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --footer-bg: #2c3e50;
+    --footer-text: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --supervised-color: #3498db;
+    --unsupervised-color: #e67e22;
+}
+
+[data-theme="dark"] {
+    --primary-color: #ecf0f1;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --text-color: #ecf0f1;
+    --bg-color: #1a1a1a;
+    --card-bg: #2c2c2c;
+    --header-bg: #2c2c2c;
+    --footer-bg: #1a1a1a;
+    --footer-text: #ecf0f1;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --supervised-color: #2980b9;
+    --unsupervised-color: #d35400;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: var(--transition);
+}
+
+header {
+    background-color: var(--header-bg);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.logo p {
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.nav-link.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.theme-toggle button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.theme-toggle button:hover {
+    background-color: var(--shadow-color);
+}
+
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, var(--supervised-color) 0%, var(--unsupervised-color) 100%);
+    border-radius: 1rem;
+    color: white;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.comparison-section {
+    margin-bottom: 4rem;
+}
+
+.comparison-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.learning-type {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: var(--transition);
+}
+
+.learning-type:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.learning-type.supervised {
+    border-top: 4px solid var(--supervised-color);
+}
+
+.learning-type.unsupervised {
+    border-top: 4px solid var(--unsupervised-color);
+}
+
+.type-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.type-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.learning-type.supervised .type-icon {
+    color: var(--supervised-color);
+}
+
+.learning-type.unsupervised .type-icon {
+    color: var(--unsupervised-color);
+}
+
+.type-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+.type-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.definition, .examples, .algorithms {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.definition h3, .examples h3, .algorithms h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.examples ul, .algorithms ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.examples li, .algorithms li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.examples li::before, .algorithms li::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+.key-differences {
+    margin-bottom: 4rem;
+}
+
+.differences-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.differences-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.differences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.difference-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: var(--transition);
+}
+
+.difference-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.difference-card h3 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.supervised, .unsupervised {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.supervised {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.unsupervised {
+    background-color: rgba(230, 126, 34, 0.1);
+}
+
+.supervised i, .unsupervised i {
+    font-size: 1.5rem;
+}
+
+.supervised i {
+    color: var(--supervised-color);
+}
+
+.unsupervised i {
+    color: var(--unsupervised-color);
+}
+
+.real-world-analogies {
+    margin-bottom: 4rem;
+}
+
+.analogies-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.analogies-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.analogies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.analogy-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.analogy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.analogy-card.supervised {
+    border-top: 4px solid var(--supervised-color);
+}
+
+.analogy-card.unsupervised {
+    border-top: 4px solid var(--unsupervised-color);
+}
+
+.analogy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.analogy-card.supervised .analogy-icon {
+    color: var(--supervised-color);
+}
+
+.analogy-card.unsupervised .analogy-icon {
+    color: var(--unsupervised-color);
+}
+
+.analogy-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.analogy-visual {
+    margin-top: 2rem;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcard {
+    width: 150px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.flashcard:hover {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.flashcard-front {
+    background-color: var(--supervised-color);
+    color: white;
+}
+
+.flashcard-back {
+    background-color: var(--unsupervised-color);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.flashcard-front i, .flashcard-back i {
+    font-size: 3rem;
+}
+
+.lego-groups {
+    display: flex;
+    gap: 2rem;
+}
+
+.lego-group {
+    width: 100px;
+    height: 100px;
+    border-radius: 0.5rem;
+}
+
+.lego-group.red {
+    background-color: var(--supervised-color);
+}
+
+.lego-group.blue {
+    background-color: var(--unsupervised-color);
+}
+
+.decision-flowchart {
+    margin-bottom: 4rem;
+}
+
+.flowchart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.flowchart-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.flowchart {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.flow-step {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.flow-step i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.flow-step.yes i {
+    color: var(--supervised-color);
+}
+
+.flow-step.no i {
+    color: var(--unsupervised-color);
+}
+
+.flow-arrow {
+    width: 2px;
+    height: 2rem;
+    background-color: var(--text-color);
+    margin: 0 auto 1rem;
+}
+
+.flow-branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.footer-content a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-content a:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .comparison-container {
+        grid-template-columns: 1fr;
+    }
+
+    .flow-branches {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+} 

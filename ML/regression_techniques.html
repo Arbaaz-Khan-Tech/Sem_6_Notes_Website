@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Techniques</title>
+    <link rel="stylesheet" href="regression_techniques.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+    header {
+    background-color: var(--header-color);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    color: var(--secondary-color);
+}
+
+</style>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="ML_Questions.html">Back to ML Topics</a>
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Regression Techniques</h2>
+                <p>Master the art of predictive modeling with linear regression and regularization</p>
+            </div>
+        </section>
+
+        <section class="linear-regression">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-chart-line section-icon"></i>
+                    <h2>Linear Regression</h2>
+                </div>
+                <div class="equation-box">
+                    <h3>Basic Equation</h3>
+                    <div class="math-equation">
+                        \[ \hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n \]
+                    </div>
+                    <div class="equation-goal">
+                        <h4>Goal: Minimize Mean Squared Error (MSE)</h4>
+                        <div class="math-equation">
+                            \[ \min \sum(y_i - \hat{y}_i)^2 \]
+                        </div>
+                    </div>
+                </div>
+                <div class="interactive-demo">
+                    <div class="plot-container">
+                        <div class="data-points"></div>
+                        <div class="regression-line"></div>
+                    </div>
+                    <div class="demo-controls">
+                        <button class="add-point-btn">Add Point</button>
+                        <button class="reset-points-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="regularization-comparison">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-balance-scale section-icon"></i>
+                    <h2>Ridge vs. Lasso</h2>
+                </div>
+                <div class="reg-tabs">
+                    <button class="reg-tab active" data-tab="ridge">Ridge (L2)</button>
+                    <button class="reg-tab" data-tab="lasso">Lasso (L1)</button>
+                </div>
+                <div class="reg-content">
+                    <div class="reg-panel active" id="ridge">
+                        <div class="reg-header">
+                            <i class="fas fa-mountain reg-icon"></i>
+                            <h3>Ridge Regression</h3>
+                        </div>
+                        <div class="reg-equation">
+                            \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum\beta_j^2) \]
+                        </div>
+                        <div class="reg-visual">
+                            <div class="coefficient-plot">
+                                <div class="plot-axis"></div>
+                                <div class="ridge-curve"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reg-panel" id="lasso">
+                        <div class="reg-header">
+                            <i class="fas fa-cut reg-icon"></i>
+                            <h3>Lasso Regression</h3>
+                        </div>
+                        <div class="reg-equation">
+                            \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum|\beta_j|) \]
+                        </div>
+                        <div class="reg-visual">
+                            <div class="coefficient-plot">
+                                <div class="plot-axis"></div>
+                                <div class="lasso-curve"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-regularization">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-sliders-h section-icon"></i>
+                    <h2>Interactive Regularization</h2>
+                </div>
+                <div class="lambda-slider">
+                    <label>Regularization Strength (λ):</label>
+                    <input type="range" min="0" max="10" step="0.1" value="0" id="lambdaSlider">
+                    <span class="lambda-value">0</span>
+                </div>
+                <div class="demo-container">
+                    <div class="before-after">
+                        <div class="before">
+                            <h3>Without Regularization</h3>
+                            <div class="plot-before">
+                                <canvas id="beforePlot"></canvas>
+                            </div>
+                        </div>
+                        <div class="after">
+                            <h3>With Regularization</h3>
+                            <div class="plot-after">
+                                <canvas id="afterPlot"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="regression-comparison">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-code-branch section-icon"></i>
+                    <h2>Linear vs Logistic Regression</h2>
+                </div>
+                <div class="comparison-grid">
+                    <div class="comparison-card linear">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line card-icon"></i>
+                            <h3>Linear Regression</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="equation">
+                                \[ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n \]
+                            </div>
+                            <div class="characteristics">
+                                <h4>Characteristics:</h4>
+                                <ul>
+                                    <li>Predicts continuous values</li>
+                                    <li>Uses MSE as loss function</li>
+                                    <li>Output range: (-∞, +∞)</li>
+                                    <li>No activation function</li>
+                                </ul>
+                            </div>
+                            <div class="use-cases">
+                                <h4>Use Cases:</h4>
+                                <ul>
+                                    <li>House price prediction</li>
+                                    <li>Stock price forecasting</li>
+                                    <li>Temperature prediction</li>
+                                    <li>Sales forecasting</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comparison-card logistic">
+                        <div class="card-header">
+                            <i class="fas fa-sigmoid card-icon"></i>
+                            <h3>Logistic Regression</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="equation">
+                                \[ p(y=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n)}} \]
+                            </div>
+                            <div class="characteristics">
+                                <h4>Characteristics:</h4>
+                                <ul>
+                                    <li>Predicts probabilities</li>
+                                    <li>Uses cross-entropy loss</li>
+                                    <li>Output range: (0, 1)</li>
+                                    <li>Sigmoid activation</li>
+                                </ul>
+                            </div>
+                            <div class="use-cases">
+                                <h4>Use Cases:</h4>
+                                <ul>
+                                    <li>Spam detection</li>
+                                    <li>Disease diagnosis</li>
+                                    <li>Credit approval</li>
+                                    <li>Customer churn</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="regularization-methods">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-balance-scale section-icon"></i>
+                    <h2>Regularization Methods Comparison</h2>
+                </div>
+                <div class="methods-grid">
+                    <div class="method-card linear">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line card-icon"></i>
+                            <h3>Linear Regression</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="equation">
+                                \[ \min \sum(y_i - \hat{y}_i)^2 \]
+                            </div>
+                            <div class="characteristics">
+                                <h4>Characteristics:</h4>
+                                <ul>
+                                    <li>No regularization</li>
+                                    <li>Can overfit</li>
+                                    <li>Simple implementation</li>
+                                    <li>Fast computation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-card ridge">
+                        <div class="card-header">
+                            <i class="fas fa-mountain card-icon"></i>
+                            <h3>Ridge Regression (L2)</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="equation">
+                                \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum\beta_j^2) \]
+                            </div>
+                            <div class="characteristics">
+                                <h4>Characteristics:</h4>
+                                <ul>
+                                    <li>L2 penalty term</li>
+                                    <li>Shrinks coefficients</li>
+                                    <li>Never zero coefficients</li>
+                                    <li>Good for multicollinearity</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-card lasso">
+                        <div class="card-header">
+                            <i class="fas fa-cut card-icon"></i>
+                            <h3>Lasso Regression (L1)</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="equation">
+                                \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum|\beta_j|) \]
+                            </div>
+                            <div class="characteristics">
+                                <h4>Characteristics:</h4>
+                                <ul>
+                                    <li>L1 penalty term</li>
+                                    <li>Feature selection</li>
+                                    <li>Can zero coefficients</li>
+                                    <li>Good for sparse data</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+        <section class="regression-analogy">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-lightbulb section-icon"></i>
+                    <h2>Real-World Analogies</h2>
+                </div>
+                <div class="analogy-container">
+                    <div class="analogy-card">
+                        <i class="fas fa-home analogy-icon"></i>
+                        <h3>House Price Prediction</h3>
+                        <p>Linear Regression: Guessing house price based on size (no constraints)</p>
+                        <div class="analogy-visual">
+                            <div class="house-slider">
+                                <input type="range" min="0" max="100" value="50">
+                                <span class="size-value">50 sq ft</span>
+                            </div>
+                            <div class="price-prediction">
+                                <span class="predicted-price">$250,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analogy-card">
+                        <i class="fas fa-balance-scale analogy-icon"></i>
+                        <h3>Ridge vs. Lasso</h3>
+                        <p>Ridge: "No single factor can dominate pricing"</p>
+                        <p>Lasso: "Ignore some factors completely"</p>
+                        <div class="analogy-visual">
+                            <div class="factor-weights">
+                                <div class="weight-item">
+                                    <span>Size</span>
+                                    <div class="weight-bar"></div>
+                                </div>
+                                <div class="weight-item">
+                                    <span>Location</span>
+                                    <div class="weight-bar"></div>
+                                </div>
+                                <div class="weight-item">
+                                    <span>Age</span>
+                                    <div class="weight-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="regression-quiz">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-question-circle section-icon"></i>
+                    <h2>Quick Quiz</h2>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p>Which method would you use for feature selection?</p>
+                    </div>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="quiz" value="ridge">
+                            <span class="option-label">Ridge Regression</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="quiz" value="lasso">
+                            <span class="option-label">Lasso Regression</span>
+                        </label>
+                    </div>
+                    <div class="quiz-result">
+                        <p class="result-text"></p>
+                        <button class="try-again-btn">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="important-points">
+            <div class="section-container">
+                <div class="section-header">
+                    <i class="fas fa-exclamation-circle section-icon"></i>
+                    <h2>V.V.IMP Points</h2>
+                </div>
+                <div class="points-grid">
+                    <div class="point-card">
+                        <i class="fas fa-check-circle point-icon"></i>
+                        <h3>Key Differences</h3>
+                        <ul>
+                            <li>Ridge shrinks coefficients but never to zero</li>
+                            <li>Lasso can force coefficients to exactly zero</li>
+                            <li>Ridge is better for multicollinearity</li>
+                            <li>Lasso is better for feature selection</li>
+                        </ul>
+                    </div>
+                    <div class="point-card">
+                        <i class="fas fa-lightbulb point-icon"></i>
+                        <h3>When to Use</h3>
+                        <ul>
+                            <li>Use Ridge when all features are important</li>
+                            <li>Use Lasso when you suspect sparse features</li>
+                            <li>Use Elastic Net for a balance of both</li>
+                            <li>Always cross-validate λ parameter</li>
+                        </ul>
+                    </div>
+                    <div class="point-card">
+                        <i class="fas fa-exclamation-triangle point-icon"></i>
+                        <h3>Common Pitfalls</h3>
+                        <ul>
+                            <li>Not scaling features before regularization</li>
+                            <li>Choosing λ without cross-validation</li>
+                            <li>Ignoring multicollinearity</li>
+                            <li>Overlooking feature importance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="points-popup">
+        <div class="popup-content">
+            <h3>Points to Remember</h3>
+            <ul>
+                <li>Always scale features before applying regularization</li>
+                <li>Cross-validate to find optimal λ value</li>
+                <li>Ridge is better for correlated features</li>
+                <li>Lasso is better for feature selection</li>
+                <li>Consider Elastic Net for balanced approach</li>
+            </ul>
+            <button class="close-popup">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <script src="regression_techniques.js"></script>
+</body>
+</html> 

@@ -1,0 +1,540 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --card-background: #ffffff;
+    --highlight-color: #ffd700;
+    --navbar-background: #ffffff;
+    --navbar-text: #2c3e50;
+    --navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --card-color: #ffffff;
+    --header-color: #ffffff;
+    --footer-color: #2c3e50;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --highlight-blue: #3498db;
+    --highlight-green: #2ecc71;
+    --highlight-red: #e74c3c;
+    --highlight-yellow: #f1c40f;
+    --highlight-purple: #9b59b6;
+}
+
+[data-theme="dark"] {
+    --primary-color: #64b5f6;
+    --secondary-color: #b0bec5;
+    --accent-color: #ef5350;
+    --background-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-background: #2d2d2d;
+    --highlight-color: #ffd700;
+    --navbar-background: #2d2d2d;
+    --navbar-text: #e0e0e0;
+    --navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --card-color: #34495e;
+    --header-color: #2c3e50;
+    --footer-color: #2c3e50;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --highlight-blue: #3498db;
+    --highlight-green: #2ecc71;
+    --highlight-red: #e74c3c;
+    --highlight-yellow: #f1c40f;
+    --highlight-purple: #9b59b6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: var(--transition);
+}
+
+header {
+    background-color: var(--header-color);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--navbar-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Core Concepts Section */
+.core-concepts {
+    margin-bottom: 3rem;
+}
+
+.core-concepts h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.concept-card {
+    background-color: var(--card-color);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.concept-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.concept-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Comparison Table */
+.comparison-table {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.comparison-table th {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--primary-color);
+}
+
+/* Example Section */
+.example-section {
+    margin: 2rem 0;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.example-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.step-by-step {
+    margin-top: 1.5rem;
+}
+
+.step-by-step h5 {
+    color: var(--primary-color);
+    margin: 1rem 0 0.5rem;
+}
+
+.step-by-step p {
+    margin-bottom: 0.5rem;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.metric-card {
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.metric-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.metric-card .formula {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Confusion Matrix */
+.confusion-matrix {
+    margin: 2rem 0;
+}
+
+.confusion-matrix h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.matrix-table {
+    overflow-x: auto;
+}
+
+.matrix-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.matrix-table th,
+.matrix-table td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.matrix-table th {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--primary-color);
+}
+
+/* Detailed Explanation Section */
+.detailed-explanation {
+    margin-bottom: 3rem;
+}
+
+.detailed-explanation h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.explanation-card {
+    background-color: var(--card-color);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.explanation-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.explanation-content {
+    margin-top: 1rem;
+}
+
+.explanation-content h4 {
+    color: var(--primary-color);
+    margin: 1.5rem 0 1rem;
+}
+
+.explanation-content ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.explanation-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Memory Aids Section */
+.memory-aids {
+    margin-bottom: 3rem;
+}
+
+.memory-aids h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.memory-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.memory-card {
+    background-color: var(--card-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.memory-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.memory-card ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.memory-card li {
+    margin-bottom: 0.5rem;
+}
+
+.mnemonic {
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* Points to Remember */
+.points-to-remember {
+    margin-bottom: 3rem;
+}
+
+.points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.point-card {
+    background-color: var(--card-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.point-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.point-card i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.point-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Memory Aid */
+.memory-aid {
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.memory-aid h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Highlight Colors */
+.highlight-blue {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--highlight-blue);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.highlight-green {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--highlight-green);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.highlight-red {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--highlight-red);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.highlight-yellow {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: var(--highlight-yellow);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.highlight-purple {
+    background-color: rgba(155, 89, 182, 0.1);
+    color: var(--highlight-purple);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .concept-card {
+        padding: 1.5rem;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-content,
+    .points-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Navbar Styles */
+.navbar {
+    background: var(--navbar-background);
+    box-shadow: var(--navbar-shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--navbar-text);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+/* Adjust container for navbar */
+.container {
+    margin-top: 4rem;
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] .important-note {
+    background: #2d2d2d;
+    border-left-color: var(--highlight-color);
+}
+
+[data-theme="dark"] .memory-content {
+    background: #2d2d2d;
+    border-left-color: var(--highlight-color);
+}
+
+[data-theme="dark"] .shortcut-card {
+    background: #2d2d2d;
+}
+
+[data-theme="dark"] .visual-card {
+    background: #2d2d2d;
+}
+
+[data-theme="dark"] .pca-diagram {
+    background: #1a1a1a;
+}
+
+[data-theme="dark"] table {
+    border-color: #404040;
+}
+
+[data-theme="dark"] th {
+    background: var(--primary-color);
+}
+
+[data-theme="dark"] tr:nth-child(even) {
+    background: #2d2d2d;
+} 

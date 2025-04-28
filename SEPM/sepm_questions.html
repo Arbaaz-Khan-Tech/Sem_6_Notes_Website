@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEPM Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+        .dark .bg-blue-900\/30 {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .dark .bg-green-900\/30 {
+            background-color: rgba(34, 197, 94, 0.1);
+        }
+        .dark .bg-purple-900\/30 {
+            background-color: rgba(168, 85, 247, 0.1);
+        }
+        .dark .bg-red-900\/30 {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        .dark .bg-indigo-900\/30 {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+        .dark .bg-teal-900\/30 {
+            background-color: rgba(20, 184, 166, 0.1);
+        }
+        .dark .bg-orange-900\/30 {
+            background-color: rgba(249, 115, 22, 0.1);
+        }
+        .dark .bg-yellow-900\/30 {
+            background-color: rgba(234, 179, 8, 0.1);
+        }
+        .dark .bg-pink-900\/30 {
+            background-color: rgba(236, 72, 153, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">SEPM Questions</h1>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Software Engineering & Project Management</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Comprehensive coverage of important topics and previous year questions</p>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Topic 1 -->
+            <a href="/SEPM/Sf_Eg_Fund.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Software Engineering Fundamentals</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Definition, umbrella activities, and requirements analysis</p>
+            </a>
+
+            <!-- Topic 2 -->
+            <a href="/SEPM/Sf_Eg_Models.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Software Development Models</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Waterfall, Agile, and Incremental development approaches</p>
+            </a>
+
+            <!-- Topic 3 -->
+            <a href="/SEPM/Sf_Eg_Pr_Mg.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Project Management</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">4'Ps, COCOMO, and project scheduling techniques</p>
+            </a>
+
+            <!-- Topic 4 -->
+            <a href="/SEPM/Sf_Risk_Mg.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Risk Management</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">RMMM plan and common risk sources</p>
+            </a>
+
+            <!-- Topic 5 -->
+            <a href="/SEPM/Sf_SRS.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Requirements & SRS</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">SRS documentation and requirement engineering tasks</p>
+            </a>
+
+            <!-- Topic 6 -->
+            <a href="/SEPM/Sf_Testing.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Testing & Quality</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">White-box vs. black-box testing and testing strategies</p>
+            </a>
+
+            <!-- Topic 7 -->
+            <a href="/SEPM/Sf_Design.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Design & UI</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Golden rules for UI design and cohesion/coupling</p>
+            </a>
+
+            <!-- Topic 8 -->
+            <a href="/SEPM/Sf_Tools.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Tools & Techniques</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Cyclomatic complexity and CMM model</p>
+            </a>
+        </div>
+    </main>
+
+    <!-- Cheatsheet Section -->
+    <section class="bg-gray-50 dark:bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">SEPM Cheatsheet</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Quick reference guide with color-coded highlights and memory shortcuts</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Fundamentals -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-600 dark:text-blue-400 font-bold">1</span>
+                        </div>
+                        <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Software Engineering Fundamentals</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">Definition & Umbrella Activities</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Software Engineering: Systematic approach to software development</li>
+                                <li>Umbrella Activities:
+                                    <ul class="list-disc list-inside ml-4 mt-2">
+                                        <li>Project Tracking (monitoring progress)</li>
+                                        <li>Risk Management (identify/mitigate risks)</li>
+                                        <li>Quality Assurance (SQA, testing)</li>
+                                        <li>Configuration Management (SCM)</li>
+                                        <li>Documentation</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-2">4'Ps of Project Management</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>People (team, stakeholders)</li>
+                                <li>Product (requirements, scope)</li>
+                                <li>Process (SDLC models)</li>
+                                <li>Project (scheduling, resources)</li>
+                            </ul>
+                            <p class="mt-2 text-sm text-green-600 dark:text-green-400">Memory Shortcut: "PPPP" (People, Product, Process, Project)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SDLC Models -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                            <span class="text-purple-600 dark:text-purple-400 font-bold">2</span>
+                        </div>
+                        <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Software Development Life Cycle</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-purple-50 dark:bg-purple-900/30">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-purple-700 dark:text-purple-400">Model</th>
+                                    <th class="px-4 py-2 text-left text-purple-700 dark:text-purple-400">Key Features</th>
+                                    <th class="px-4 py-2 text-left text-purple-700 dark:text-purple-400">When to Use</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Waterfall</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Linear, sequential phases</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Stable requirements</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Agile</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Iterative, customer feedback</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Dynamic requirements</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Incremental</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Deliver in modules</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Large projects</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Spiral</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Risk-driven, combines Waterfall + Agile</td>
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">High-risk projects</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">Agile vs. Traditional</h4>
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Agile: Flexible, sprints, Scrum/Kanban</li>
+                            <li>Traditional (Waterfall): Rigid, phase-wise</li>
+                        </ul>
+                        <p class="mt-2 text-sm text-yellow-600 dark:text-yellow-400">Memory Shortcut: "Agile = Flexible, Waterfall = Fixed"</p>
+                    </div>
+                </div>
+
+                <!-- Requirements Engineering -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center">
+                            <span class="text-red-600 dark:text-red-400 font-bold">3</span>
+                        </div>
+                        <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Requirements Engineering</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400 mb-2">Functional vs. Non-Functional</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-medium text-red-600 dark:text-red-400">Functional</h5>
+                                    <p class="text-gray-700 dark:text-gray-300">What the system does (e.g., login)</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-red-600 dark:text-red-400">Non-Functional</h5>
+                                    <p class="text-gray-700 dark:text-gray-300">How the system performs (e.g., speed, security)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-indigo-700 dark:text-indigo-400 mb-2">SRS Structure</h4>
+                            <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Introduction (purpose, scope)</li>
+                                <li>Functional Requirements (use cases)</li>
+                                <li>Non-Functional Requirements (performance, security)</li>
+                                <li>User Interface (mockups)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Management -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center">
+                            <span class="text-teal-600 dark:text-teal-400 font-bold">4</span>
+                        </div>
+                        <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Project Management</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-teal-50 dark:bg-teal-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-teal-700 dark:text-teal-400 mb-2">COCOMO Model</h4>
+                            <p class="text-gray-700 dark:text-gray-300 mb-2">Effort = a × (KLOC)ᵇ</p>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Organic (a=2.4, b=1.05)</li>
+                                <li>Semi-Detached (a=3.0, b=1.12)</li>
+                                <li>Embedded (a=3.6, b=1.20)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 dark:text-orange-400 mb-2">CPM & PERT</h4>
+                            <p class="text-gray-700 dark:text-gray-300 mb-2">Expected Time = (O + 4M + P)/6</p>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>O: Optimistic</li>
+                                <li>M: Most likely</li>
+                                <li>P: Pessimistic</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Tips -->
+            <div class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Exam Tips</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-4 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-2">Diagrams</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Practice AON, Waterfall/Agile flowcharts</p>
+                    </div>
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-4 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-2">Numericals</h4>
+                        <p class="text-gray-700 dark:text-gray-300">COCOMO, PERT, Cyclomatic Complexity</p>
+                    </div>
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-4 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-2">SRS</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Memorize structure for Hospital/Railway systems</p>
+                    </div>
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-4 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-2">Key Differences</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Agile vs. Waterfall, White-box vs. Black-box</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Predicted Question Paper 2025 -->
+    <section class="bg-gray-50 dark:bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Predicted Question Paper 2025</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Based on recent trends and important topics</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <!-- Section I -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Section I (Compulsory)</h3>
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-4">Q1. Attempt any FOUR:</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-blue-600 dark:text-blue-400 font-medium mr-2">a.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Define software engineering and explain umbrella activities.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-600 dark:text-blue-400 font-medium mr-2">b.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Compare Agile and Waterfall models.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-600 dark:text-blue-400 font-medium mr-2">c.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Explain functional vs. non-functional requirements with examples.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-600 dark:text-blue-400 font-medium mr-2">d.</span>
+                                <p class="text-gray-700 dark:text-gray-300">List the golden rules for UI design.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-600 dark:text-blue-400 font-medium mr-2">e.</span>
+                                <p class="text-gray-700 dark:text-gray-300">What is the W5HH principle?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section II -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Section II (Attempt any THREE)</h3>
+                    
+                    <!-- Q2 -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-4">Q2.</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-green-600 dark:text-green-400 font-medium mr-2">a.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Explain COCOMO model for cost estimation.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-600 dark:text-green-400 font-medium mr-2">b.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Prepare an RMMM plan for "data breach risk" in an Online Banking System.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-4">Q3.</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-purple-600 dark:text-purple-400 font-medium mr-2">a.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Develop SRS for "E-Learning Platform" (focus on modules like user authentication, course management).</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-purple-600 dark:text-purple-400 font-medium mr-2">b.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Differentiate unit testing and integration testing with examples.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-4">Q4.</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-red-600 dark:text-red-400 font-medium mr-2">a.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Draw a CFG and calculate cyclomatic complexity for a given pseudocode (e.g., nested loops).</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-red-600 dark:text-red-400 font-medium mr-2">b.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Explain cohesion and coupling with examples.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-indigo-700 dark:text-indigo-400 mb-4">Q5.</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-indigo-600 dark:text-indigo-400 font-medium mr-2">a.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Draw an AON diagram for given activities (similar to Page 4, Q5b) and identify the critical path.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-indigo-600 dark:text-indigo-400 font-medium mr-2">b.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Describe the CMM model with a diagram.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-4">Q6.</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-yellow-600 dark:text-yellow-400 font-medium mr-2">a.</span>
+                                <div class="text-gray-700 dark:text-gray-300">
+                                    <p class="mb-2">Short notes on:</p>
+                                    <ul class="list-disc list-inside ml-4 space-y-2">
+                                        <li>Scrum model</li>
+                                        <li>SCM process</li>
+                                        <li>Black-box testing techniques</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+</body>
+</html>

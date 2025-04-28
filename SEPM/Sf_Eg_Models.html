@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Development Models</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Software Development Models</h1>
+                
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/SEPM/sepm_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            SEPM
+                        </a>
+                    </nav>
+                
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Interactive Guide: Software Development Models</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Compare Waterfall, Agile, and Incremental models with interactive examples</p>
+        </div>
+
+        <!-- Core Models Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">1. Core Models Explained</h3>
+
+                <!-- Waterfall Model -->
+                <div class="mb-12">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🌊</span>
+                        <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Waterfall Model</h4>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg italic mb-6">"A linear, phase-by-phase approach where each stage must be completed before moving to the next."</p>
+
+                    <!-- Phases -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg mb-6">
+                        <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-4">Key Phases</h5>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-red-500 font-semibold">1. Requirements</span>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-green-500 font-semibold">2. Design</span>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-blue-500 font-semibold">3. Implementation</span>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-purple-500 font-semibold">4. Testing</span>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-indigo-500 font-semibold">5. Maintenance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pros and Cons -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-3">✅ Pros</h5>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Simple, structured, and easy to manage</li>
+                                <li>Clear milestones and documentation</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-red-700 dark:text-red-400 mb-3">❌ Cons</h5>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Inflexible to changes</li>
+                                <li>Late testing → High cost of fixes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mnemonic -->
+                    <div class="mt-6 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic:</span> 
+                            "Waterfall = <span class="text-red-500">Straight</span> and <span class="text-green-500">Rigid</span> like a waterfall!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Agile Model -->
+                <div class="mb-12">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🏃</span>
+                        <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Agile Model</h4>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg italic mb-6">"Iterative, customer-centric approach with adaptive planning and continuous delivery."</p>
+
+                    <!-- Features -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg mb-6">
+                        <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-4">Key Features</h5>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-red-500">•</span>
+                                <span class="text-gray-700 dark:text-gray-300"><span class="font-semibold">Sprints:</span> Short development cycles (2-4 weeks)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-500">•</span>
+                                <span class="text-gray-700 dark:text-gray-300"><span class="font-semibold">Scrum/Kanban:</span> Frameworks for task management</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-blue-500">•</span>
+                                <span class="text-gray-700 dark:text-gray-300"><span class="font-semibold">Daily Standups:</span> Team sync-ups</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pros and Cons -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-3">✅ Pros</h5>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Flexible to changes</li>
+                                <li>Early and frequent deliverables</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-red-700 dark:text-red-400 mb-3">❌ Cons</h5>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Requires high customer involvement</li>
+                                <li>Less predictable timelines</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mnemonic -->
+                    <div class="mt-6 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic:</span> 
+                            "Agile = <span class="text-red-500">Fast</span>, <span class="text-green-500">Adaptive</span>, and <span class="text-blue-500">Collaborative</span>!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Incremental Model -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">📦</span>
+                        <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Incremental Model</h4>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg italic mb-6">"Hybrid approach: Build the product in increments, each adding new functionality."</p>
+
+                    <!-- Phases -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg mb-6">
+                        <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-4">Key Phases</h5>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-red-500 font-semibold">1. Core Features</span>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-green-500 font-semibold">2. Add Increments</span>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                                <span class="text-blue-500 font-semibold">3. Final Product</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pros and Cons -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-3">✅ Pros</h5>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Early delivery of partial products</li>
+                                <li>Easier to manage risk</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-red-700 dark:text-red-400 mb-3">❌ Cons</h5>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Requires careful planning</li>
+                                <li>Can become complex with many increments</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mnemonic -->
+                    <div class="mt-6 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic:</span> 
+                            "Incremental = <span class="text-red-500">Step-by-Step</span> Lego building!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">2. Agile vs. Traditional (Waterfall) Models</h3>
+
+                <!-- Comparison Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aspect</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-green-500 dark:text-green-400 uppercase tracking-wider">Agile</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-500 dark:text-blue-400 uppercase tracking-wider">Waterfall</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Flexibility</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">High (adapts to changes)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Low (rigid structure)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Customer Involvement</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Continuous</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Only at start/end</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Testing</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Ongoing (per sprint)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">End of project</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Best For</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Dynamic requirements (e.g., startups)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Stable requirements (e.g., aerospace)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Demo Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">3. Interactive Demo</h3>
+
+                <!-- Choose Your Model -->
+                <div class="mb-12">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Choose Your Model</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg cursor-pointer hover:shadow-lg transition-shadow">
+                            <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">E-commerce App</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Dynamic requirements, frequent updates</p>
+                            <p class="text-green-500 mt-2">Recommended: Agile</p>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg cursor-pointer hover:shadow-lg transition-shadow">
+                            <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">Banking System</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Stable requirements, strict regulations</p>
+                            <p class="text-blue-500 mt-2">Recommended: Waterfall</p>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg cursor-pointer hover:shadow-lg transition-shadow">
+                            <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">Mobile Game</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Core features first, then updates</p>
+                            <p class="text-purple-500 mt-2">Recommended: Incremental</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-World Analogies -->
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Real-World Analogies</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-2">Waterfall</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Like building a house (foundation → walls → roof)</p>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-2">Agile</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Like growing a garden (plant, adapt, harvest)</p>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-2">Incremental</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Like assembling a car (engine → wheels → body)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+</body>
+</html> 

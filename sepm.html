@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEPM - Software Engineering & Project Management</title>
+    <link rel="stylesheet" href="sepm.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <header>
+        <div class="logo">
+            <h1>SEPM</h1>
+            <p>Software Engineering & Project Management</p>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#" class="nav-link active">SEPM</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section with Definition -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Software Engineering</h2>
+                <p class="definition">
+                    <span class="keyword" data-tooltip="Methodical and organized approach">Systematic</span> application of engineering principles to 
+                    <span class="keyword" data-tooltip="Creating the structure and components">design</span>, 
+                    <span class="keyword" data-tooltip="Building the software">develop</span>, 
+                    <span class="keyword" data-tooltip="Verifying functionality">test</span>, and 
+                    <span class="keyword" data-tooltip="Keeping software up-to-date">maintain</span> software in a 
+                    <span class="keyword" data-tooltip="Efficient use of resources">cost-effective</span>, 
+                    <span class="keyword" data-tooltip="Ability to handle growth">scalable</span>, and 
+                    <span class="keyword" data-tooltip="Consistent performance">reliable</span> manner.
+                </p>
+            </div>
+        </section>
+
+        <!-- Umbrella Activities Section -->
+        <section class="umbrella-activities">
+            <h2>Umbrella Activities</h2>
+            <p class="section-intro">These are cross-cutting activities applied throughout the software development lifecycle:</p>
+            
+            <div class="activities-grid">
+                <div class="activity-card" data-activity="project-management">
+                    <div class="activity-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Project Management</h3>
+                    <p>Planning, scheduling, risk management</p>
+                    <div class="activity-visual">
+                        <div class="gantt-chart">
+                            <div class="gantt-bar" style="width: 30%;">Planning</div>
+                            <div class="gantt-bar" style="width: 40%;">Development</div>
+                            <div class="gantt-bar" style="width: 20%;">Testing</div>
+                            <div class="gantt-bar" style="width: 10%;">Deployment</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-activity="quality-assurance">
+                    <div class="activity-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Quality Assurance</h3>
+                    <p>Code reviews, testing, audits</p>
+                    <div class="activity-visual">
+                        <div class="lint-demo">
+                            <div class="code-line error">function calculate() {</div>
+                            <div class="code-line">  var x = 10;</div>
+                            <div class="code-line error">  return x;</div>
+                            <div class="code-line">}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-activity="configuration-management">
+                    <div class="activity-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Configuration Management</h3>
+                    <p>Version control (Git), documentation</p>
+                    <div class="activity-visual">
+                        <div class="git-branches">
+                            <div class="branch main">main</div>
+                            <div class="branch feature">feature</div>
+                            <div class="branch hotfix">hotfix</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-activity="risk-management">
+                    <div class="activity-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Risk Management</h3>
+                    <p>Identifying and mitigating risks early</p>
+                    <div class="activity-visual">
+                        <div class="risk-matrix">
+                            <div class="risk-cell high">High Impact</div>
+                            <div class="risk-cell medium">Medium Impact</div>
+                            <div class="risk-cell low">Low Impact</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-activity="process-improvement">
+                    <div class="activity-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Process Improvement</h3>
+                    <p>Refining workflows (Agile/DevOps)</p>
+                    <div class="activity-visual">
+                        <div class="process-cycle">
+                            <div class="cycle-step">Plan</div>
+                            <div class="cycle-step">Do</div>
+                            <div class="cycle-step">Check</div>
+                            <div class="cycle-step">Act</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive SDLC Diagram -->
+        <section class="sdlc-diagram">
+            <h2>Software Development Life Cycle</h2>
+            <p class="section-intro">How umbrella activities span across all phases:</p>
+            
+            <div class="mermaid">
+                graph LR
+                    A[Requirements] --> B[Design]
+                    B --> C[Implementation]
+                    C --> D[Testing]
+                    D --> E[Deployment]
+                    E --> F[Maintenance]
+                    
+                    subgraph "Umbrella Activities"
+                        G[Project Management]
+                        H[Quality Assurance]
+                        I[Configuration Management]
+                        J[Risk Management]
+                        K[Process Improvement]
+                    end
+                    
+                    G -.-> A
+                    G -.-> B
+                    G -.-> C
+                    G -.-> D
+                    G -.-> E
+                    G -.-> F
+                    
+                    H -.-> A
+                    H -.-> B
+                    H -.-> C
+                    H -.-> D
+                    H -.-> E
+                    H -.-> F
+                    
+                    I -.-> A
+                    I -.-> B
+                    I -.-> C
+                    I -.-> D
+                    I -.-> E
+                    I -.-> F
+                    
+                    J -.-> A
+                    J -.-> B
+                    J -.-> C
+                    J -.-> D
+                    J -.-> E
+                    J -.-> F
+                    
+                    K -.-> A
+                    K -.-> B
+                    K -.-> C
+                    K -.-> D
+                    K -.-> E
+                    K -.-> F
+            </div>
+            
+            <div class="sdlc-tooltips">
+                <div class="tooltip" data-phase="requirements">
+                    <h4>Requirements Phase</h4>
+                    <p>Risk Management peaks here as requirements are critical to project success.</p>
+                </div>
+                <div class="tooltip" data-phase="design">
+                    <h4>Design Phase</h4>
+                    <p>Quality Assurance focuses on design patterns and architecture reviews.</p>
+                </div>
+                <div class="tooltip" data-phase="implementation">
+                    <h4>Implementation Phase</h4>
+                    <p>Configuration Management tracks code changes and versions.</p>
+                </div>
+                <div class="tooltip" data-phase="testing">
+                    <h4>Testing Phase</h4>
+                    <p>Quality Assurance is most intensive during testing.</p>
+                </div>
+                <div class="tooltip" data-phase="deployment">
+                    <h4>Deployment Phase</h4>
+                    <p>Risk Management focuses on deployment strategies and rollback plans.</p>
+                </div>
+                <div class="tooltip" data-phase="maintenance">
+                    <h4>Maintenance Phase</h4>
+                    <p>Process Improvement analyzes what worked and what didn't.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mnemonic Device -->
+        <section class="mnemonic">
+            <h2>Quick Reference: PQR-RP</h2>
+            <p class="section-intro">A simple way to remember the umbrella activities:</p>
+            
+            <div class="mnemonic-bubbles">
+                <div class="bubble" data-activity="project-management">P</div>
+                <div class="bubble" data-activity="quality-assurance">Q</div>
+                <div class="bubble" data-activity="risk-management">R</div>
+                <div class="bubble" data-activity="reviews">R</div>
+                <div class="bubble" data-activity="process-improvement">P</div>
+            </div>
+            
+            <div class="mnemonic-explanation">
+                <p><strong>P</strong>roject Management</p>
+                <p><strong>Q</strong>uality Assurance</p>
+                <p><strong>R</strong>isk Management</p>
+                <p><strong>R</strong>eviews</p>
+                <p><strong>P</strong>rocess Improvement</p>
+            </div>
+        </section>
+
+        <!-- Quiz Widget -->
+        <section class="quiz-widget">
+            <h2>Test Your Knowledge</h2>
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>Which umbrella activity ensures code quality?</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-option="a">
+                        <span class="option-label">A</span>
+                        <span class="option-text">Risk Management</span>
+                    </div>
+                    <div class="quiz-option" data-option="b">
+                        <span class="option-label">B</span>
+                        <span class="option-text">Quality Assurance</span>
+                    </div>
+                    <div class="quiz-option" data-option="c">
+                        <span class="option-label">C</span>
+                        <span class="option-text">Configuration Management</span>
+                    </div>
+                </div>
+                <div class="quiz-result">
+                    <p class="result-text"></p>
+                    <button class="try-again-btn">Try Another Question</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Downloadable Cheatsheet -->
+        <section class="cheatsheet">
+            <h2>Download Cheatsheet</h2>
+            <p class="section-intro">Save this summary for offline reference:</p>
+            <button class="download-btn">
+                <i class="fas fa-download"></i>
+                Download PDF
+            </button>
+        </section>
+
+        <!-- Functional vs. Non-Functional Requirements Section -->
+        <section class="requirements-comparison">
+            <h2>Functional vs. Non-Functional Requirements</h2>
+            <p class="section-intro">Understanding the key differences between what a system does and how well it performs:</p>
+            
+            <div class="split-screen">
+                <div class="fr-side">
+                    <div class="side-header">
+                        <h3>Functional Requirements</h3>
+                        <p class="side-subtitle">"What the system DOES"</p>
+                    </div>
+                    <div class="side-content">
+                        <p>Define specific actions, inputs, and outputs that the system must perform.</p>
+                        <div class="example-box">
+                            <div class="example-icon">⚙️</div>
+                            <div class="example-text">
+                                <h4>Examples:</h4>
+                                <ul>
+                                    <li>User can reset password via email</li>
+                                    <li>System allows filtering search results</li>
+                                    <li>Payment processing with multiple methods</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="interactive-demo">
+                            <div class="demo-title">Interactive Demo</div>
+                            <div class="button-demo">
+                                <button class="demo-button">Login</button>
+                                <div class="demo-result">User authenticated successfully</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nfr-side">
+                    <div class="side-header">
+                        <h3>Non-Functional Requirements</h3>
+                        <p class="side-subtitle">"How the system PERFORMS"</p>
+                    </div>
+                    <div class="side-content">
+                        <p>Define quality attributes like speed, security, and usability of the system.</p>
+                        <div class="example-box">
+                            <div class="example-icon">📊</div>
+                            <div class="example-text">
+                                <h4>Examples:</h4>
+                                <ul>
+                                    <li>System loads in less than 2 seconds</li>
+                                    <li>99.9% uptime guarantee</li>
+                                    <li>GDPR compliance for data handling</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="interactive-demo">
+                            <div class="demo-title">Performance Metric</div>
+                            <div class="speedometer">
+                                <div class="speedometer-gauge">
+                                    <div class="gauge-fill"></div>
+                                    <div class="gauge-marker"></div>
+                                </div>
+                                <div class="speedometer-value">1.5s</div>
+                                <div class="speedometer-label">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <h3>Key Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Functional Requirements</th>
+                            <th>Non-Functional Requirements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-row="focus">
+                            <td>Focus</td>
+                            <td>Features (WHAT)</td>
+                            <td>Quality (HOW WELL)</td>
+                        </tr>
+                        <tr data-row="testing">
+                            <td>Testing</td>
+                            <td>Unit/Integration Tests</td>
+                            <td>Performance/Security Tests</td>
+                        </tr>
+                        <tr data-row="example">
+                            <td>Example</td>
+                            <td class="example-cell" data-example="fr">"Add to cart" button</td>
+                            <td class="example-cell" data-example="nfr">"Page loads in 1.5s"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="sdlc-context">
+                <h3>SDLC Context</h3>
+                <p>How FR and NFR fit into the Software Development Life Cycle:</p>
+                
+                <div class="mermaid">
+                    graph LR
+                        subgraph "Functional Requirements"
+                            FR1[Requirements Phase] --> FR2[Development Phase]
+                            FR2 --> FR3[QA Testing]
+                        end
+                        
+                        subgraph "Non-Functional Requirements"
+                            NFR1[Early Definition] --> NFR2[Deployment Monitoring]
+                            NFR2 --> NFR3[Post-Launch Audit]
+                        end
+                        
+                        style FR1 fill:#4a6cf7,color:white
+                        style FR2 fill:#4a6cf7,color:white
+                        style FR3 fill:#4a6cf7,color:white
+                        
+                        style NFR1 fill:#8a7aff,color:white
+                        style NFR2 fill:#8a7aff,color:white
+                        style NFR3 fill:#8a7aff,color:white
+                </div>
+            </div>
+            
+            <div class="mnemonic-device">
+                <h3>Quick Reference: F = Features, N = Numbers</h3>
+                <div class="mnemonic-bubbles">
+                    <div class="bubble" data-activity="functional">
+                        <div class="bubble-content">
+                            <span class="bubble-letter">F</span>
+                            <span class="bubble-icon">⚙️</span>
+                        </div>
+                        <div class="bubble-label">Functions</div>
+                    </div>
+                    <div class="bubble" data-activity="non-functional">
+                        <div class="bubble-content">
+                            <span class="bubble-letter">N</span>
+                            <span class="bubble-icon">📏</span>
+                        </div>
+                        <div class="bubble-label">Numbers</div>
+                    </div>
+                </div>
+                <p class="mnemonic-explanation">
+                    <strong>F</strong>unctional = <strong>F</strong>eatures (what it does)<br>
+                    <strong>N</strong>on-Functional = <strong>N</strong>umbers (speed, security levels)
+                </p>
+            </div>
+            
+            <div class="interactive-quiz">
+                <h3>Test Your Knowledge</h3>
+                <p>Drag and drop these requirements into the correct category:</p>
+                
+                <div class="drag-drop-container">
+                    <div class="drag-items">
+                        <div class="drag-item" draggable="true" data-category="fr">User authentication</div>
+                        <div class="drag-item" draggable="true" data-category="nfr">GDPR compliance</div>
+                        <div class="drag-item" draggable="true" data-category="fr">Shopping cart functionality</div>
+                        <div class="drag-item" draggable="true" data-category="nfr">Mobile-responsive design</div>
+                        <div class="drag-item" draggable="true" data-category="fr">Payment processing</div>
+                        <div class="drag-item" draggable="true" data-category="nfr">99.9% uptime</div>
+                    </div>
+                    
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="fr">
+                            <h4>Functional Requirements</h4>
+                            <div class="dropped-items"></div>
+                        </div>
+                        <div class="drop-zone" data-category="nfr">
+                            <h4>Non-Functional Requirements</h4>
+                            <div class="dropped-items"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="check-answers-btn">Check Answers</button>
+                <div class="quiz-feedback"></div>
+            </div>
+            
+            <div class="industry-examples">
+                <h3>Industry-Specific Examples</h3>
+                <div class="industry-tabs">
+                    <button class="industry-tab active" data-industry="healthcare">Healthcare</button>
+                    <button class="industry-tab" data-industry="ecommerce">E-commerce</button>
+                    <button class="industry-tab" data-industry="finance">Finance</button>
+                </div>
+                
+                <div class="industry-content">
+                    <div class="industry-panel active" data-industry="healthcare">
+                        <div class="industry-example">
+                            <h4>Healthcare</h4>
+                            <div class="example-columns">
+                                <div class="example-column">
+                                    <h5>Functional Requirements</h5>
+                                    <ul>
+                                        <li>Patient record management</li>
+                                        <li>Appointment scheduling</li>
+                                        <li>Prescription ordering</li>
+                                        <li>Insurance claim processing</li>
+                                    </ul>
+                                </div>
+                                <div class="example-column">
+                                    <h5>Non-Functional Requirements</h5>
+                                    <ul>
+                                        <li>HIPAA compliance</li>
+                                        <li>99.99% uptime for critical systems</li>
+                                        <li>Data encryption at rest and in transit</li>
+                                        <li>Audit trail for all data access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-panel" data-industry="ecommerce">
+                        <div class="industry-example">
+                            <h4>E-commerce</h4>
+                            <div class="example-columns">
+                                <div class="example-column">
+                                    <h5>Functional Requirements</h5>
+                                    <ul>
+                                        <li>Product catalog browsing</li>
+                                        <li>Shopping cart management</li>
+                                        <li>Checkout process</li>
+                                        <li>Order tracking</li>
+                                    </ul>
+                                </div>
+                                <div class="example-column">
+                                    <h5>Non-Functional Requirements</h5>
+                                    <ul>
+                                        <li>Page load time under 3 seconds</li>
+                                        <li>Support for 10,000+ concurrent users</li>
+                                        <li>Mobile-responsive design</li>
+                                        <li>PCI DSS compliance for payments</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-panel" data-industry="finance">
+                        <div class="industry-example">
+                            <h4>Finance</h4>
+                            <div class="example-columns">
+                                <div class="example-column">
+                                    <h5>Functional Requirements</h5>
+                                    <ul>
+                                        <li>Account balance checking</li>
+                                        <li>Fund transfers between accounts</li>
+                                        <li>Bill payments</li>
+                                        <li>Transaction history</li>
+                                    </ul>
+                                </div>
+                                <div class="example-column">
+                                    <h5>Non-Functional Requirements</h5>
+                                    <ul>
+                                        <li>Real-time transaction processing</li>
+                                        <li>Multi-factor authentication</li>
+                                        <li>99.999% uptime for core systems</li>
+                                        <li>Compliance with banking regulations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 StudyHub. All rights reserved.</p>
+    </footer>
+
+    <script src="sepm.js"></script>
+</body>
+</html> 

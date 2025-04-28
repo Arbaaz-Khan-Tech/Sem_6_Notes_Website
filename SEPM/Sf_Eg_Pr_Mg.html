@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Project Management</h1>
+                
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/SEPM/sepm_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            SEPM
+                        </a>
+                    </nav>
+                
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Ultimate Interactive Guide: Project Management</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Master the 4Ps, COCOMO, and CPM/PERT with interactive tools and examples</p>
+        </div>
+
+        <!-- 4Ps Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">1. The 4Ps of Project Management</h3>
+
+                <!-- 4Ps Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- People -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">People</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Team roles, stakeholders, skills</p>
+                        <p class="text-gray-600 dark:text-gray-400 italic mb-4">"Who is on the team? Who are the clients?"</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Project Manager</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Development Team</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Stakeholders</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• End Users</p>
+                        </div>
+                    </div>
+
+                    <!-- Product -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Product</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Scope, features, deliverables</p>
+                        <p class="text-gray-600 dark:text-gray-400 italic mb-4">"What are we building? What's the MVP?"</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Requirements</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Features</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Deliverables</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Quality Standards</p>
+                        </div>
+                    </div>
+
+                    <!-- Process -->
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Process</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Methodology, tools, workflows</p>
+                        <p class="text-gray-600 dark:text-gray-400 italic mb-4">"How will we work? What tools will we use?"</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• SDLC Models</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Development Tools</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Testing Methods</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Quality Assurance</p>
+                        </div>
+                    </div>
+
+                    <!-- Project -->
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Project</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Timeline, budget, risks</p>
+                        <p class="text-gray-600 dark:text-gray-400 italic mb-4">"When is the deadline? What's the budget?"</p>
+                        <div class="space-y-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Schedule</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Budget</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Risk Management</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">• Resource Allocation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "<span class="text-red-500">People</span> Make <span class="text-green-500">Products</span> Using <span class="text-blue-500">Processes</span> for a <span class="text-purple-500">Project</span>!"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "4Ps = <span class="text-red-500">P</span>eople + <span class="text-green-500">P</span>roduct + <span class="text-blue-500">P</span>rocess + <span class="text-purple-500">P</span>roject"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COCOMO Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">2. COCOMO Cost Estimation</h3>
+
+                <!-- Formula -->
+                <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg mb-8">
+                    <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-4">Basic COCOMO Formula</h4>
+                    <div class="space-y-4">
+                        <p class="text-gray-700 dark:text-gray-300">Effort = a × (KLOC)ᵇ (Person-Months)</p>
+                        <p class="text-gray-700 dark:text-gray-300">Time = c × (Effort)ᵈ (Months)</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-green-600 dark:text-green-400 mb-2">Organic</h5>
+                                <p class="text-gray-700 dark:text-gray-300">a = 2.4, b = 1.05</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Small teams, familiar environment</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Semi-Detached</h5>
+                                <p class="text-gray-700 dark:text-gray-300">a = 3.0, b = 1.12</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Medium teams, mixed experience</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-purple-600 dark:text-purple-400 mb-2">Embedded</h5>
+                                <p class="text-gray-700 dark:text-gray-300">a = 3.6, b = 1.20</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Large teams, complex environment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonics -->
+                <div class="space-y-4 mb-8">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 1:</span> 
+                            "COCOMO = <span class="text-red-500">C</span>ount <span class="text-green-500">O</span>f <span class="text-blue-500">C</span>ode, <span class="text-purple-500">O</span>rganize <span class="text-red-500">M</span>anagement <span class="text-green-500">O</span>verhead"
+                        </p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">Mnemonic 2:</span> 
+                            "Project Types: <span class="text-green-500">O</span>rganic (2.4), <span class="text-blue-500">S</span>emi-Detached (3.0), <span class="text-purple-500">E</span>mbedded (3.6)"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Calculator -->
+                <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-700 dark:text-green-400 mb-4">COCOMO Calculator</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 mb-2">KLOC (Thousands of Lines of Code)</label>
+                            <input type="range" min="1" max="100" value="50" class="w-full" id="klocSlider">
+                            <p class="text-gray-600 dark:text-gray-400 text-center" id="klocValue">50 KLOC</p>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 mb-2">Project Type</label>
+                            <select class="w-full p-2 rounded-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300" id="projectType">
+                                <option value="organic">Organic</option>
+                                <option value="semi-detached">Semi-Detached</option>
+                                <option value="embedded">Embedded</option>
+                            </select>
+                        </div>
+                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-900 dark:text-white mb-2">Estimated Effort</h5>
+                            <p class="text-gray-700 dark:text-gray-300" id="effortEstimate">Calculating...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CPM/PERT Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">3. Project Scheduling (CPM/PERT)</h3>
+
+                <!-- CPM -->
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Critical Path Method (CPM)</h4>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">"Finds the longest path (critical path) to determine project duration."</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg">
+                            <h5 class="font-semibold text-red-700 dark:text-red-400 mb-2">Early Start (ES)</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Earliest possible start time</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">ES = Max(EF of predecessors)</p>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                            <h5 class="font-semibold text-green-700 dark:text-green-400 mb-2">Late Finish (LF)</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Latest possible finish time</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">LF = Min(LS of successors)</p>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                            <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">Slack Time</h5>
+                            <p class="text-gray-700 dark:text-gray-300">Tasks that can delay without affecting timeline</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Slack = LF - EF</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PERT -->
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Program Evaluation Review Technique (PERT)</h4>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">"Uses probabilistic time estimates (Optimistic/Pessimistic/Most Likely)."</p>
+
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-4">Expected Time Formula</h5>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Expected Time = (O + 4M + P) / 6</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h6 class="font-semibold text-gray-900 dark:text-white mb-2">O: Optimistic</h6>
+                                <p class="text-gray-700 dark:text-gray-300">Best-case scenario</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Minimum time needed</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h6 class="font-semibold text-gray-900 dark:text-white mb-2">M: Most Likely</h6>
+                                <p class="text-gray-700 dark:text-gray-300">Normal scenario</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Most probable time</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h6 class="font-semibold text-gray-900 dark:text-white mb-2">P: Pessimistic</h6>
+                                <p class="text-gray-700 dark:text-gray-300">Worst-case scenario</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Maximum time needed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mnemonic -->
+                <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-semibold">Mnemonic:</span> 
+                        "CPM = <span class="text-red-500">Critical</span> Path, PERT = <span class="text-green-500">Probabilistic</span> Time!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Analogies -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Real-World Analogies</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">4Ps</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like a restaurant (People = chefs, Product = menu, Process = recipes, Project = dinner service)</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">COCOMO</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like a recipe's "serving size" (KLOC) → "cooking time" (effort)</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">CPM/PERT</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like planning a road trip (critical path = fastest route, PERT = accounting for traffic)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // COCOMO Calculator
+        const klocSlider = document.getElementById('klocSlider');
+        const klocValue = document.getElementById('klocValue');
+        const projectType = document.getElementById('projectType');
+        const effortEstimate = document.getElementById('effortEstimate');
+
+        function calculateEffort() {
+            const kloc = parseInt(klocSlider.value);
+            const type = projectType.value;
+            let a, b;
+
+            switch(type) {
+                case 'organic':
+                    a = 2.4;
+                    b = 1.05;
+                    break;
+                case 'semi-detached':
+                    a = 3.0;
+                    b = 1.12;
+                    break;
+                case 'embedded':
+                    a = 3.6;
+                    b = 1.20;
+                    break;
+            }
+
+            const effort = a * Math.pow(kloc, b);
+            effortEstimate.textContent = `${effort.toFixed(2)} Person-Months`;
+        }
+
+        klocSlider.addEventListener('input', () => {
+            klocValue.textContent = `${klocSlider.value} KLOC`;
+            calculateEffort();
+        });
+
+        projectType.addEventListener('change', calculateEffort);
+
+        // Initial calculation
+        calculateEffort();
+    </script>
+</body>
+</html> 
