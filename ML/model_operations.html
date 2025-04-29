@@ -4,277 +4,372 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model Operations - ML Guide</title>
-    <link rel="stylesheet" href="model_operations.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.1/dist/latex.min.js"></script>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="ML_Questions.html" class="nav-link">
-                <i class="fas fa-home"></i> Home
-            </a>
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </nav>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
 
-    <main>
-        <section class="hero">
-            <h1>Model Operations</h1>
-            <p>Understanding Model Evaluation, Performance Metrics, and the Confusion Matrix</p>
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            ML Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
+                <nav class="flex flex-col space-y-2 p-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        Home
+                    </a>
+                    <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        ML Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Model Operations</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding Model Evaluation, Performance Metrics, and the Confusion Matrix</p>
         </section>
 
-        <section class="core-concepts">
-            <h2>Core Concepts (V.V.IMP)</h2>
+        <!-- Core Concepts -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Core Concepts (V.V.IMP)</h2>
             
-            <div class="concept-card overfitting-underfitting">
-                <h3>Overfitting vs. Underfitting</h3>
-                <p>Understanding the balance between model complexity and generalization.</p>
+            <!-- Overfitting vs Underfitting Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Overfitting vs. Underfitting</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">Understanding the balance between model complexity and generalization.</p>
                 
-                <div class="comparison-table">
-                    <table>
-                        <thead>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden mb-6">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-100 dark:bg-gray-600">
                             <tr>
-                                <th>Aspect</th>
-                                <th>Overfitting</th>
-                                <th>Underfitting</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aspect</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Overfitting</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Underfitting</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
                             <tr>
-                                <td>Definition</td>
-                                <td><span class="highlight-red">Model memorizes noise (high variance)</span></td>
-                                <td><span class="highlight-blue">Model is too simple (high bias)</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Definition</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">Model memorizes noise (high variance)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 dark:text-blue-400">Model is too simple (high bias)</td>
                             </tr>
                             <tr>
-                                <td>Training Error</td>
-                                <td><span class="highlight-red">Very low (near 0%)</span></td>
-                                <td><span class="highlight-blue">High</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Training Error</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">Very low (near 0%)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 dark:text-blue-400">High</td>
                             </tr>
                             <tr>
-                                <td>Test Error</td>
-                                <td><span class="highlight-red">Much higher than training error</span></td>
-                                <td><span class="highlight-blue">High (similar to training)</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Test Error</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">Much higher than training error</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 dark:text-blue-400">High (similar to training)</td>
                             </tr>
                             <tr>
-                                <td>Visual Cue</td>
-                                <td><span class="highlight-red">Jagged curve fitting all points (🌪️ Chaos)</span></td>
-                                <td><span class="highlight-blue">Straight line missing patterns (📉 Too rigid)</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Visual Cue</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">Jagged curve fitting all points (🌪️ Chaos)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 dark:text-blue-400">Straight line missing patterns (📉 Too rigid)</td>
                             </tr>
                             <tr>
-                                <td>Fix</td>
-                                <td><span class="highlight-red">Regularization, dropout, more data</span></td>
-                                <td><span class="highlight-blue">Add features, increase model complexity</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Fix</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">Regularization, dropout, more data</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 dark:text-blue-400">Add features, increase model complexity</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="example-section">
-                    <h4>Example: Polynomial Regression</h4>
-                    <p>Let's see how different polynomial degrees affect model fitting:</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Example: Polynomial Regression</h4>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Let's see how different polynomial degrees affect model fitting:</p>
                     
-                    <div class="step-by-step">
-                        <h5>Underfitting (Degree = 1)</h5>
-                        <p>\[y = w_0 + w_1x\]</p>
-                        <p><span class="highlight-blue">Too simple to capture patterns</span></p>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="font-semibold text-gray-900 dark:text-white mb-2">Underfitting (Degree = 1)</h5>
+                            <p class="text-center text-xl mb-2">\[y = w_0 + w_1x\]</p>
+                            <p class="text-blue-600 dark:text-blue-400">Too simple to capture patterns</p>
+                        </div>
                         
-                        <h5>Good Fit (Degree = 3)</h5>
-                        <p>\[y = w_0 + w_1x + w_2x^2 + w_3x^3\]</p>
-                        <p><span class="highlight-green">Balanced complexity</span></p>
+                        <div>
+                            <h5 class="font-semibold text-gray-900 dark:text-white mb-2">Good Fit (Degree = 3)</h5>
+                            <p class="text-center text-xl mb-2">\[y = w_0 + w_1x + w_2x^2 + w_3x^3\]</p>
+                            <p class="text-green-600 dark:text-green-400">Balanced complexity</p>
+                        </div>
                         
-                        <h5>Overfitting (Degree = 10)</h5>
-                        <p>\[y = w_0 + w_1x + ... + w_{10}x^{10}\]</p>
-                        <p><span class="highlight-red">Fits noise in the data</span></p>
+                        <div>
+                            <h5 class="font-semibold text-gray-900 dark:text-white mb-2">Overfitting (Degree = 10)</h5>
+                            <p class="text-center text-xl mb-2">\[y = w_0 + w_1x + ... + w_{10}x^{10}\]</p>
+                            <p class="text-red-600 dark:text-red-400">Fits noise in the data</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="memory-aid">
-                    <h4>Shortcut to Remember:</h4>
-                    <p>"<span class="highlight-yellow">Overfit = Memorizing the textbook (fails surprise tests). Underfit = Guessing randomly (fails everything).</span>"</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shortcut to Remember:</h4>
+                    <p class="text-gray-700 dark:text-gray-300">"<span class="font-semibold text-yellow-600 dark:text-yellow-400">Overfit = Memorizing the textbook (fails surprise tests). Underfit = Guessing randomly (fails everything).</span>"</p>
                 </div>
             </div>
 
-            <div class="concept-card performance-metrics">
-                <h3>Performance Metrics</h3>
-                <p>Understanding how to evaluate model performance.</p>
+            <!-- Performance Metrics Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Performance Metrics</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">Understanding how to evaluate model performance.</p>
 
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h4>Accuracy</h4>
-                        <p class="formula">\[\frac{TP + TN}{Total}\]</p>
-                        <p><span class="highlight-blue">Use when classes are balanced</span></p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Accuracy</h4>
+                        <p class="text-center text-xl mb-2">\[\frac{TP + TN}{Total}\]</p>
+                        <p class="text-blue-600 dark:text-blue-400">Use when classes are balanced</p>
                     </div>
                     
-                    <div class="metric-card">
-                        <h4>Precision</h4>
-                        <p class="formula">\[\frac{TP}{TP + FP}\]</p>
-                        <p><span class="highlight-green">Use when false positives are costly</span></p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Precision</h4>
+                        <p class="text-center text-xl mb-2">\[\frac{TP}{TP + FP}\]</p>
+                        <p class="text-green-600 dark:text-green-400">Use when false positives are costly</p>
                     </div>
                     
-                    <div class="metric-card">
-                        <h4>Recall</h4>
-                        <p class="formula">\[\frac{TP}{TP + FN}\]</p>
-                        <p><span class="highlight-red">Use when false negatives are costly</span></p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Recall</h4>
+                        <p class="text-center text-xl mb-2">\[\frac{TP}{TP + FN}\]</p>
+                        <p class="text-red-600 dark:text-red-400">Use when false negatives are costly</p>
                     </div>
                     
-                    <div class="metric-card">
-                        <h4>F1-Score</h4>
-                        <p class="formula">\[2 \times \frac{Precision \times Recall}{Precision + Recall}\]</p>
-                        <p><span class="highlight-purple">Use for imbalanced data</span></p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">F1-Score</h4>
+                        <p class="text-center text-xl mb-2">\[2 \times \frac{Precision \times Recall}{Precision + Recall}\]</p>
+                        <p class="text-purple-600 dark:text-purple-400">Use for imbalanced data</p>
                     </div>
                 </div>
 
-                <div class="confusion-matrix">
-                    <h4>Confusion Matrix</h4>
-                    <div class="matrix-table">
-                        <table>
-                            <thead>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Confusion Matrix</h4>
+                    <div class="overflow-hidden">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                            <thead class="bg-gray-100 dark:bg-gray-600">
                                 <tr>
-                                    <th></th>
-                                    <th>Predicted: Yes</th>
-                                    <th>Predicted: No</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"></th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Predicted: Yes</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Predicted: No</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
                                 <tr>
-                                    <td>Actual: Yes</td>
-                                    <td><span class="highlight-green">True Positive (TP) ✅</span></td>
-                                    <td><span class="highlight-red">False Negative (FN) ❌</span></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Actual: Yes</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">True Positive (TP) ✅</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">False Negative (FN) ❌</td>
                                 </tr>
                                 <tr>
-                                    <td>Actual: No</td>
-                                    <td><span class="highlight-red">False Positive (FP) ❌</span></td>
-                                    <td><span class="highlight-green">True Negative (TN) ✅</span></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Actual: No</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">False Positive (FP) ❌</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">True Negative (TN) ✅</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="memory-aid">
-                    <h4>Shortcut to Remember:</h4>
-                    <p>"<span class="highlight-yellow">Precision = Don't cry wolf (avoid FP). Recall = Catch all wolves (avoid FN).</span>"</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shortcut to Remember:</h4>
+                    <p class="text-gray-700 dark:text-gray-300">"<span class="font-semibold text-yellow-600 dark:text-yellow-400">Precision = Don't cry wolf (avoid FP). Recall = Catch all wolves (avoid FN).</span>"</p>
                 </div>
             </div>
         </section>
 
-        <section class="detailed-explanation">
-            <h2>Detailed Explanation</h2>
+        <!-- Memory Aids -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Memory Aids & Quick References</h2>
             
-            <div class="explanation-card">
-                <h3>Overfitting vs. Underfitting in Detail</h3>
-                <div class="explanation-content">
-                    <p><span class="highlight-blue">Model Evaluation</span> is crucial for understanding how well your model performs. Here's a deeper look at overfitting and underfitting:</p>
-                    
-                    <h4>Overfitting (High Variance)</h4>
-                    <ul>
-                        <li><span class="highlight-red">Symptoms</span>: Model performs well on training data but poorly on new data</li>
-                        <li><span class="highlight-red">Causes</span>: Too complex model, insufficient data, noise in data</li>
-                        <li><span class="highlight-red">Solutions</span>: Regularization, dropout, data augmentation, early stopping</li>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Overfitting vs. Underfitting Memory Tricks</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-semibold text-red-600 dark:text-red-400">Overfitting</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">O</span>verly complex (like memorizing a textbook)</li>
+                        <li><span class="font-semibold text-blue-600 dark:text-blue-400">Underfitting</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">U</span>nderwhelming (like guessing randomly)</li>
+                        <li><span class="font-semibold text-green-600 dark:text-green-400">Good Fit</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">G</span>oldilocks (just right)</li>
                     </ul>
-
-                    <h4>Underfitting (High Bias)</h4>
-                    <ul>
-                        <li><span class="highlight-blue">Symptoms</span>: Model performs poorly on both training and test data</li>
-                        <li><span class="highlight-blue">Causes</span>: Too simple model, insufficient features</li>
-                        <li><span class="highlight-blue">Solutions</span>: Add more features, increase model complexity, reduce regularization</li>
-                    </ul>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300">Remember: "<span class="font-semibold text-purple-600 dark:text-purple-400">Overfit = Memorizing the textbook (fails surprise tests). Underfit = Guessing randomly (fails everything).</span>"</p>
                 </div>
-            </div>
 
-            <div class="explanation-card">
-                <h3>Performance Metrics in Detail</h3>
-                <div class="explanation-content">
-                    <p><span class="highlight-green">Performance Metrics</span> help us quantify how well our model is performing. Here's a detailed explanation of each metric:</p>
-                    
-                    <h4>Accuracy</h4>
-                    <ul>
-                        <li><span class="highlight-blue">Definition</span>: Proportion of correct predictions</li>
-                        <li><span class="highlight-blue">Use Case</span>: When classes are balanced</li>
-                        <li><span class="highlight-blue">Limitation</span>: Can be misleading with imbalanced data</li>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Performance Metrics Memory Tricks</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-semibold text-blue-600 dark:text-blue-400">Accuracy</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">A</span>ll correct predictions</li>
+                        <li><span class="font-semibold text-green-600 dark:text-green-400">Precision</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">P</span>recise positive predictions</li>
+                        <li><span class="font-semibold text-red-600 dark:text-red-400">Recall</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">R</span>ecover all positive cases</li>
+                        <li><span class="font-semibold text-purple-600 dark:text-purple-400">F1-Score</span> = <span class="font-semibold text-yellow-600 dark:text-yellow-400">F</span>ind balance between precision and recall</li>
                     </ul>
-
-                    <h4>Precision and Recall</h4>
-                    <ul>
-                        <li><span class="highlight-green">Precision</span>: Focuses on the accuracy of positive predictions</li>
-                        <li><span class="highlight-red">Recall</span>: Focuses on the ability to find all positive cases</li>
-                        <li><span class="highlight-purple">Trade-off</span>: Increasing one often decreases the other</li>
-                    </ul>
-
-                    <h4>F1-Score</h4>
-                    <ul>
-                        <li><span class="highlight-yellow">Definition</span>: Harmonic mean of precision and recall</li>
-                        <li><span class="highlight-yellow">Use Case</span>: When you need a balanced measure</li>
-                        <li><span class="highlight-yellow">Advantage</span>: Works well with imbalanced data</li>
-                    </ul>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300">Remember: "<span class="font-semibold text-purple-600 dark:text-purple-400">Precision = Don't cry wolf (avoid FP). Recall = Catch all wolves (avoid FN).</span>"</p>
                 </div>
             </div>
         </section>
 
-        <section class="memory-aids">
-            <h2>Memory Aids & Quick References</h2>
+        <!-- Points to Remember -->
+        <section>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Points to Remember (V.V.IMP)</h2>
             
-            <div class="memory-content">
-                <div class="memory-card">
-                    <h3>Overfitting vs. Underfitting Memory Tricks</h3>
-                    <ul>
-                        <li><span class="highlight-red">Overfitting</span> = <span class="highlight-yellow">O</span>verly complex (like memorizing a textbook)</li>
-                        <li><span class="highlight-blue">Underfitting</span> = <span class="highlight-yellow">U</span>nderwhelming (like guessing randomly)</li>
-                        <li><span class="highlight-green">Good Fit</span> = <span class="highlight-yellow">G</span>oldilocks (just right)</li>
-                    </ul>
-                    <p class="mnemonic">Remember: "<span class="highlight-purple">Overfit = Memorizing the textbook (fails surprise tests). Underfit = Guessing randomly (fails everything).</span>"</p>
-                </div>
-
-                <div class="memory-card">
-                    <h3>Performance Metrics Memory Tricks</h3>
-                    <ul>
-                        <li><span class="highlight-blue">Accuracy</span> = <span class="highlight-yellow">A</span>ll correct predictions</li>
-                        <li><span class="highlight-green">Precision</span> = <span class="highlight-yellow">P</span>recise positive predictions</li>
-                        <li><span class="highlight-red">Recall</span> = <span class="highlight-yellow">R</span>ecover all positive cases</li>
-                        <li><span class="highlight-purple">F1-Score</span> = <span class="highlight-yellow">F</span>ind balance between precision and recall</li>
-                    </ul>
-                    <p class="mnemonic">Remember: "<span class="highlight-purple">Precision = Don't cry wolf (avoid FP). Recall = Catch all wolves (avoid FN).</span>"</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="points-to-remember">
-            <h2>Points to Remember (V.V.IMP)</h2>
-            
-            <div class="points-grid">
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>Overfitting</h3>
-                    <p>High training accuracy, low test accuracy</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Overfitting</h3>
+                    <p class="text-gray-700 dark:text-gray-300">High training accuracy, low test accuracy</p>
                 </div>
                 
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>Underfitting</h3>
-                    <p>Low training accuracy, low test accuracy</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Underfitting</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Low training accuracy, low test accuracy</p>
                 </div>
                 
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>Precision vs. Recall</h3>
-                    <p>Trade-off between false positives and false negatives</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Precision vs. Recall</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Trade-off between false positives and false negatives</p>
                 </div>
                 
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>F1-Score</h3>
-                    <p>Balanced measure for imbalanced data</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">F1-Score</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Balanced measure for imbalanced data</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="model_operations.js"></script>
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html> 

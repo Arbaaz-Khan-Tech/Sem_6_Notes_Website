@@ -4,238 +4,393 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Specific Algorithms - ML Guide</title>
-    <link rel="stylesheet" href="specific_algorithms.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.1/dist/latex.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="ML_Questions.html" class="nav-link">
-                <i class="fas fa-home"></i> Home
-            </a>
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            ML Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
+                <nav class="flex flex-col space-y-2 p-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        Home
+                    </a>
+                    <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        ML Topics
+                    </a>
+                </nav>
+            </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="container">
-        <header>
-            <h1>Specific Algorithms</h1>
-            <p class="subtitle">Understanding Hebbian Learning, SVM, and McCulloch-Pitts Model</p>
-        </header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <section class="text-center mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Specific Algorithms</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Understanding Hebbian Learning, SVM, and McCulloch-Pitts Model</p>
+            </div>
+        </section>
 
-        <section class="mcp-model">
-            <h2>McCulloch-Pitts Model (1943)</h2>
-            <div class="model-content">
-                <div class="text-content">
-                    <p>The <span class="highlight-red">first mathematical neuron</span> — binary logic gates made simple!</p>
-                    
-                    <h3>Key Concepts:</h3>
-                    <ul>
-                        <li><span class="highlight-red">Binary Inputs/Outputs</span>: Only accepts and outputs 0 (inactive) or 1 (active)</li>
-                        <li><span class="highlight-green">Fixed Weights</span>: No learning — weights are manually set</li>
-                        <li><span class="highlight-blue">Threshold Logic</span>: Fires if weighted sum ≥ threshold (θ)</li>
-                    </ul>
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">McCulloch-Pitts Model (1943)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <p class="text-gray-700 dark:text-gray-300">The <span class="font-semibold text-primary-600 dark:text-primary-400">first mathematical neuron</span> — binary logic gates made simple!</p>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Concepts:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Binary Inputs/Outputs</span>: Only accepts and outputs 0 (inactive) or 1 (active)</li>
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Fixed Weights</span>: No learning — weights are manually set</li>
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Threshold Logic</span>: Fires if weighted sum ≥ threshold (θ)</li>
+                            </ul>
+                        </div>
 
-                    <div class="formula-box">
-                        <h4>Formula:</h4>
-                        <p>\[y = \begin{cases} 1 & \text{if } \sum_{i} w_i x_i \geq \theta \\ 0 & \text{otherwise} \end{cases}\]</p>
-                    </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Formula:</h4>
+                            <p class="text-center text-xl">\[y = \begin{cases} 1 & \text{if } \sum_{i} w_i x_i \geq \theta \\ 0 & \text{otherwise} \end{cases}\]</p>
+                        </div>
 
-                    <div class="shortcut-tips">
-                        <h3>Quick Shortcuts to Remember:</h3>
-                        <div class="shortcut-card">
-                            <span class="shortcut-icon">🧠</span>
-                            <p>"MCP = Fancy If-Else! <span class="highlight-red">Weights</span> = Importance, <span class="highlight-blue">Threshold</span> = Gatekeeper"</p>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Shortcuts to Remember:</h3>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl">🧠</span>
+                                <p class="text-gray-700 dark:text-gray-300">"MCP = Fancy If-Else! <span class="font-semibold text-primary-600 dark:text-primary-400">Weights</span> = Importance, <span class="font-semibold text-primary-600 dark:text-primary-400">Threshold</span> = Gatekeeper"</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="interactive-demo">
-                    <h3>Logic Gate Simulator</h3>
-                    <div class="gate-simulator">
-                        <div class="inputs">
-                            <label>Input 1: <input type="checkbox" id="input1"></label>
-                            <label>Input 2: <input type="checkbox" id="input2"></label>
-                        </div>
-                        <div class="weights">
-                            <label>Weight 1: <input type="range" id="weight1" min="-2" max="2" step="0.1" value="1"></label>
-                            <label>Weight 2: <input type="range" id="weight2" min="-2" max="2" step="0.1" value="1"></label>
-                        </div>
-                        <div class="threshold">
-                            <label>Threshold: <input type="range" id="threshold" min="0" max="2" step="0.1" value="1"></label>
-                        </div>
-                        <div class="output">
-                            <h4>Output: <span id="output">0</span></h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Logic Gate Simulator</h3>
+                        <div class="space-y-4">
+                            <div class="space-y-2">
+                                <label class="block text-gray-700 dark:text-gray-300">Input 1: <input type="checkbox" id="input1" class="ml-2"></label>
+                                <label class="block text-gray-700 dark:text-gray-300">Input 2: <input type="checkbox" id="input2" class="ml-2"></label>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-gray-700 dark:text-gray-300">Weight 1: <input type="range" id="weight1" min="-2" max="2" step="0.1" value="1" class="w-full"></label>
+                                <label class="block text-gray-700 dark:text-gray-300">Weight 2: <input type="range" id="weight2" min="-2" max="2" step="0.1" value="1" class="w-full"></label>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-gray-700 dark:text-gray-300">Threshold: <input type="range" id="threshold" min="0" max="2" step="0.1" value="1" class="w-full"></label>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Output: <span id="output" class="text-primary-600 dark:text-primary-400">0</span></h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="hebbian-learning">
-            <h2>Hebbian Learning (1949)</h2>
-            <div class="model-content">
-                <div class="text-content">
-                    <p>"<span class="highlight-red">Neurons that fire together, wire together!</span>"</p>
-                    
-                    <h3>Key Concepts:</h3>
-                    <ul>
-                        <li><span class="highlight-red">Unsupervised Learning</span>: No labels needed — learns from input patterns</li>
-                        <li><span class="highlight-green">Local Updates</span>: Synapses strengthen based on co-activation</li>
-                        <li><span class="highlight-blue">Biological Basis</span>: Models how real neurons adapt (neuroplasticity)</li>
-                    </ul>
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Hebbian Learning (1949)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <p class="text-gray-700 dark:text-gray-300">"<span class="font-semibold text-primary-600 dark:text-primary-400">Neurons that fire together, wire together!</span>"</p>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Concepts:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Unsupervised Learning</span>: No labels needed — learns from input patterns</li>
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Local Updates</span>: Synapses strengthen based on co-activation</li>
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Biological Basis</span>: Models how real neurons adapt (neuroplasticity)</li>
+                            </ul>
+                        </div>
 
-                    <div class="formula-box">
-                        <h4>Formula:</h4>
-                        <p>\[\Delta w_{ij} = \eta \cdot x_i \cdot y_j\]</p>
-                        <p class="formula-note">where:</p>
-                        <ul class="formula-notes">
-                            <li>\(\Delta w_{ij}\) is the weight change</li>
-                            <li>\(\eta\) is the learning rate</li>
-                            <li>\(x_i\) is the input activation</li>
-                            <li>\(y_j\) is the output activation</li>
-                        </ul>
-                    </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Formula:</h4>
+                            <p class="text-center text-xl mb-4">\[\Delta w_{ij} = \eta \cdot x_i \cdot y_j\]</p>
+                            <p class="text-gray-700 dark:text-gray-300 mb-2">where:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                                <li>\(\Delta w_{ij}\) is the weight change</li>
+                                <li>\(\eta\) is the learning rate</li>
+                                <li>\(x_i\) is the input activation</li>
+                                <li>\(y_j\) is the output activation</li>
+                            </ul>
+                        </div>
 
-                    <div class="shortcut-tips">
-                        <h3>Quick Shortcuts to Remember:</h3>
-                        <div class="shortcut-card">
-                            <span class="shortcut-icon">🔌</span>
-                            <p>"Hebb = Brain's WiFi! <span class="highlight-red">Stronger signals</span> = <span class="highlight-green">Stronger connection</span>"</p>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Shortcuts to Remember:</h3>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl">🔌</span>
+                                <p class="text-gray-700 dark:text-gray-300">"Hebb = Brain's WiFi! <span class="font-semibold text-primary-600 dark:text-primary-400">Stronger signals</span> = <span class="font-semibold text-primary-600 dark:text-primary-400">Stronger connection</span>"</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="interactive-demo">
-                    <h3>Synapse Builder</h3>
-                    <div class="synapse-builder">
-                        <div class="neurons">
-                            <div class="neuron" id="neuron1">Neuron 1</div>
-                            <div class="neuron" id="neuron2">Neuron 2</div>
-                        </div>
-                        <div class="connection" id="connection"></div>
-                        <div class="controls">
-                            <label>Learning Rate (η): <input type="range" id="learningRate" min="0" max="1" step="0.1" value="0.5"></label>
-                            <button id="activateBtn">Activate Neurons</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="svm">
-            <h2>Support Vector Machines (SVM)</h2>
-            <div class="model-content">
-                <div class="text-content">
-                    <p>"<span class="highlight-red">The maximal margin classifier</span> — finding the best decision boundary"</p>
-                    
-                    <h3>Key Concepts:</h3>
-                    <ul>
-                        <li><span class="highlight-red">Hyperplane</span>: Decision boundary \(w^T x + b = 0\)</li>
-                        <li><span class="highlight-green">Margin Maximization</span>: Widest possible gap between classes</li>
-                        <li><span class="highlight-blue">Kernel Trick</span>: Maps data to higher dimensions (e.g., RBF kernel)</li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <h4>Optimization Problem:</h4>
-                        <p>\[\min_{w,b} \frac{1}{2} \|w\|^2 \text{ subject to } y_i(w^T x_i + b) \geq 1 \text{ for all } i\]</p>
-                        <p class="formula-note">where:</p>
-                        <ul class="formula-notes">
-                            <li>\(w\) is the weight vector</li>
-                            <li>\(b\) is the bias term</li>
-                            <li>\(x_i\) are the training points</li>
-                            <li>\(y_i\) are the class labels (-1 or 1)</li>
-                        </ul>
-                    </div>
-
-                    <div class="shortcut-tips">
-                        <h3>Quick Shortcuts to Remember:</h3>
-                        <div class="shortcut-card">
-                            <span class="shortcut-icon">⚔️</span>
-                            <p>"SVM = <span class="highlight-red">Street Builder</span>! Widest road between classes"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="interactive-demo">
-                    <h3>Decision Boundary Playground</h3>
-                    <div class="svm-playground">
-                        <div id="svm-viz"></div>
-                        <div class="controls">
-                            <label>Kernel: 
-                                <select id="kernelSelect">
-                                    <option value="linear">Linear</option>
-                                    <option value="rbf">RBF</option>
-                                </select>
-                            </label>
-                            <button id="addPointBtn">Add Point</button>
-                            <button id="clearBtn">Clear</button>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Synapse Builder</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <div class="neuron bg-white dark:bg-gray-800 rounded-lg p-4 text-center" id="neuron1">Neuron 1</div>
+                                <div class="neuron bg-white dark:bg-gray-800 rounded-lg p-4 text-center" id="neuron2">Neuron 2</div>
+                            </div>
+                            <div class="connection h-1 bg-gray-200 dark:bg-gray-600" id="connection"></div>
+                            <div class="space-y-4">
+                                <label class="block text-gray-700 dark:text-gray-300">Learning Rate (η): <input type="range" id="learningRate" min="0" max="1" step="0.1" value="0.5" class="w-full"></label>
+                                <button id="activateBtn" class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Activate Neurons</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="comparison">
-            <h2>Algorithm Comparison</h2>
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Algorithm</th>
-                            <th>Strengths</th>
-                            <th>Weaknesses</th>
-                            <th>Best For</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>McCulloch-Pitts</td>
-                            <td>Simple, foundational</td>
-                            <td>No learning, binary only</td>
-                            <td>Logic gates</td>
-                        </tr>
-                        <tr>
-                            <td>Hebbian</td>
-                            <td>Biologically plausible</td>
-                            <td>No error correction</td>
-                            <td>Unsupervised learning</td>
-                        </tr>
-                        <tr>
-                            <td>SVM</td>
-                            <td>Robust, kernel magic</td>
-                            <td>Slow for large datasets</td>
-                            <td>Small/medium datasets</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Support Vector Machines (SVM)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <p class="text-gray-700 dark:text-gray-300">"<span class="font-semibold text-primary-600 dark:text-primary-400">The maximal margin classifier</span> — finding the best decision boundary"</p>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Concepts:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Hyperplane</span>: Decision boundary \(w^T x + b = 0\)</li>
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Margin Maximization</span>: Widest possible gap between classes</li>
+                                <li><span class="font-semibold text-primary-600 dark:text-primary-400">Kernel Trick</span>: Maps data to higher dimensions (e.g., RBF kernel)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Optimization Problem:</h4>
+                            <p class="text-center text-xl mb-4">\[\min_{w,b} \frac{1}{2} \|w\|^2 \text{ subject to } y_i(w^T x_i + b) \geq 1 \text{ for all } i\]</p>
+                            <p class="text-gray-700 dark:text-gray-300 mb-2">where:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                                <li>\(w\) is the weight vector</li>
+                                <li>\(b\) is the bias term</li>
+                                <li>\(x_i\) are the training points</li>
+                                <li>\(y_i\) are the class labels (-1 or 1)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Shortcuts to Remember:</h3>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl">⚔️</span>
+                                <p class="text-gray-700 dark:text-gray-300">"SVM = <span class="font-semibold text-primary-600 dark:text-primary-400">Street Builder</span>! Widest road between classes"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Decision Boundary Playground</h3>
+                        <div class="space-y-4">
+                            <div id="svm-viz" class="w-full h-64 bg-white dark:bg-gray-800 rounded-lg"></div>
+                            <div class="space-y-4">
+                                <label class="block text-gray-700 dark:text-gray-300">Kernel: 
+                                    <select id="kernelSelect" class="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300">
+                                        <option value="linear">Linear</option>
+                                        <option value="rbf">RBF</option>
+                                    </select>
+                                </label>
+                                <div class="flex space-x-4">
+                                    <button id="addPointBtn" class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Add Point</button>
+                                    <button id="clearBtn" class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="challenges">
-            <h2>Interactive Challenges</h2>
-            <div class="challenge-grid">
-                <div class="challenge-card">
-                    <h3>Build a XOR Gate</h3>
-                    <p>Why MCP fails (needs multi-layer)</p>
-                    <div class="challenge-demo" id="xor-challenge"></div>
-                </div>
-                <div class="challenge-card">
-                    <h3>Break the SVM</h3>
-                    <p>Overlap data to see slack variables kick in</p>
-                    <div class="challenge-demo" id="svm-challenge"></div>
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Algorithm Comparison</h2>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-100 dark:bg-gray-600">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Algorithm</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Strengths</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Weaknesses</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">McCulloch-Pitts</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Simple, foundational</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">No learning, binary only</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Logic gates</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Hebbian</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Biologically plausible</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">No error correction</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Unsupervised learning</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">SVM</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Robust, kernel magic</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Slow for large datasets</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Small/medium datasets</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
-    </div>
-    <script src="specific_algorithms.js"></script>
+
+        <section>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Interactive Challenges</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Build a XOR Gate</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Why MCP fails (needs multi-layer)</p>
+                        <div class="challenge-demo" id="xor-challenge"></div>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Break the SVM</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Overlap data to see slack variables kick in</p>
+                        <div class="challenge-demo" id="svm-challenge"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html> 

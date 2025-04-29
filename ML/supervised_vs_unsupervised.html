@@ -4,97 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supervised vs Unsupervised Learning</title>
-    <link rel="stylesheet" href="supervised_vs_unsupervised.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
 
-<style>
-header {
-    background-color: var(--header-color);
-    padding: 1rem;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-nav a:hover {
-    color: var(--secondary-color);
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: var(--transition);
-}
-
-.theme-toggle:hover {
-    color: var(--secondary-color);
-}
-
-</style>
-
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="ML_Questions.html">Back to ML Topics</a>
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </nav>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            ML Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
+                <nav class="flex flex-col space-y-2 p-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        Home
+                    </a>
+                    <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        ML Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Supervised vs Unsupervised Learning</h2>
-                <p>Understanding the fundamental differences between these two core ML paradigms</p>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <section class="text-center mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Supervised vs Unsupervised Learning</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Understanding the fundamental differences between these two core ML paradigms</p>
             </div>
         </section>
 
-        <section class="comparison-section">
-            <div class="comparison-container">
-                <div class="learning-type supervised">
-                    <div class="type-header">
-                        <i class="fas fa-tag type-icon"></i>
-                        <h2>Supervised Learning</h2>
-                        <p class="subtitle">"Learning with a Teacher"</p>
-                    </div>
-                    <div class="type-content">
-                        <div class="definition">
-                            <h3>Definition</h3>
-                            <p>Uses labeled data (input-output pairs) to train models for predicting outcomes.</p>
+        <section class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <i class="fas fa-tag text-2xl text-primary-600 dark:text-primary-400"></i>
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Supervised Learning</h2>
+                            <p class="text-lg text-gray-600 dark:text-gray-400">"Learning with a Teacher"</p>
                         </div>
-                        <div class="examples">
-                            <h3>Examples</h3>
-                            <ul>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Definition</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Uses labeled data (input-output pairs) to train models for predicting outcomes.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Examples</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                                 <li>Spam Detection</li>
                                 <li>House Price Prediction</li>
                                 <li>Image Classification</li>
                                 <li>Sentiment Analysis</li>
                             </ul>
                         </div>
-                        <div class="algorithms">
-                            <h3>Common Algorithms</h3>
-                            <ul>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Common Algorithms</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                                 <li>Linear Regression</li>
                                 <li>Support Vector Machines</li>
                                 <li>Decision Trees</li>
@@ -104,29 +157,31 @@ nav a:hover {
                     </div>
                 </div>
 
-                <div class="learning-type unsupervised">
-                    <div class="type-header">
-                        <i class="fas fa-search type-icon"></i>
-                        <h2>Unsupervised Learning</h2>
-                        <p class="subtitle">"Learning without a Teacher"</p>
-                    </div>
-                    <div class="type-content">
-                        <div class="definition">
-                            <h3>Definition</h3>
-                            <p>Finds patterns and structures in unlabeled data without predefined outputs.</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <i class="fas fa-search text-2xl text-primary-600 dark:text-primary-400"></i>
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Unsupervised Learning</h2>
+                            <p class="text-lg text-gray-600 dark:text-gray-400">"Learning without a Teacher"</p>
                         </div>
-                        <div class="examples">
-                            <h3>Examples</h3>
-                            <ul>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Definition</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Finds patterns and structures in unlabeled data without predefined outputs.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Examples</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                                 <li>Customer Segmentation</li>
                                 <li>Anomaly Detection</li>
                                 <li>Topic Modeling</li>
                                 <li>Image Clustering</li>
                             </ul>
                         </div>
-                        <div class="algorithms">
-                            <h3>Common Algorithms</h3>
-                            <ul>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Common Algorithms</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                                 <li>K-Means Clustering</li>
                                 <li>Principal Component Analysis</li>
                                 <li>DBSCAN</li>
@@ -138,46 +193,46 @@ nav a:hover {
             </div>
         </section>
 
-        <section class="key-differences">
-            <div class="differences-container">
-                <h2>Key Differences</h2>
-                <div class="differences-grid">
-                    <div class="difference-card">
-                        <h3>Data Type</h3>
-                        <div class="comparison">
-                            <div class="supervised">
-                                <i class="fas fa-tag"></i>
-                                <p>Labeled Data (X → y)</p>
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Key Differences</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Data Type</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-tag text-2xl text-primary-600 dark:text-primary-400"></i>
+                                <p class="text-gray-700 dark:text-gray-300">Labeled Data (X → y)</p>
                             </div>
-                            <div class="unsupervised">
-                                <i class="fas fa-search"></i>
-                                <p>Unlabeled Data (X only)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="difference-card">
-                        <h3>Goal</h3>
-                        <div class="comparison">
-                            <div class="supervised">
-                                <i class="fas fa-bullseye"></i>
-                                <p>Predict Known Outputs</p>
-                            </div>
-                            <div class="unsupervised">
-                                <i class="fas fa-puzzle-piece"></i>
-                                <p>Discover Hidden Patterns</p>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-search text-2xl text-primary-600 dark:text-primary-400"></i>
+                                <p class="text-gray-700 dark:text-gray-300">Unlabeled Data (X only)</p>
                             </div>
                         </div>
                     </div>
-                    <div class="difference-card">
-                        <h3>Applications</h3>
-                        <div class="comparison">
-                            <div class="supervised">
-                                <i class="fas fa-chart-line"></i>
-                                <p>Classification & Regression</p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Goal</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-bullseye text-2xl text-primary-600 dark:text-primary-400"></i>
+                                <p class="text-gray-700 dark:text-gray-300">Predict Known Outputs</p>
                             </div>
-                            <div class="unsupervised">
-                                <i class="fas fa-object-group"></i>
-                                <p>Clustering & Dimensionality Reduction</p>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-puzzle-piece text-2xl text-primary-600 dark:text-primary-400"></i>
+                                <p class="text-gray-700 dark:text-gray-300">Discover Hidden Patterns</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Applications</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-chart-line text-2xl text-primary-600 dark:text-primary-400"></i>
+                                <p class="text-gray-700 dark:text-gray-300">Classification & Regression</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-object-group text-2xl text-primary-600 dark:text-primary-400"></i>
+                                <p class="text-gray-700 dark:text-gray-300">Clustering & Dimensionality Reduction</p>
                             </div>
                         </div>
                     </div>
@@ -185,76 +240,80 @@ nav a:hover {
             </div>
         </section>
 
-        <section class="real-world-analogies">
-            <div class="analogies-container">
-                <h2>Real-World Analogies</h2>
-                <div class="analogies-grid">
-                    <div class="analogy-card supervised">
-                        <i class="fas fa-book-reader analogy-icon"></i>
-                        <h3>Supervised Learning</h3>
-                        <p>Like a student learning with flashcards - each card has a question and its correct answer.</p>
-                        <div class="analogy-visual">
-                            <div class="flashcard">
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Real-World Analogies</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fas fa-book-reader text-2xl text-primary-600 dark:text-primary-400"></i>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Supervised Learning</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Like a student learning with flashcards - each card has a question and its correct answer.</p>
+                        <div class="flex justify-center">
+                            <div class="flashcard bg-white dark:bg-gray-800 rounded-lg p-6 w-48 h-32 flex items-center justify-center">
                                 <div class="flashcard-front">
-                                    <i class="fas fa-question"></i>
+                                    <i class="fas fa-question text-4xl text-primary-600 dark:text-primary-400"></i>
                                 </div>
-                                <div class="flashcard-back">
-                                    <i class="fas fa-check"></i>
+                                <div class="flashcard-back hidden">
+                                    <i class="fas fa-check text-4xl text-green-600 dark:text-green-400"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="analogy-card unsupervised">
-                        <i class="fas fa-puzzle-piece analogy-icon"></i>
-                        <h3>Unsupervised Learning</h3>
-                        <p>Like sorting a box of Legos - grouping similar pieces without instructions.</p>
-                        <div class="analogy-visual">
-                            <div class="lego-groups">
-                                <div class="lego-group red"></div>
-                                <div class="lego-group blue"></div>
-                            </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fas fa-puzzle-piece text-2xl text-primary-600 dark:text-primary-400"></i>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Unsupervised Learning</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Like sorting a box of Legos - grouping similar pieces without instructions.</p>
+                        <div class="flex justify-center space-x-4">
+                            <div class="lego-group w-16 h-16 bg-red-500 rounded-lg"></div>
+                            <div class="lego-group w-16 h-16 bg-blue-500 rounded-lg"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="decision-flowchart">
-            <div class="flowchart-container">
-                <h2>Which to Use?</h2>
-                <div class="flowchart">
-                    <div class="flow-step">
-                        <i class="fas fa-play-circle"></i>
-                        <p>Start</p>
-                    </div>
-                    <div class="flow-arrow"></div>
-                    <div class="flow-step">
-                        <i class="fas fa-question-circle"></i>
-                        <p>Do you have labeled data?</p>
-                    </div>
-                    <div class="flow-branches">
-                        <div class="branch">
-                            <div class="flow-arrow"></div>
-                            <div class="flow-step yes">
-                                <i class="fas fa-check-circle"></i>
-                                <p>Yes</p>
-                            </div>
-                            <div class="flow-arrow"></div>
-                            <div class="flow-step">
-                                <i class="fas fa-tag"></i>
-                                <p>Use Supervised Learning</p>
-                            </div>
+        <section>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Which to Use?</h2>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-play-circle text-2xl text-primary-600 dark:text-primary-400"></i>
+                            <p class="text-gray-700 dark:text-gray-300">Start</p>
                         </div>
-                        <div class="branch">
-                            <div class="flow-arrow"></div>
-                            <div class="flow-step no">
-                                <i class="fas fa-times-circle"></i>
-                                <p>No</p>
+                        <div class="w-0.5 h-8 bg-gray-300 dark:bg-gray-600"></div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-question-circle text-2xl text-primary-600 dark:text-primary-400"></i>
+                            <p class="text-gray-700 dark:text-gray-300">Do you have labeled data?</p>
+                        </div>
+                        <div class="flex space-x-8">
+                            <div class="flex flex-col items-center">
+                                <div class="w-0.5 h-8 bg-gray-300 dark:bg-gray-600"></div>
+                                <div class="flex items-center space-x-4">
+                                    <i class="fas fa-check-circle text-2xl text-green-600 dark:text-green-400"></i>
+                                    <p class="text-gray-700 dark:text-gray-300">Yes</p>
+                                </div>
+                                <div class="w-0.5 h-8 bg-gray-300 dark:bg-gray-600"></div>
+                                <div class="flex items-center space-x-4">
+                                    <i class="fas fa-tag text-2xl text-primary-600 dark:text-primary-400"></i>
+                                    <p class="text-gray-700 dark:text-gray-300">Use Supervised Learning</p>
+                                </div>
                             </div>
-                            <div class="flow-arrow"></div>
-                            <div class="flow-step">
-                                <i class="fas fa-search"></i>
-                                <p>Use Unsupervised Learning</p>
+                            <div class="flex flex-col items-center">
+                                <div class="w-0.5 h-8 bg-gray-300 dark:bg-gray-600"></div>
+                                <div class="flex items-center space-x-4">
+                                    <i class="fas fa-times-circle text-2xl text-red-600 dark:text-red-400"></i>
+                                    <p class="text-gray-700 dark:text-gray-300">No</p>
+                                </div>
+                                <div class="w-0.5 h-8 bg-gray-300 dark:bg-gray-600"></div>
+                                <div class="flex items-center space-x-4">
+                                    <i class="fas fa-search text-2xl text-primary-600 dark:text-primary-400"></i>
+                                    <p class="text-gray-700 dark:text-gray-300">Use Unsupervised Learning</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,12 +322,47 @@ nav a:hover {
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank">BAAZ</a></p>
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
         </div>
     </footer>
 
-    <script src="supervised_vs_unsupervised.js"></script>
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html> 

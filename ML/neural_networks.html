@@ -4,38 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neural Networks - ML Notes</title>
-    <link rel="stylesheet" href="neural_networks.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="ML_Questions.html">Back to ML Topics</a>
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </nav>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            ML Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
+                <nav class="flex flex-col space-y-2 p-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        Home
+                    </a>
+                    <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        ML Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>Neural Networks</h1>
-            <p>Understanding the building blocks of deep learning through interactive demos and visualizations</p>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Neural Networks</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding the building blocks of deep learning through interactive demos and visualizations</p>
         </section>
 
-        <section class="core-concepts">
-            <h2>Core Concepts (V.V.IMP)</h2>
+        <!-- Core Concepts -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Core Concepts (V.V.IMP)</h2>
             
-            <div class="concept-card perceptron">
-                <h3>Perceptron Models</h3>
-                <p>The building block of neural networks — a single-layer binary classifier.</p>
+            <!-- Perceptron Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Perceptron Models</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">The building block of neural networks — a single-layer binary classifier.</p>
                 
-                <div class="formula">
-                    <p>Output = \[
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                    <p class="text-center text-xl mb-4">Output = \[
                         \begin{cases}
                         1 & \text{if } \sum w_ix_i + b \geq 0 \\
                         0 & \text{otherwise}
@@ -43,102 +143,104 @@
                     \]</p>
                 </div>
 
-                <div class="interactive-demo">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
                     <div class="perceptron-visualization">
-                        <canvas id="perceptronCanvas"></canvas>
-                        <div class="controls">
-                            <button id="resetPerceptron">Reset</button>
-                            <button id="toggleGate">Toggle AND/OR</button>
+                        <canvas id="perceptronCanvas" class="w-full h-64 bg-white dark:bg-gray-800 rounded-lg"></canvas>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <button id="resetPerceptron" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Reset</button>
+                            <button id="toggleGate" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Toggle AND/OR</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="memory-aid">
-                    <h4>Shortcut to Remember:</h4>
-                    <p>"Perceptron = Fancy If-Else. Weights = Importance, Bias = Threshold!"</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shortcut to Remember:</h4>
+                    <p class="text-gray-700 dark:text-gray-300">"Perceptron = Fancy If-Else. Weights = Importance, Bias = Threshold!"</p>
                 </div>
             </div>
 
-            <div class="concept-card backpropagation">
-                <h3>Backpropagation</h3>
-                <p>How neural networks learn from mistakes by propagating errors backward.</p>
+            <!-- Backpropagation Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Backpropagation</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">How neural networks learn from mistakes by propagating errors backward.</p>
 
-                <div class="key-steps">
-                    <div class="step">
-                        <i class="fas fa-forward"></i>
-                        <h4>Forward Pass</h4>
-                        <p>Compute prediction</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                        <i class="fas fa-forward text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Forward Pass</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Compute prediction</p>
                     </div>
-                    <div class="step">
-                        <i class="fas fa-calculator"></i>
-                        <h4>Calculate Loss</h4>
-                        <p>MSE/Cross-Entropy</p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                        <i class="fas fa-calculator text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Calculate Loss</h4>
+                        <p class="text-gray-700 dark:text-gray-300">MSE/Cross-Entropy</p>
                     </div>
-                    <div class="step">
-                        <i class="fas fa-backward"></i>
-                        <h4>Backward Pass</h4>
-                        <p>Update weights using chain rule</p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                        <i class="fas fa-backward text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Backward Pass</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Update weights using chain rule</p>
                     </div>
                 </div>
 
-                <div class="interactive-demo">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
                     <div class="backprop-visualization">
-                        <canvas id="backpropCanvas"></canvas>
-                        <div class="controls">
-                            <button id="toggleForwardBackward">Toggle Forward/Backward</button>
-                            <button id="resetBackprop">Reset</button>
+                        <canvas id="backpropCanvas" class="w-full h-64 bg-white dark:bg-gray-800 rounded-lg"></canvas>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <button id="toggleForwardBackward" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Toggle Forward/Backward</button>
+                            <button id="resetBackprop" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Reset</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="memory-aid">
-                    <h4>Shortcut to Remember:</h4>
-                    <p>"Backprop = Blame Game! Distribute error to guilty weights."</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shortcut to Remember:</h4>
+                    <p class="text-gray-700 dark:text-gray-300">"Backprop = Blame Game! Distribute error to guilty weights."</p>
                 </div>
             </div>
 
-            <div class="concept-card activation-functions">
-                <h3>Activation Functions</h3>
-                <p>Non-linear 'switches' that decide neuron output.</p>
+            <!-- Activation Functions Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Activation Functions</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">Non-linear 'switches' that decide neuron output.</p>
 
-                <div class="function-table">
-                    <table>
-                        <thead>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden mb-6">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-100 dark:bg-gray-600">
                             <tr>
-                                <th>Function</th>
-                                <th>Formula</th>
-                                <th>Range</th>
-                                <th>Use Case</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Function</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Formula</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Range</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Use Case</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
                             <tr>
-                                <td>Sigmoid</td>
-                                <td>\[\frac{1}{1 + e^{-x}}\]</td>
-                                <td>(0,1)</td>
-                                <td>Probability</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Sigmoid</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">\[\frac{1}{1 + e^{-x}}\]</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">(0,1)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Probability</td>
                             </tr>
                             <tr>
-                                <td>ReLU</td>
-                                <td>\[\max(0, x)\]</td>
-                                <td>[0, ∞)</td>
-                                <td>Deep Networks</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">ReLU</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">\[\max(0, x)\]</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">[0, ∞)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Deep Networks</td>
                             </tr>
                             <tr>
-                                <td>Tanh</td>
-                                <td>\[\frac{e^x - e^{-x}}{e^x + e^{-x}}\]</td>
-                                <td>(-1,1)</td>
-                                <td>Hidden Layers</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Tanh</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">\[\frac{e^x - e^{-x}}{e^x + e^{-x}}\]</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">(-1,1)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Hidden Layers</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="interactive-demo">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
                     <div class="activation-visualization">
-                        <canvas id="activationCanvas"></canvas>
-                        <div class="controls">
-                            <select id="activationSelect">
+                        <canvas id="activationCanvas" class="w-full h-64 bg-white dark:bg-gray-800 rounded-lg"></canvas>
+                        <div class="flex justify-center mt-4">
+                            <select id="activationSelect" class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300">
                                 <option value="sigmoid">Sigmoid</option>
                                 <option value="relu">ReLU</option>
                                 <option value="tanh">Tanh</option>
@@ -147,132 +249,164 @@
                     </div>
                 </div>
 
-                <div class="memory-aid">
-                    <h4>Shortcut to Remember:</h4>
-                    <p>"Sigmoid = Squish, ReLU = Chop, Tanh = Stretch!"</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shortcut to Remember:</h4>
+                    <p class="text-gray-700 dark:text-gray-300">"Sigmoid = Squish, ReLU = Chop, Tanh = Stretch!"</p>
                 </div>
             </div>
         </section>
 
-        <section class="interactive-playground">
-            <h2>Interactive Neural Network Playground</h2>
+        <!-- Interactive Playground -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Interactive Neural Network Playground</h2>
             
-            <div class="network-builder">
-                <div class="layer-controls">
-                    <button id="addLayer">Add Layer</button>
-                    <button id="removeLayer">Remove Layer</button>
-                    <input type="number" id="neuronsPerLayer" min="1" max="10" value="3">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <button id="addLayer" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Add Layer</button>
+                    <button id="removeLayer" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Remove Layer</button>
+                    <input type="number" id="neuronsPerLayer" min="1" max="10" value="3" class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300">
                 </div>
                 
-                <div class="network-visualization">
-                    <canvas id="networkCanvas"></canvas>
+                <div class="network-visualization mb-6">
+                    <canvas id="networkCanvas" class="w-full h-96 bg-white dark:bg-gray-800 rounded-lg"></canvas>
                 </div>
 
-                <div class="training-controls">
-                    <button id="trainNetwork">Train</button>
-                    <button id="resetNetwork">Reset</button>
-                    <div class="accuracy-display">
-                        Accuracy: <span id="accuracyValue">0%</span>
+                <div class="flex flex-wrap justify-center items-center gap-4">
+                    <button id="trainNetwork" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Train</button>
+                    <button id="resetNetwork" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">Reset</button>
+                    <div class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                        Accuracy: <span id="accuracyValue" class="font-semibold">0%</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="points-to-remember">
-            <h2>Points to Remember (V.V.IMP)</h2>
+        <!-- Points to Remember -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Points to Remember (V.V.IMP)</h2>
             
-            <div class="points-grid">
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>Perceptrons</h3>
-                    <p>Linear classifiers → Can't solve XOR (need MLP)</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Perceptrons</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Linear classifiers → Can't solve XOR (need MLP)</p>
                 </div>
                 
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>Backpropagation</h3>
-                    <p>Uses chain rule → Requires differentiable activations</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Backpropagation</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Uses chain rule → Requires differentiable activations</p>
                 </div>
                 
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>ReLU > Sigmoid</h3>
-                    <p>Avoids vanishing gradients in deep nets</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ReLU > Sigmoid</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Avoids vanishing gradients in deep nets</p>
                 </div>
                 
-                <div class="point-card">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3>Bias Matters</h3>
-                    <p>Shifts decision boundary → Don't forget it!</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <i class="fas fa-exclamation-circle text-2xl text-primary-600 dark:text-primary-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Bias Matters</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Shifts decision boundary → Don't forget it!</p>
                 </div>
             </div>
         </section>
 
-        <section class="memory-aids">
-            <h2>Memory Aids & Quick References</h2>
+        <!-- Memory Aids -->
+        <section>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Memory Aids & Quick References</h2>
             
-            <div class="memory-content">
-                <div class="memory-card">
-                    <h3>Perceptron Basics</h3>
-                    <p>A <span class="highlight">perceptron</span> is like a <span class="highlight">decision maker</span> that:</p>
-                    <ul>
-                        <li>Takes <span class="highlight">inputs</span> and multiplies them by <span class="highlight">weights</span></li>
-                        <li>Adds a <span class="highlight">bias</span> term to shift the decision boundary</li>
-                        <li>Uses a <span class="highlight">step function</span> to make binary decisions</li>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Perceptron Basics</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">A <span class="font-semibold text-primary-600 dark:text-primary-400">perceptron</span> is like a <span class="font-semibold text-primary-600 dark:text-primary-400">decision maker</span> that:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Takes <span class="font-semibold text-primary-600 dark:text-primary-400">inputs</span> and multiplies them by <span class="font-semibold text-primary-600 dark:text-primary-400">weights</span></li>
+                        <li>Adds a <span class="font-semibold text-primary-600 dark:text-primary-400">bias</span> term to shift the decision boundary</li>
+                        <li>Uses a <span class="font-semibold text-primary-600 dark:text-primary-400">step function</span> to make binary decisions</li>
                     </ul>
-                    <p class="mnemonic">Remember: <span class="highlight">"P = Wx + b"</span> (Perceptron = Weights × inputs + bias)</p>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300">Remember: <span class="font-semibold text-purple-600 dark:text-purple-400">"P = Wx + b"</span> (Perceptron = Weights × inputs + bias)</p>
                 </div>
 
-                <div class="memory-card">
-                    <h3>Backpropagation Steps</h3>
-                    <p>Think of backpropagation as a <span class="highlight">blame game</span>:</p>
-                    <ol>
-                        <li><span class="highlight">Forward Pass</span>: Make a prediction</li>
-                        <li><span class="highlight">Calculate Error</span>: How wrong was the prediction?</li>
-                        <li><span class="highlight">Backward Pass</span>: Blame the weights that caused the error</li>
-                        <li><span class="highlight">Update Weights</span>: Adjust weights to reduce error</li>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Backpropagation Steps</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Think of backpropagation as a <span class="font-semibold text-primary-600 dark:text-primary-400">blame game</span>:</p>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Forward Pass</span>: Make a prediction</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Calculate Error</span>: How wrong was the prediction?</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Backward Pass</span>: Blame the weights that caused the error</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Update Weights</span>: Adjust weights to reduce error</li>
                     </ol>
-                    <p class="mnemonic">Remember: <span class="highlight">"Forward → Error → Backward → Update"</span></p>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300">Remember: <span class="font-semibold text-purple-600 dark:text-purple-400">"Forward → Error → Backward → Update"</span></p>
                 </div>
 
-                <div class="memory-card">
-                    <h3>Activation Functions</h3>
-                    <p>Each activation function has a specific purpose:</p>
-                    <ul>
-                        <li><span class="highlight">Sigmoid</span>: Squishes values between 0 and 1 (like a probability)</li>
-                        <li><span class="highlight">ReLU</span>: Kills negative values, keeps positives (like a water filter)</li>
-                        <li><span class="highlight">Tanh</span>: Squishes values between -1 and 1 (like a stretched sigmoid)</li>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Activation Functions</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Each activation function has a specific purpose:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Sigmoid</span>: Squishes values between 0 and 1 (like a probability)</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">ReLU</span>: Kills negative values, keeps positives (like a water filter)</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Tanh</span>: Squishes values between -1 and 1 (like a stretched sigmoid)</li>
                     </ul>
-                    <p class="mnemonic">Remember: <span class="highlight">"Sigmoid = Squish, ReLU = Kill Negatives, Tanh = Stretch"</span></p>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300">Remember: <span class="font-semibold text-purple-600 dark:text-purple-400">"Sigmoid = Squish, ReLU = Kill Negatives, Tanh = Stretch"</span></p>
                 </div>
 
-                <div class="memory-card">
-                    <h3>Common Pitfalls</h3>
-                    <p>Watch out for these common mistakes:</p>
-                    <ul>
-                        <li><span class="highlight">Vanishing Gradients</span>: When using sigmoid in deep networks</li>
-                        <li><span class="highlight">Overfitting</span>: When network memorizes training data</li>
-                        <li><span class="highlight">Learning Rate</span>: Too high = overshooting, too low = slow learning</li>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Common Pitfalls</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Watch out for these common mistakes:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Vanishing Gradients</span>: When using sigmoid in deep networks</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Overfitting</span>: When network memorizes training data</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Learning Rate</span>: Too high = overshooting, too low = slow learning</li>
                     </ul>
-                    <p class="mnemonic">Remember: <span class="highlight">"Use ReLU for deep nets, regularize to prevent overfitting"</span></p>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300">Remember: <span class="font-semibold text-purple-600 dark:text-purple-400">"Use ReLU for deep nets, regularize to prevent overfitting"</span></p>
                 </div>
             </div>
         </section>
-
-        <div class="points-popup">
-            <div class="popup-content">
-                <h3>V.V.IMP Points to Remember!</h3>
-                <ul>
-                    <li>Perceptrons are linear classifiers</li>
-                    <li>Backpropagation uses chain rule</li>
-                    <li>ReLU is better than Sigmoid for deep networks</li>
-                    <li>Always include bias terms</li>
-                </ul>
-                <button class="close-popup">Got it!</button>
-            </div>
-        </div>
     </main>
 
-    <script src="neural_networks.js"></script>
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html> 

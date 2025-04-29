@@ -4,197 +4,320 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimensionality Reduction - ML Guide</title>
-    <link rel="stylesheet" href="dimensionality_reduction.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.1/dist/latex.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="ML_Questions.html" class="nav-link">
-                <i class="fas fa-home"></i> Home
-            </a>
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
+                <nav class="flex flex-col space-y-2 p-4">
+                    <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </nav>
+            </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="container">
-        <header>
-            <h1>Dimensionality Reduction</h1>
-            <p class="subtitle">Understanding PCA and its Applications</p>
-        </header>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Dimensionality Reduction</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding PCA and its Applications</p>
+        </section>
 
-        <section class="intro">
-            <h2>What is PCA?</h2>
-            <div class="math-flow">
-                <div class="math-step">
-                    <span class="math-icon">📊</span>
-                    <p>Standardized Data</p>
+        <!-- Intro Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">What is PCA?</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">📊</span>
+                    <p class="text-gray-700 dark:text-gray-300">Standardized Data</p>
                 </div>
-                <div class="math-arrow">→</div>
-                <div class="math-step">
-                    <span class="math-icon">📈</span>
-                    <p>Covariance Matrix</p>
+                <div class="flex items-center">
+                    <span class="text-2xl">→</span>
                 </div>
-                <div class="math-arrow">→</div>
-                <div class="math-step">
-                    <span class="math-icon">🔍</span>
-                    <p>Eigenvectors/Values</p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">📈</span>
+                    <p class="text-gray-700 dark:text-gray-300">Covariance Matrix</p>
                 </div>
-                <div class="math-arrow">→</div>
-                <div class="math-step">
-                    <span class="math-icon">🎯</span>
-                    <p>Principal Components</p>
+                <div class="flex items-center">
+                    <span class="text-2xl">→</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">🔍</span>
+                    <p class="text-gray-700 dark:text-gray-300">Eigenvectors/Values</p>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-2xl">→</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">🎯</span>
+                    <p class="text-gray-700 dark:text-gray-300">Principal Components</p>
                 </div>
             </div>
         </section>
 
-        <section class="detailed-explanation">
-            <h2>Understanding PCA in Depth</h2>
-            <div class="explanation-content">
-                <div class="text-content">
-                    <p><span class="highlight">Principal Component Analysis (PCA)</span> is a powerful technique for reducing the dimensionality of data while preserving its most important features. Think of it as a <span class="highlight">smart camera</span> that takes the best possible picture of your data from the most informative angle.</p>
+        <!-- Detailed Explanation -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Understanding PCA in Depth</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        <span class="font-semibold text-primary-600 dark:text-primary-400">Principal Component Analysis (PCA)</span> is a powerful technique for reducing the dimensionality of data while preserving its most important features. Think of it as a <span class="font-semibold text-primary-600 dark:text-primary-400">smart camera</span> that takes the best possible picture of your data from the most informative angle.
+                    </p>
                     
-                    <h3>Key Concepts:</h3>
-                    <ul>
-                        <li><span class="highlight">Principal Components</span>: These are the new axes that capture the maximum variance in your data. They're like the "best angles" to view your data from.</li>
-                        <li><span class="highlight">Eigenvalues</span>: Tell you how much variance each principal component explains. The larger the eigenvalue, the more important that component is.</li>
-                        <li><span class="highlight">Eigenvectors</span>: Define the direction of each principal component. They're like the "lens" through which we view the data.</li>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Concepts:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Principal Components</span>: These are the new axes that capture the maximum variance in your data. They're like the "best angles" to view your data from.</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Eigenvalues</span>: Tell you how much variance each principal component explains. The larger the eigenvalue, the more important that component is.</li>
+                        <li><span class="font-semibold text-primary-600 dark:text-primary-400">Eigenvectors</span>: Define the direction of each principal component. They're like the "lens" through which we view the data.</li>
                     </ul>
 
-                    <div class="important-note">
-                        <h4>Important Notes About PCA:</h4>
-                        <ul>
-                            <li>PCA works best with <span class="highlight">linear relationships</span> in your data</li>
-                            <li>Always <span class="highlight">standardize your data</span> before applying PCA</li>
-                            <li>The number of components should be chosen based on the <span class="highlight">cumulative variance explained</span></li>
-                            <li>PCA is sensitive to <span class="highlight">outliers</span> - clean your data first!</li>
+                    <div class="mt-6 bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Important Notes About PCA:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                            <li>PCA works best with <span class="font-semibold text-primary-600 dark:text-primary-400">linear relationships</span> in your data</li>
+                            <li>Always <span class="font-semibold text-primary-600 dark:text-primary-400">standardize your data</span> before applying PCA</li>
+                            <li>The number of components should be chosen based on the <span class="font-semibold text-primary-600 dark:text-primary-400">cumulative variance explained</span></li>
+                            <li>PCA is sensitive to <span class="font-semibold text-primary-600 dark:text-primary-400">outliers</span> - clean your data first!</li>
                         </ul>
                     </div>
-
-                    <div class="shortcut-tips">
-                        <h3>Quick Shortcuts to Remember:</h3>
-                        <div class="shortcut-card">
-                            <span class="shortcut-icon">🎯</span>
-                            <p>"PCA = <span class="highlight">Data Squeeze</span>! Find the best angles to view your data."</p>
-                        </div>
-                        <div class="shortcut-card">
-                            <span class="shortcut-icon">📊</span>
-                            <p>"More variance = More important component"</p>
-                        </div>
-                        <div class="shortcut-card">
-                            <span class="shortcut-icon">🔍</span>
-                            <p>"Eigenvalues tell you how much each component matters"</p>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="visual-aids">
-                    <div class="visual-card">
-                        <h3>PCA Visualization</h3>
-                        <div class="pca-diagram">
-                            <!-- SVG will be inserted here by JavaScript -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Shortcuts to Remember:</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <span class="text-2xl">🎯</span>
+                            <p class="text-gray-700 dark:text-gray-300">"PCA = <span class="font-semibold text-primary-600 dark:text-primary-400">Data Squeeze</span>! Find the best angles to view your data."</p>
                         </div>
-                        <p class="caption">How PCA transforms data into principal components</p>
+                        <div class="flex items-start space-x-4">
+                            <span class="text-2xl">📊</span>
+                            <p class="text-gray-700 dark:text-gray-300">"More variance = More important component"</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <span class="text-2xl">🔍</span>
+                            <p class="text-gray-700 dark:text-gray-300">"Eigenvalues tell you how much each component matters"</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="interactive-playground">
-            <h2>Interactive PCA Playground</h2>
-            <div class="playground-container">
-                <div class="data-explorer">
-                    <h3>Data Explorer</h3>
-                    <div class="upload-section">
-                        <input type="file" id="dataset-upload" accept=".csv,.json">
-                        <button class="demo-btn">Load Demo Dataset</button>
-                    </div>
-                    <div class="visualization-container">
-                        <div id="raw-data-viz"></div>
-                        <div id="pca-viz"></div>
-                    </div>
-                    <div class="controls">
-                        <label>Number of PCs: <input type="range" id="pc-slider" min="1" max="10" value="2"></label>
-                        <div id="variance-explained"></div>
-                    </div>
+        <!-- Applications Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">PCA Applications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <span class="text-3xl mb-4 block">🧬</span>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Genomics</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Visualizing gene expression clusters</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <span class="text-3xl mb-4 block">💹</span>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Finance</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Portfolio risk factor analysis</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <span class="text-3xl mb-4 block">📸</span>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Computer Vision</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Image compression (Eigenfaces)</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <span class="text-3xl mb-4 block">📚</span>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">NLP</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Topic modeling (Latent Semantic Analysis)</p>
                 </div>
             </div>
         </section>
 
-        <section class="applications">
-            <h2>PCA Applications</h2>
-            <div class="app-grid">
-                <div class="app-card">
-                    <span class="app-icon">🧬</span>
-                    <h3>Genomics</h3>
-                    <p>Visualizing gene expression clusters</p>
-                </div>
-                <div class="app-card">
-                    <span class="app-icon">💹</span>
-                    <h3>Finance</h3>
-                    <p>Portfolio risk factor analysis</p>
-                </div>
-                <div class="app-card">
-                    <span class="app-icon">📸</span>
-                    <h3>Computer Vision</h3>
-                    <p>Image compression (Eigenfaces)</p>
-                </div>
-                <div class="app-card">
-                    <span class="app-icon">📚</span>
-                    <h3>NLP</h3>
-                    <p>Topic modeling (Latent Semantic Analysis)</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="comparison">
-            <h2>PCA vs. Alternatives</h2>
-            <div class="comparison-table">
-                <table>
-                    <thead>
+        <!-- Comparison Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">PCA vs. Alternatives</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                            <th>Method</th>
-                            <th>Pros</th>
-                            <th>Cons</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Method</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Pros</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Cons</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         <tr>
-                            <td>PCA</td>
-                            <td>Linear, fast, interpretable</td>
-                            <td>Fails on non-linear data</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">PCA</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Linear, fast, interpretable</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Fails on non-linear data</td>
                         </tr>
                         <tr>
-                            <td>t-SNE</td>
-                            <td>Great for visualization</td>
-                            <td>Computationally heavy</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">t-SNE</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Great for visualization</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Computationally heavy</td>
                         </tr>
                         <tr>
-                            <td>Autoencoders</td>
-                            <td>Deep learning, non-linear</td>
-                            <td>Black-box, harder to interpret</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Autoencoders</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Deep learning, non-linear</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Black-box, harder to interpret</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <section class="memory-aid">
-            <h2>Quick Memory Aid</h2>
-            <div class="memory-content">
-                <p><span class="highlight">PCA</span> is like a <span class="highlight">data squeeze</span> - it finds the best angles to view your data!</p>
-                <p>Remember: <span class="highlight">Principal Components</span> are the directions of maximum variance 🧭</p>
-                <p><span class="highlight">Eigenvalues</span> tell you how much variance each PC explains 📏</p>
-                <p>Think of PCA as a <span class="highlight">smart camera</span> that takes the best possible picture of your data 📸</p>
+        <!-- Memory Aid Section -->
+        <section>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Quick Memory Aid</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                <div class="space-y-4">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-semibold text-primary-600 dark:text-primary-400">PCA</span> is like a <span class="font-semibold text-primary-600 dark:text-primary-400">data squeeze</span> - it finds the best angles to view your data!
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Remember: <span class="font-semibold text-primary-600 dark:text-primary-400">Principal Components</span> are the directions of maximum variance 🧭
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-semibold text-primary-600 dark:text-primary-400">Eigenvalues</span> tell you how much variance each PC explains 📏
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Think of PCA as a <span class="font-semibold text-primary-600 dark:text-primary-400">smart camera</span> that takes the best possible picture of your data 📸
+                    </p>
+                </div>
             </div>
         </section>
-    </div>
-    <script src="dimensionality_reduction.js"></script>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html> 
