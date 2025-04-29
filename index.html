@@ -4,120 +4,333 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Notes - Your Ultimate Study Companion</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        space: {
+                            50: '#f0f7ff',
+                            100: '#e0f0ff',
+                            200: '#bae0ff',
+                            300: '#7cc5ff',
+                            400: '#36a5ff',
+                            500: '#0088ff',
+                            600: '#0066cc',
+                            700: '#004d99',
+                            800: '#003366',
+                            900: '#001a33',
+                        },
+                        dark: {
+                            bg: '#0a0a1a',
+                            card: '#1a1a2e',
+                            border: '#2a2a3e',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass {
+            background: rgba(26, 26, 46, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .space-gradient {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite, moveStar var(--move-duration) linear infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        @keyframes moveStar {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(var(--move-x), var(--move-y)); }
+        }
+        .astronaut-1 {
+            position: fixed;
+            width: 96px;
+            height: 96px;
+            top: 20%;
+            left: 10%;
+            animation: float1 30s ease-in-out infinite;
+            z-index: 10;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+        .astronaut-2 {
+            position: fixed;
+            width: 96px;
+            height: 96px;
+            top: 60%;
+            right: 10%;
+            animation: float2 35s ease-in-out infinite;
+            z-index: 10;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+        @keyframes float1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(300px, -150px) rotate(5deg); }
+            50% { transform: translate(600px, 0) rotate(0deg); }
+            75% { transform: translate(300px, 150px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-300px, 150px) rotate(-5deg); }
+            50% { transform: translate(-600px, 0) rotate(0deg); }
+            75% { transform: translate(-300px, -150px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">
-                <img src="Arbaaz (2).png" alt="College Notes Logo" class="logo-image">
-                <span>College Notes</span>
-            </a>
-            <div class="nav-links">
-                <a href="#subjects">Subjects</a>
-                <a href="#about">About</a>
-                <button id="themeToggle" class="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+<body class="bg-black text-white min-h-screen font-montserrat overflow-x-hidden">
+    <!-- Stars Background -->
+    <div id="stars" class="fixed inset-0 z-0"></div>
+
+    <!-- Floating Astronauts -->
+    <img src="Astro.webp" alt="Astronaut 1" class="astronaut-1 opacity-100">
+    <img src="Astro.webp" alt="Astronaut 2" class="astronaut-2 opacity-100">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="flex items-center space-x-3">
+                    <img src="Baaz_No_Bg.png" alt="College Notes Logo" class="h-8 w-8">
+                    <span class="text-xl font-semibold">College Notes</span>
+                </a>
+                <div class="flex items-center space-x-6">
+                    <a href="#subjects" class="hover:text-space-300 transition-colors">Subjects</a>
+                    <a href="#about" class="hover:text-space-300 transition-colors">About</a>
+                    <button id="themeToggle" class="p-2 rounded-lg glass hover:bg-white/10 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Your Ultimate Study Companion</h1>
-            <p>Access comprehensive, well-organized notes for your college subjects. Designed to help you excel in your academic journey.</p>
-            <a href="#subjects" class="cta-button">Explore Subjects</a>
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('Baaz.png'); opacity: 0.2;"></div>
+        <div class="absolute inset-0 space-gradient opacity-80"></div>
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-space-300 to-space-500">
+                Your Ultimate Study Companion
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-space-200">
+                Access comprehensive, well-organized notes for your college subjects. Designed to help you excel in your academic journey.
+            </p>
+            <p class="text-lg md:text-xl mb-8 text-space-300 italic">
+                (But let's be real, you'll probably just watch reels and forget these notes exist! 📱✨)
+            </p>
+            <a href="#subjects" class="inline-block px-8 py-4 rounded-lg glass hover:bg-white/20 transition-all transform hover:scale-105">
+                Explore Subjects
+            </a>
         </div>
-        <div class="hero-pattern"></div>
     </header>
 
-    <main>
-        <section id="subjects" class="subjects">
-            <h2>Available Subjects</h2>
-            <div class="subject-grid">
-                <article class="subject-card">
-                    <div class="card-icon">
+    <!-- Subjects Section -->
+    <section id="subjects" class="relative py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-12">Available Subjects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Data Analytics Card -->
+                <article class="glass rounded-xl p-6 transform hover:scale-105 transition-all">
+                    <div class="text-4xl text-space-400 mb-4">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Data Analytics and Visualization</h3>
-                    <p>Master data analysis techniques and create compelling visualizations. Learn about statistical methods, data mining, and interactive dashboards.</p>
-                    <a href="DAV/dav_questions.html" class="card-link">View Notes</a>
+                    <h3 class="text-xl font-semibold mb-3">Data Analytics and Visualization</h3>
+                    <p class="text-space-200 mb-4">Master data analysis techniques and create compelling visualizations. Learn about statistical methods, data mining, and interactive dashboards.</p>
+                    <a href="DAV/dav_questions.html" class="inline-block px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
+                        View Notes
+                    </a>
                 </article>
 
-                <article class="subject-card">
-                    <div class="card-icon">
+                <!-- Cryptography Card -->
+                <article class="glass rounded-xl p-6 transform hover:scale-105 transition-all">
+                    <div class="text-4xl text-space-400 mb-4">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Cryptography and System Security</h3>
-                    <p>Explore cryptographic algorithms, security protocols, and system protection methods. Understand how to secure digital information and systems.</p>
-                    <a href="CS/css_questions.html" class="card-link">View Notes</a>
+                    <h3 class="text-xl font-semibold mb-3">Cryptography and System Security</h3>
+                    <p class="text-space-200 mb-4">Explore cryptographic algorithms, security protocols, and system protection methods. Understand how to secure digital information and systems.</p>
+                    <a href="CS/css_questions.html" class="inline-block px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
+                        View Notes
+                    </a>
                 </article>
 
-                <article class="subject-card">
-                    <div class="card-icon">
+                <!-- Machine Learning Card -->
+                <article class="glass rounded-xl p-6 transform hover:scale-105 transition-all">
+                    <div class="text-4xl text-space-400 mb-4">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3>Machine Learning</h3>
-                    <p>Dive into algorithms, neural networks, and AI concepts. Learn about supervised and unsupervised learning, deep learning, and model evaluation.</p>
-                    <a href="ML/ML_Questions.html" class="card-link">View Notes</a>
+                    <h3 class="text-xl font-semibold mb-3">Machine Learning</h3>
+                    <p class="text-space-200 mb-4">Dive into algorithms, neural networks, and AI concepts. Learn about supervised and unsupervised learning, deep learning, and model evaluation.</p>
+                    <a href="ML/ML_Questions.html" class="inline-block px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
+                        View Notes
+                    </a>
                 </article>
 
-                <article class="subject-card">
-                    <div class="card-icon">
+                <!-- Software Engineering Card -->
+                <article class="glass rounded-xl p-6 transform hover:scale-105 transition-all">
+                    <div class="text-4xl text-space-400 mb-4">
                         <i class="fas fa-code-branch"></i>
                     </div>
-                    <h3>Software Engineering and Project Management</h3>
-                    <p>Understand software development methodologies, project planning, and team collaboration. Learn about agile practices and software architecture.</p>
-                    <a href="SEPM/sepm_questions.html" class="card-link">View Notes</a>
+                    <h3 class="text-xl font-semibold mb-3">Software Engineering and Project Management</h3>
+                    <p class="text-space-200 mb-4">Understand software development methodologies, project planning, and team collaboration. Learn about agile practices and software architecture.</p>
+                    <a href="SEPM/sepm_questions.html" class="inline-block px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
+                        View Notes
+                    </a>
                 </article>
 
-                <article class="subject-card">
-                    <div class="card-icon">
+                <!-- Distributed Computing Card -->
+                <article class="glass rounded-xl p-6 transform hover:scale-105 transition-all">
+                    <div class="text-4xl text-space-400 mb-4">
                         <i class="fas fa-network-wired"></i>
                     </div>
-                    <h3>Distributed Computing</h3>
-                    <p>Explore distributed systems, cloud computing, and parallel processing. Learn about scalability, fault tolerance, and distributed algorithms.</p>
-                    <a href="DC/dc_questions.html" class="card-link">View Notes</a>
+                    <h3 class="text-xl font-semibold mb-3">Distributed Computing</h3>
+                    <p class="text-space-200 mb-4">Explore distributed systems, cloud computing, and parallel processing. Learn about scalability, fault tolerance, and distributed algorithms.</p>
+                    <a href="DC/dc_questions.html" class="inline-block px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
+                        View Notes
+                    </a>
                 </article>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="about">
-            <h2>About These Notes</h2>
-            <div class="about-content">
-                <p>These comprehensive notes are designed to help you understand complex concepts through clear explanations, visual aids, and interactive examples. Each subject's notes are regularly updated to ensure accuracy and relevance.</p>
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Comprehensive Coverage</span>
+    <!-- About Section -->
+    <section id="about" class="relative py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass rounded-xl p-8">
+                <h2 class="text-4xl font-bold text-center mb-8">About These Notes</h2>
+                <p class="text-lg text-center text-space-200 mb-8">
+                    These notes weren't made by a pro, and they might not help you pass — but hey, you tried Instagram without a tutorial, so why not give these a shot too?
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass rounded-lg p-6 text-center">
+                        <i class="fas fa-check-circle text-3xl text-space-400 mb-4"></i>
+                        <span class="text-lg">No Coverage</span>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Interactive Examples</span>
+                    <div class="glass rounded-lg p-6 text-center">
+                        <i class="fas fa-check-circle text-3xl text-space-400 mb-4"></i>
+                        <span class="text-lg">No  Examples</span>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Regular Updates</span>
+                    <div class="glass rounded-lg p-6 text-center">
+                        <i class="fas fa-check-circle text-3xl text-space-400 mb-4"></i>
+                        <span class="text-lg">No  Updates</span>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <div class="footer-content">
-            <p>Made  by <a href="https://arbaaz.xyz" target="_blank">Baaz</a></p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+    <!-- Footer -->
+    <footer class="relative glass mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>Made by <a href="https://arbaaz.xyz" target="_blank" class="text-space-400 hover:text-space-300 transition-colors">Baaz</a></p>
+                    <p class="text-sm text-space-300 mt-2">"I made these notes so I can forget about studying... and then forget where I put these notes! 📚✨"</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/Arbaaz-Khan-Tech" target="_blank" class="text-2xl hover:text-space-300 transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="http://www.linkedin.com/in/arbaaz-khan-tech" target="_blank" class="text-2xl hover:text-space-300 transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="twitter.html" class="text-2xl hover:text-space-300 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random animation durations
+                star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
+                star.style.setProperty('--move-duration', `${20 + Math.random() * 30}s`);
+                
+                // Random movement direction
+                const moveX = (Math.random() - 0.5) * 200;
+                const moveY = (Math.random() - 0.5) * 200;
+                star.style.setProperty('--move-x', `${moveX}px`);
+                star.style.setProperty('--move-y', `${moveY}px`);
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize stars
+        createStars();
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
 </body>
 </html>

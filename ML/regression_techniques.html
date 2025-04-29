@@ -44,34 +44,34 @@
             },
         }
     </script>
-    <style>
+<style>
         .topic-card {
             transition: all 0.3s ease;
         }
         .topic-card:hover {
             transform: translateY(-5px);
-        }
+}
 
         /* Dark Mode Overrides */
         .dark .bg-gray-900 {
             background-color: #1a1b1e;
-        }
+}
         .dark .bg-gray-800 {
             background-color: #2c2d31;
-        }
+}
         .dark .bg-gray-700 {
             background-color: #3f4046;
         }
         .dark .text-gray-400 {
             color: #9ca3af;
-        }
+}
         .dark .text-gray-300 {
             color: #e4e5e7;
         }
         .dark .border-gray-700 {
             border-color: #3f4046;
-        }
-    </style>
+}
+</style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
     <!-- Header -->
@@ -91,8 +91,8 @@
                 </div>
                 <div class="flex items-center space-x-4">
                     <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                        <i class="fas fa-moon"></i>
-                    </button>
+                <i class="fas fa-moon"></i>
+            </button>
                     <!-- Mobile Menu Button -->
                     <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,7 +110,7 @@
                     <a href="/ML/ML_Questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">
                         ML Topics
                     </a>
-                </nav>
+        </nav>
             </div>
         </div>
     </header>
@@ -172,7 +172,7 @@
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
                             <div class="text-center text-xl mb-4">
-                                \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum\beta_j^2) \]
+                            \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum\beta_j^2) \]
                             </div>
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
@@ -189,7 +189,7 @@
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
                             <div class="text-center text-xl mb-4">
-                                \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum|\beta_j|) \]
+                            \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum|\beta_j|) \]
                             </div>
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
@@ -210,7 +210,7 @@
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Interactive Regularization</h2>
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
-                    <div class="lambda-slider">
+                <div class="lambda-slider">
                         <label class="block text-gray-700 dark:text-gray-300 mb-2">Regularization Strength (λ):</label>
                         <input type="range" min="0" max="10" step="0.1" value="0" id="lambdaSlider" class="w-full">
                         <span class="lambda-value text-gray-700 dark:text-gray-300">0</span>
@@ -219,13 +219,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Without Regularization</h3>
-                        <div class="plot-before">
+                            <div class="plot-before">
                             <canvas id="beforePlot" class="w-full h-64 bg-white dark:bg-gray-800 rounded-lg"></canvas>
                         </div>
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">With Regularization</h3>
-                        <div class="plot-after">
+                            <div class="plot-after">
                             <canvas id="afterPlot" class="w-full h-64 bg-white dark:bg-gray-800 rounded-lg"></canvas>
                         </div>
                     </div>
@@ -246,8 +246,8 @@
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Linear Regression</h3>
                         </div>
                         <div class="text-center text-xl mb-4">
-                            \[ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n \]
-                        </div>
+                                \[ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n \]
+                            </div>
                         <div class="space-y-4">
                             <div>
                                 <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Characteristics:</h4>
@@ -275,8 +275,8 @@
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Logistic Regression</h3>
                         </div>
                         <div class="text-center text-xl mb-4">
-                            \[ p(y=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n)}} \]
-                        </div>
+                                \[ p(y=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_nx_n)}} \]
+                            </div>
                         <div class="space-y-4">
                             <div>
                                 <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Characteristics:</h4>
@@ -315,57 +315,57 @@
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Linear Regression</h3>
                         </div>
                         <div class="text-center text-xl mb-4">
-                            \[ \min \sum(y_i - \hat{y}_i)^2 \]
-                        </div>
+                                \[ \min \sum(y_i - \hat{y}_i)^2 \]
+                            </div>
                         <div>
                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Characteristics:</h4>
                             <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                                <li>No regularization</li>
-                                <li>Can overfit</li>
-                                <li>Simple implementation</li>
-                                <li>Fast computation</li>
-                            </ul>
+                                    <li>No regularization</li>
+                                    <li>Can overfit</li>
+                                    <li>Simple implementation</li>
+                                    <li>Fast computation</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                         <div class="flex items-center space-x-4 mb-4">
                             <i class="fas fa-mountain text-2xl text-primary-600 dark:text-primary-400"></i>
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Ridge Regression (L2)</h3>
                         </div>
                         <div class="text-center text-xl mb-4">
-                            \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum\beta_j^2) \]
-                        </div>
+                                \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum\beta_j^2) \]
+                            </div>
                         <div>
                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Characteristics:</h4>
                             <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                                <li>L2 penalty term</li>
-                                <li>Shrinks coefficients</li>
-                                <li>Never zero coefficients</li>
-                                <li>Good for multicollinearity</li>
-                            </ul>
+                                    <li>L2 penalty term</li>
+                                    <li>Shrinks coefficients</li>
+                                    <li>Never zero coefficients</li>
+                                    <li>Good for multicollinearity</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                         <div class="flex items-center space-x-4 mb-4">
                             <i class="fas fa-cut text-2xl text-primary-600 dark:text-primary-400"></i>
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Lasso Regression (L1)</h3>
                         </div>
                         <div class="text-center text-xl mb-4">
-                            \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum|\beta_j|) \]
-                        </div>
+                                \[ \min(\sum(y_i - \hat{y}_i)^2 + \lambda\sum|\beta_j|) \]
+                            </div>
                         <div>
                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Characteristics:</h4>
                             <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                                <li>L1 penalty term</li>
-                                <li>Feature selection</li>
-                                <li>Can zero coefficients</li>
-                                <li>Good for sparse data</li>
-                            </ul>
+                                    <li>L1 penalty term</li>
+                                    <li>Feature selection</li>
+                                    <li>Can zero coefficients</li>
+                                    <li>Good for sparse data</li>
+                                </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section> 
 
         <section class="mb-16">
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
