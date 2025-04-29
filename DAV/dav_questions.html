@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics & Visualization Topics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Data Analytics & Visualization</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Important Topics for Exam</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Click on any topic to learn more about it</p>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Data Analytics Lifecycle -->
+            <a href="/DAV/Dav_Analytics_Lc.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Data Analytics Lifecycle</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Phases, importance, and applications</p>
+            </a>
+
+            <!-- Regression Analysis -->
+            <a href="/DAV/Dav_Reg_Anl.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Regression Analysis</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Linear vs. logistic regression, calculations, and stepwise regression</p>
+            </a>
+
+            <!-- Time Series Analysis -->
+            <a href="/DAV/DAV_TIme_Series.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Time Series Analysis</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">ARIMA/ARMA models and Box-Jenkins methodology</p>
+            </a>
+
+            <!-- Text Analytics -->
+            <a href="/DAV/DAV_Text_anl.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Text Analytics</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">TF-IDF and text mining steps</p>
+            </a>
+
+            <!-- Data Visualization -->
+            <a href="/DAV/DAV_Data_Visualiz.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-red-100 dark:bg-red-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Data Visualization</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Matplotlib vs. Seaborn and visualization in R/Python</p>
+            </a>
+
+            <!-- Statistical Methods -->
+            <a href="/DAV/DAV_Stats_Method.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Statistical Methods</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Correlation, regression equations, and autocorrelation</p>
+            </a>
+
+            <!-- Python/R Libraries -->
+            <a href="/DAV/dav_Libraries.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3 bg-pink-100 dark:bg-pink-900/30 rounded-lg">
+                        <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Python/R Libraries</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Pandas features and data import/export in R</p>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+</body>
+</html>

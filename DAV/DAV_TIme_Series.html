@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Series Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .keyword {
+            color: #0ea5e9;
+            font-weight: 600;
+        }
+        .dark .keyword {
+            color: #38bdf8;
+        }
+
+        .important-concept {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .important-concept {
+            background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+        }
+
+        .mnemonic-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .mnemonic-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .fun-fact {
+            background: linear-gradient(135deg, #6b21a8 0%, #7e22ce 100%);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1rem 0;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .dark .comparison-table th,
+        .dark .comparison-table td {
+            border-color: #4b5563;
+        }
+        .comparison-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .dark .comparison-table th {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        .dark .comparison-table td {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .dark .comparison-table tr:hover td {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Time Series Analysis</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/DAV/dav_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/DAV/dav_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Time Series Analysis</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding ARIMA/ARMA models and Box-Jenkins methodology</p>
+        </div>
+
+        <!-- ARIMA/ARMA Models -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">ARIMA/ARMA Models</h3>
+                <div class="space-y-6">
+                    <div class="important-concept">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">V.V.V. Important: Model Components</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">AR (AutoRegressive)</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Uses past values to predict future values</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Formula: y_t = c + Σ(φ_i * y_{t-i}) + ε_t</p>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-green-700 dark:text-green-400">MA (Moving Average)</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Uses past errors to predict future values</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Formula: y_t = μ + Σ(θ_i * ε_{t-i}) + ε_t</p>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-purple-700 dark:text-purple-400">I (Integrated)</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Difference the data to make it stationary</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Formula: Δ^d y_t = (1-B)^d y_t</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Model Parameters</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>p: AR order (number of lagged observations)</li>
+                                <li>d: Differencing order (number of times data is differenced)</li>
+                                <li>q: MA order (number of lagged forecast errors)</li>
+                                <li>Seasonal parameters (P, D, Q, s) for SARIMA</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Selection Criteria</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>AIC (Akaike Information Criterion)</li>
+                                <li>BIC (Bayesian Information Criterion)</li>
+                                <li>Cross-validation performance</li>
+                                <li>Residual analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Model Type</th>
+                                    <th class="text-left">Description</th>
+                                    <th class="text-left">Use Cases</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">ARMA(p,q)</td>
+                                    <td>Combines AR and MA components</td>
+                                    <td>
+                                        <ul class="list-disc list-inside">
+                                            <li>Stationary time series</li>
+                                            <li>Short-term forecasting</li>
+                                            <li>Economic indicators</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">ARIMA(p,d,q)</td>
+                                    <td>ARMA with differencing</td>
+                                    <td>
+                                        <ul class="list-disc list-inside">
+                                            <li>Non-stationary data</li>
+                                            <li>Long-term forecasting</li>
+                                            <li>Financial time series</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">SARIMA(p,d,q)(P,D,Q)s</td>
+                                    <td>ARIMA with seasonal components</td>
+                                    <td>
+                                        <ul class="list-disc list-inside">
+                                            <li>Seasonal data</li>
+                                            <li>Weather forecasting</li>
+                                            <li>Sales with seasonal patterns</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="important-concept">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">V.V.V. Important: Implementation Steps</h4>
+                        <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Data Preparation
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>Check for missing values</li>
+                                    <li>Handle outliers</li>
+                                    <li>Test for stationarity</li>
+                                </ul>
+                            </li>
+                            <li>Model Identification
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>Plot ACF and PACF</li>
+                                    <li>Determine p, d, q values</li>
+                                    <li>Check for seasonality</li>
+                                </ul>
+                            </li>
+                            <li>Parameter Estimation
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>Fit the model</li>
+                                    <li>Estimate coefficients</li>
+                                    <li>Check significance</li>
+                                </ul>
+                            </li>
+                            <li>Model Diagnostics
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>Residual analysis</li>
+                                    <li>Ljung-Box test</li>
+                                    <li>Forecast evaluation</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="fun-fact">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-2">Fun Fact</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            The ARIMA model was first introduced by Box and Jenkins in their 1970 book "Time Series Analysis: Forecasting and Control." This book is considered a classic in the field of time series analysis! The methodology they developed is still widely used today in various fields including finance, economics, and weather forecasting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Box-Jenkins Methodology -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Box-Jenkins Methodology</h3>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Methodology Steps</h4>
+                            <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Model Identification</li>
+                                <li>Parameter Estimation</li>
+                                <li>Model Diagnostics</li>
+                                <li>Forecasting</li>
+                            </ol>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Key Tools</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>ACF (Autocorrelation Function)</li>
+                                <li>PACF (Partial Autocorrelation Function)</li>
+                                <li>Ljung-Box Test</li>
+                                <li>Residual Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="important-concept">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">V.V.V. Important: Applications</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">Finance</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>Stock price prediction</li>
+                                    <li>Exchange rate forecasting</li>
+                                    <li>Risk assessment</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-green-700 dark:text-green-400">Economics</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>GDP forecasting</li>
+                                    <li>Inflation prediction</li>
+                                    <li>Economic indicators</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-purple-700 dark:text-purple-400">Business</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>Sales forecasting</li>
+                                    <li>Inventory management</li>
+                                    <li>Resource planning</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Pros</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Handles complex patterns</li>
+                                <li>Provides confidence intervals</li>
+                                <li>Can capture seasonality</li>
+                                <li>Well-established methodology</li>
+                                <li>Good for short-term forecasting</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Cons</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Requires large datasets</li>
+                                <li>Computationally intensive</li>
+                                <li>Assumes linear relationships</li>
+                                <li>Can be complex to implement</li>
+                                <li>May not capture sudden changes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">Mnemonic: "IDEA"</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">I</span>dentify the model<br>
+                            <span class="font-semibold">D</span>iagnose the data<br>
+                            <span class="font-semibold">E</span>stimate parameters<br>
+                            <span class="font-semibold">A</span>ssess the results
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html> 

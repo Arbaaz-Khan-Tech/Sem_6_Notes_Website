@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Libraries</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .keyword {
+            color: #0ea5e9;
+            font-weight: 600;
+        }
+        .dark .keyword {
+            color: #38bdf8;
+        }
+
+        .important-concept {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .important-concept {
+            background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+        }
+
+        .mnemonic-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .mnemonic-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .fun-fact {
+            background: linear-gradient(135deg, #6b21a8 0%, #7e22ce 100%);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1rem 0;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .dark .comparison-table th,
+        .dark .comparison-table td {
+            border-color: #4b5563;
+        }
+        .comparison-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .dark .comparison-table th {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        .dark .comparison-table td {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .dark .comparison-table tr:hover td {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Data Analysis Libraries</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/DAV/dav_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/DAV/dav_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Data Analysis Libraries</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding Pandas features and Data import/export in R</p>
+        </div>
+
+        <!-- Pandas Features -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Pandas Features</h3>
+                <div class="space-y-6">
+                    <div class="important-concept">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">V.V.V. Important: Core Features</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">Data Structures</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>DataFrame</li>
+                                    <li>Series</li>
+                                    <li>Panel</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-green-700 dark:text-green-400">Data Operations</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>Filtering</li>
+                                    <li>Grouping</li>
+                                    <li>Aggregation</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-purple-700 dark:text-purple-400">Data Cleaning</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>Missing values</li>
+                                    <li>Duplicates</li>
+                                    <li>Data types</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Key Functions</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>read_csv() - Import CSV files</li>
+                                <li>merge() - Combine datasets</li>
+                                <li>groupby() - Group operations</li>
+                                <li>pivot_table() - Reshape data</li>
+                                <li>apply() - Apply functions</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Data Analysis Tools</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Statistical functions</li>
+                                <li>Time series analysis</li>
+                                <li>Data visualization</li>
+                                <li>Data transformation</li>
+                                <li>Data validation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="fun-fact">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-2">Fun Fact</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Pandas was created by Wes McKinney in 2008 while working at AQR Capital Management. The name "Pandas" comes from "Panel Data," which is a term used in statistics for structured data!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Import/Export in R -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Data Import/Export in R</h3>
+                <div class="space-y-6">
+                    <div class="overflow-x-auto">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">File Type</th>
+                                    <th class="text-left">Import Function</th>
+                                    <th class="text-left">Export Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">CSV</td>
+                                    <td>read.csv()</td>
+                                    <td>write.csv()</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Excel</td>
+                                    <td>read_excel()</td>
+                                    <td>write_excel()</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">JSON</td>
+                                    <td>fromJSON()</td>
+                                    <td>toJSON()</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">SQL</td>
+                                    <td>dbGetQuery()</td>
+                                    <td>dbWriteTable()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="important-concept">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">V.V.V. Important: Best Practices</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">Import Tips</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>Check file encoding</li>
+                                    <li>Handle missing values</li>
+                                    <li>Specify data types</li>
+                                    <li>Use appropriate packages</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-green-700 dark:text-green-400">Export Tips</h5>
+                                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                    <li>Choose right format</li>
+                                    <li>Handle special characters</li>
+                                    <li>Include metadata</li>
+                                    <li>Verify output</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Common Packages</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>readr - Fast CSV reading</li>
+                                <li>readxl - Excel files</li>
+                                <li>jsonlite - JSON handling</li>
+                                <li>DBI - Database interface</li>
+                                <li>haven - SPSS/SAS files</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Use Cases</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Data analysis</li>
+                                <li>Statistical modeling</li>
+                                <li>Data visualization</li>
+                                <li>Report generation</li>
+                                <li>Data integration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-2">Mnemonic: "READ"</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold">R</span>ead the data<br>
+                            <span class="font-semibold">E</span>xplore the structure<br>
+                            <span class="font-semibold">A</span>nalyze the content<br>
+                            <span class="font-semibold">D</span>ocument the process
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html> 
