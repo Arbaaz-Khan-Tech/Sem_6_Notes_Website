@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6: File Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+
+        /* Keyword Highlighting */
+        .keyword {
+            color: #0ea5e9;
+            font-weight: 600;
+        }
+        .dark .keyword {
+            color: #38bdf8;
+        }
+
+        /* Important Concept Box */
+        .important-concept {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .important-concept {
+            background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1rem 0;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .dark .comparison-table th,
+        .dark .comparison-table td {
+            border-color: #4b5563;
+        }
+        .comparison-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .dark .comparison-table th {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        .dark .comparison-table td {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .dark .comparison-table tr:hover td {
+            background-color: #374151;
+        }
+        .dark .comparison-table ul {
+            color: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Unit 6: File Systems</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/DC/dc_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/DC/dc_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Unit 6: File Systems</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding distributed file systems and their architectures</p>
+        </div>
+
+        <!-- DFS Features -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">DFS Features</h3>
+                <div class="space-y-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Key Features</h4>
+                        <div class="space-y-4">
+                            <div class="important-concept">
+                                <h5 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">Essential Features:</h5>
+                                <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                    <li>Transparency
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Access transparency</li>
+                                            <li>Location transparency</li>
+                                            <li>Migration transparency</li>
+                                            <li>Replication transparency</li>
+                                        </ul>
+                                    </li>
+                                    <li>Concurrency Control
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>File locking</li>
+                                            <li>Atomic operations</li>
+                                            <li>Consistency maintenance</li>
+                                        </ul>
+                                    </li>
+                                    <li>Fault Tolerance
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Data replication</li>
+                                            <li>Recovery mechanisms</li>
+                                            <li>High availability</li>
+                                        </ul>
+                                    </li>
+                                    <li>Scalability
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Horizontal scaling</li>
+                                            <li>Load distribution</li>
+                                            <li>Performance optimization</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Real-life Applications</h4>
+                        <div class="space-y-4">
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Cloud Storage
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li>Google Drive</li>
+                                        <li>Dropbox</li>
+                                        <li>OneDrive</li>
+                                    </ul>
+                                </li>
+                                <li>Enterprise Storage
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li>Network Attached Storage (NAS)</li>
+                                        <li>Storage Area Networks (SAN)</li>
+                                        <li>Distributed Storage Systems</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Andrew File System vs NFS -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Andrew File System vs NFS</h3>
+                <div class="space-y-6">
+                    <div class="overflow-x-auto">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Feature</th>
+                                    <th class="text-left">Andrew File System (AFS)</th>
+                                    <th class="text-left">Network File System (NFS)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">Architecture</td>
+                                    <td>Client-server with caching</td>
+                                    <td>Stateless client-server</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Caching</td>
+                                    <td>Whole file caching</td>
+                                    <td>Block-level caching</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Consistency</td>
+                                    <td>Session semantics</td>
+                                    <td>Unix semantics</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Scalability</td>
+                                    <td>Better for large systems</td>
+                                    <td>Limited by server capacity</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Security</td>
+                                    <td>Kerberos authentication</td>
+                                    <td>Basic authentication</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">AFS Advantages</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Better scalability</li>
+                                <li>Stronger security</li>
+                                <li>Efficient caching</li>
+                                <li>Better performance</li>
+                                <li>Reduced server load</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">NFS Advantages</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Simplicity</li>
+                                <li>Wide compatibility</li>
+                                <li>Easy implementation</li>
+                                <li>Lower overhead</li>
+                                <li>Better for small systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- File Service Architecture -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">File Service Architecture</h3>
+                <div class="space-y-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Components</h4>
+                        <div class="space-y-4">
+                            <div class="important-concept">
+                                <h5 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">Architecture Components:</h5>
+                                <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                    <li>File Service
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>File operations</li>
+                                            <li>Access control</li>
+                                            <li>File management</li>
+                                        </ul>
+                                    </li>
+                                    <li>Directory Service
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>File naming</li>
+                                            <li>Directory structure</li>
+                                            <li>Path resolution</li>
+                                        </ul>
+                                    </li>
+                                    <li>Client Module
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Cache management</li>
+                                            <li>Request handling</li>
+                                            <li>Protocol implementation</li>
+                                        </ul>
+                                    </li>
+                                    <li>Storage Service
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Data storage</li>
+                                            <li>Block management</li>
+                                            <li>Disk operations</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Real-life Applications</h4>
+                        <div class="space-y-4">
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Enterprise Storage
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li>File servers</li>
+                                        <li>Storage arrays</li>
+                                        <li>Backup systems</li>
+                                    </ul>
+                                </li>
+                                <li>Cloud Storage
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li>Object storage</li>
+                                        <li>Block storage</li>
+                                        <li>File storage</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HDFS -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Hadoop Distributed File System (HDFS)</h3>
+                <div class="space-y-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Key Features</h4>
+                        <div class="space-y-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="keyword">HDFS</span> is designed for storing large files across multiple machines in a distributed manner.
+                            </p>
+                            <div class="important-concept">
+                                <h5 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">HDFS Architecture:</h5>
+                                <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                    <li>NameNode
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Manages file system namespace</li>
+                                            <li>Controls file access</li>
+                                            <li>Maintains metadata</li>
+                                        </ul>
+                                    </li>
+                                    <li>DataNode
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Stores actual data</li>
+                                            <li>Performs block operations</li>
+                                            <li>Reports to NameNode</li>
+                                        </ul>
+                                    </li>
+                                    <li>Block Management
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li>Large block size (128MB)</li>
+                                            <li>Replication (default 3x)</li>
+                                            <li>Fault tolerance</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Advantages</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>High fault tolerance</li>
+                                <li>Scalability</li>
+                                <li>Cost-effective</li>
+                                <li>Data locality</li>
+                                <li>Simple architecture</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Disadvantages</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Not suitable for small files</li>
+                                <li>Single point of failure</li>
+                                <li>Limited file operations</li>
+                                <li>High latency</li>
+                                <li>Complex maintenance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html> 
