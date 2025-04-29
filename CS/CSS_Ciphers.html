@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical Ciphers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+
+        /* Mnemonic Box */
+        .mnemonic-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .mnemonic-box {
+            background: linear-gradient(135deg, #1a1b1e 0%, #2c2d31 100%);
+        }
+
+        /* Cipher Grid */
+        .cipher-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            font-family: 'Fira Code', monospace;
+        }
+        .cipher-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid currentColor;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Classical Ciphers</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Classical Ciphers</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding Playfair and Hill ciphers</p>
+        </div>
+
+        <!-- Playfair Cipher Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Playfair Cipher</h3>
+
+                <!-- How it Works -->
+                <div class="space-y-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">How Playfair Works</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-blue-500">Step 1:</span> Create the Key Square
+                            <ul class="list-disc list-inside mt-2">
+                                <li>5x5 grid (I and J share a cell)</li>
+                                <li>Fill with key word first</li>
+                                <li>Complete with remaining alphabet</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-blue-500">Mnemonic:</span> 
+                                "Playfair = <span class="text-blue-500">5x5</span> Grid + <span class="text-blue-500">Key</span> First + <span class="text-blue-500">Rest</span> Alphabet"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Encryption Rules</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-green-500">Step 2:</span> Process Message
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Split into digraphs (pairs of letters)</li>
+                                <li>Add 'X' if needed for even length</li>
+                                <li>Apply rules based on letter positions</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-green-500">Mnemonic:</span> 
+                                "Encrypt = <span class="text-green-500">Pairs</span> + <span class="text-green-500">Rules</span> + <span class="text-green-500">Grid</span>"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Example</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Key: "MONARCHY"
+                            <div class="cipher-grid mt-4 mb-4">
+                                <div class="cipher-cell">M</div>
+                                <div class="cipher-cell">O</div>
+                                <div class="cipher-cell">N</div>
+                                <div class="cipher-cell">A</div>
+                                <div class="cipher-cell">R</div>
+                                <div class="cipher-cell">C</div>
+                                <div class="cipher-cell">H</div>
+                                <div class="cipher-cell">Y</div>
+                                <div class="cipher-cell">B</div>
+                                <div class="cipher-cell">D</div>
+                                <div class="cipher-cell">E</div>
+                                <div class="cipher-cell">F</div>
+                                <div class="cipher-cell">G</div>
+                                <div class="cipher-cell">I/J</div>
+                                <div class="cipher-cell">K</div>
+                                <div class="cipher-cell">L</div>
+                                <div class="cipher-cell">P</div>
+                                <div class="cipher-cell">Q</div>
+                                <div class="cipher-cell">S</div>
+                                <div class="cipher-cell">T</div>
+                                <div class="cipher-cell">U</div>
+                                <div class="cipher-cell">V</div>
+                                <div class="cipher-cell">W</div>
+                                <div class="cipher-cell">X</div>
+                                <div class="cipher-cell">Z</div>
+                            </div>
+                            <p class="mt-4">Message: "HELLO" → "HE LX LO" → "CH YR YT"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hill Cipher Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Hill Cipher</h3>
+
+                <!-- How it Works -->
+                <div class="space-y-6">
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-3">Matrix-based Encryption</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-pink-500">Key Features:</span>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Uses matrix multiplication</li>
+                                <li>Poly-alphabetic substitution</li>
+                                <li>Requires invertible key matrix</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-pink-500">Mnemonic:</span> 
+                                "Hill = <span class="text-pink-500">Matrix</span> × <span class="text-pink-500">Message</span> = <span class="text-pink-500">Cipher</span>"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-3">Encryption Process</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-yellow-500">Steps:</span>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Convert letters to numbers (A=0, B=1, etc.)</li>
+                                <li>Group into vectors of size n</li>
+                                <li>Multiply with key matrix</li>
+                                <li>Take modulo 26</li>
+                                <li>Convert back to letters</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-yellow-500">Mnemonic:</span> 
+                                "Encrypt = <span class="text-yellow-500">Numbers</span> → <span class="text-yellow-500">Vectors</span> → <span class="text-yellow-500">Multiply</span> → <span class="text-yellow-500">Modulo</span> → <span class="text-yellow-500">Letters</span>"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-indigo-700 dark:text-indigo-400 mb-3">Example</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Key Matrix: 
+                            <div class="font-mono mt-2">
+                                [3 3]<br>
+                                [2 5]
+                            </div>
+                            <p class="mt-4">Message: "HELLO" → "HE LX LO" → "DP QZ QZ"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Considerations -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Security Considerations</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Playfair Vulnerabilities</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Frequency analysis possible</li>
+                                <li>Known plaintext attacks</li>
+                                <li>Limited key space</li>
+                            </ul>
+                        </p>
+                    </div>
+
+                    <div class="bg-orange-50 dark:bg-orange-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-orange-700 dark:text-orange-400 mb-3">Hill Cipher Vulnerabilities</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Known plaintext attacks</li>
+                                <li>Matrix inversion required</li>
+                                <li>Deterministic encryption</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Points Popup -->
+        <div id="importantPointsPopup" class="fixed bottom-4 right-4 bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg shadow-lg max-w-md">
+            <div class="flex justify-between items-start mb-4">
+                <h4 class="font-semibold text-yellow-700 dark:text-yellow-400">⚠️ Very Important to Remember!</h4>
+                <button id="closePopup" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Playfair</span>: 5x5 grid, digraphs, position rules</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Hill</span>: Matrix multiplication, modulo 26</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Both</span>: Not secure for modern use</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Key</span>: Critical for both ciphers</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const importantPointsPopup = document.getElementById('importantPointsPopup');
+        const closePopup = document.getElementById('closePopup');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close popup
+        closePopup.addEventListener('click', () => {
+            importantPointsPopup.style.display = 'none';
+        });
+    </script>
+</body>
+</html> 

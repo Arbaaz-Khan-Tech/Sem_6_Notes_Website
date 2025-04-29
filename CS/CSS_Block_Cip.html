@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Ciphers - ECB vs. CBC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Block Ciphers</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">ECB vs. CBC Encryption Modes</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding the differences between Electronic Codebook and Cipher Block Chaining modes</p>
+        </div>
+
+        <!-- Comparison Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">1. ECB vs. CBC Comparison</h3>
+
+                <!-- Comparison Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aspect</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">ECB</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">CBC</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-blue-600 dark:text-blue-400">Definition</td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Encrypts each block independently</td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Each block XORed with previous ciphertext</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-purple-600 dark:text-purple-400">Pros</td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside">
+                                        <li>Parallelizable</li>
+                                        <li>Simple</li>
+                                    </ul>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside">
+                                        <li>Secure (hides patterns)</li>
+                                        <li>Adds randomness via IV</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-pink-600 dark:text-pink-400">Cons</td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside">
+                                        <li>Reveals patterns</li>
+                                        <li>Identical plaintext → identical ciphertext</li>
+                                    </ul>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside">
+                                        <li>Slower (sequential)</li>
+                                        <li>Requires IV</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-cyan-600 dark:text-cyan-400">Use Cases</td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Random data (e.g., encrypted keys)</td>
+                                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Structured data (e.g., images, documents)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mnemonic -->
+                <div class="mt-8 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-semibold">Mnemonic:</span> 
+                        "<span class="text-red-500">ECB</span> = Easy but Exposes! <span class="text-green-500">CBC</span> = Chain Blocks Carefully!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How ECB Works Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">2. How ECB Works</h3>
+
+                <!-- Step-by-Step Process -->
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-700 dark:text-red-400 font-semibold">1</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400">Split</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Plaintext into fixed-size blocks (e.g., 128-bit)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-700 dark:text-green-400 font-semibold">2</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400">Encrypt</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Each block independently using the same key</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-700 dark:text-blue-400 font-semibold">3</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400">Result</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Identical plaintext blocks → Identical ciphertext blocks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example -->
+                <div class="mt-8 bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Example:</h4>
+                    <div class="space-y-2">
+                        <p class="text-gray-700 dark:text-gray-300">Plaintext: "HELLOHELLO" → Blocks: "HELL", "OHEL", "LO"</p>
+                        <p class="text-gray-700 dark:text-gray-300">ECB Ciphertext: "XQZP XQZP YK" (Pattern visible!)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How CBC Works Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">3. How CBC Works</h3>
+
+                <!-- Step-by-Step Process -->
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-700 dark:text-red-400 font-semibold">1</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-red-700 dark:text-red-400">Generate IV</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Random initialization vector (XORed with first block)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-700 dark:text-green-400 font-semibold">2</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-green-700 dark:text-green-400">XOR</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Each block with previous ciphertext (or IV for first block)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-700 dark:text-blue-400 font-semibold">3</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-blue-700 dark:text-blue-400">Encrypt</h4>
+                            <p class="text-gray-700 dark:text-gray-300">The XOR result</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center text-purple-700 dark:text-purple-400 font-semibold">4</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-purple-700 dark:text-purple-400">Chain</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Repeat for all blocks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example -->
+                <div class="mt-8 bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Example:</h4>
+                    <div class="space-y-2">
+                        <p class="text-gray-700 dark:text-gray-300">Plaintext: "HELLOHELLO" → Blocks: "HELL", "OHEL", "LO"</p>
+                        <p class="text-gray-700 dark:text-gray-300">CBC Ciphertext: "XQZP GHRT MK" (No patterns!)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Analogies Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">4. Real-World Analogies</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">ECB</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like a rubber stamp (same input → same output)</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">CBC</h4>
+                        <p class="text-gray-700 dark:text-gray-300">Like mixing paint (each step depends on the last)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explanation of Modes Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">5. Explanation of Modes</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- ECB Mode -->
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-4">ECB Mode (Electronic Codebook)</h4>
+                        <div class="space-y-4">
+                            <p class="text-gray-700 dark:text-gray-300">• Each block is encrypted independently</p>
+                            <p class="text-gray-700 dark:text-gray-300">• Same plaintext block → same ciphertext block</p>
+                            <p class="text-gray-700 dark:text-gray-300">• No chaining between blocks</p>
+                            <p class="text-gray-700 dark:text-gray-300">• Fast but less secure</p>
+                        </div>
+                    </div>
+
+                    <!-- CBC Mode -->
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-4">CBC Mode (Cipher Block Chaining)</h4>
+                        <div class="space-y-4">
+                            <p class="text-gray-700 dark:text-gray-300">• Each block is XORed with previous ciphertext</p>
+                            <p class="text-gray-700 dark:text-gray-300">• First block uses IV (Initialization Vector)</p>
+                            <p class="text-gray-700 dark:text-gray-300">• Blocks are chained together</p>
+                            <p class="text-gray-700 dark:text-gray-300">• More secure but slower</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Important Points Popup -->
+                <div class="mt-8 bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg">
+                    <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-4">⚠️ Very Important to Remember!</h4>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">ECB</span>: Never use for sensitive data (patterns visible!)</p>
+                        <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">CBC</span>: Always use for sensitive data (patterns hidden)</p>
+                        <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">IV</span>: Must be random and unique for CBC</p>
+                        <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Block Size</span>: Usually 128 bits (16 bytes)</p>
+                        <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Padding</span>: Required for last block if not full</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html> 

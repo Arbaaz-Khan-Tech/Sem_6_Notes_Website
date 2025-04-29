@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signatures & Certificates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+
+        /* Mnemonic Box */
+        .mnemonic-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .mnemonic-box {
+            background: linear-gradient(135deg, #1a1b1e 0%, #2c2d31 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Digital Signatures & Certificates</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Digital Signatures & Certificates</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding RSA-based signatures and X.509 certificates</p>
+        </div>
+
+        <!-- RSA Signatures Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">RSA-based Digital Signatures</h3>
+
+                <!-- Signature Process -->
+                <div class="space-y-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">How RSA Signatures Work</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-blue-500">Step 1:</span> Hash the message
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Convert message to fixed-length hash</li>
+                                <li>Use SHA-256 or similar algorithm</li>
+                                <li>Creates unique message digest</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-blue-500">Mnemonic:</span> 
+                                "Hash First, Sign Later - Like a <span class="text-blue-500">Fingerprint</span> Before <span class="text-blue-500">Signature</span>"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Signature Generation</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-green-500">Step 2:</span> Sign the hash
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Use private key to encrypt hash</li>
+                                <li>Creates digital signature</li>
+                                <li>Unique to message and signer</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-green-500">Mnemonic:</span> 
+                                "Private Key = <span class="text-green-500">Personal</span> Stamp, Public Key = <span class="text-green-500">Verification</span> Tool"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Signature Verification</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-purple-500">Step 3:</span> Verify the signature
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Decrypt signature with public key</li>
+                                <li>Compare with message hash</li>
+                                <li>Verify authenticity and integrity</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-purple-500">Mnemonic:</span> 
+                                "Verify = <span class="text-purple-500">Match</span> the <span class="text-purple-500">Fingerprints</span>"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- X.509 Certificates Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">X.509 Certificate Format</h3>
+
+                <!-- Certificate Structure -->
+                <div class="space-y-6">
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-3">Certificate Structure</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-pink-500">Key Components:</span>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Version number</li>
+                                <li>Serial number</li>
+                                <li>Signature algorithm</li>
+                                <li>Issuer name</li>
+                                <li>Validity period</li>
+                                <li>Subject name</li>
+                                <li>Public key</li>
+                                <li>Extensions</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-pink-500">Mnemonic:</span> 
+                                "Very <span class="text-pink-500">Special</span> <span class="text-pink-500">ID</span> <span class="text-pink-500">Issued</span> <span class="text-pink-500">Valid</span> <span class="text-pink-500">Subject</span> <span class="text-pink-500">Public</span> <span class="text-pink-500">Extra</span>"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-3">Certificate Chain</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-yellow-500">Trust Hierarchy:</span>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Root CA (self-signed)</li>
+                                <li>Intermediate CAs</li>
+                                <li>End-entity certificates</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-yellow-500">Mnemonic:</span> 
+                                "Trust <span class="text-yellow-500">Tree</span>: <span class="text-yellow-500">Root</span> → <span class="text-yellow-500">Branches</span> → <span class="text-yellow-500">Leaves</span>"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-indigo-700 dark:text-indigo-400 mb-3">Certificate Validation</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span class="font-semibold text-indigo-500">Validation Steps:</span>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Check validity period</li>
+                                <li>Verify signature</li>
+                                <li>Check revocation status</li>
+                                <li>Validate certificate chain</li>
+                            </ul>
+                        </p>
+                        <div class="mnemonic-box mt-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <span class="font-semibold text-indigo-500">Mnemonic:</span> 
+                                "Validate = <span class="text-indigo-500">Time</span> + <span class="text-indigo-500">Signature</span> + <span class="text-indigo-500">Status</span> + <span class="text-indigo-500">Chain</span>"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Use Cases -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Common Use Cases</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Code Signing</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Verify software authenticity</li>
+                                <li>Prevent tampering</li>
+                                <li>Ensure code integrity</li>
+                            </ul>
+                        </p>
+                    </div>
+
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Email Security</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Sign emails (S/MIME)</li>
+                                <li>Verify sender identity</li>
+                                <li>Ensure message integrity</li>
+                            </ul>
+                        </p>
+                    </div>
+
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Document Signing</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Digital signatures on PDFs</li>
+                                <li>Legal document verification</li>
+                                <li>Timestamp services</li>
+                            </ul>
+                        </p>
+                    </div>
+
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-3">SSL/TLS</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Website authentication</li>
+                                <li>Secure connections</li>
+                                <li>HTTPS implementation</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Points Popup -->
+        <div id="importantPointsPopup" class="fixed bottom-4 right-4 bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg shadow-lg max-w-md">
+            <div class="flex justify-between items-start mb-4">
+                <h4 class="font-semibold text-yellow-700 dark:text-yellow-400">⚠️ Very Important to Remember!</h4>
+                <button id="closePopup" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Sign</span>: Private key signs, Public key verifies</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Hash</span>: Always hash before signing</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Chain</span>: Trust flows from root to leaf</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Validate</span>: Check time, signature, status</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const importantPointsPopup = document.getElementById('importantPointsPopup');
+        const closePopup = document.getElementById('closePopup');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close popup
+        closePopup.addEventListener('click', () => {
+            importantPointsPopup.style.display = 'none';
+        });
+    </script>
+</body>
+</html> 

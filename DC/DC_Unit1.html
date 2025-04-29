@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1: Basics of Distributed Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .dark .comparison-table th,
+        .dark .comparison-table td {
+            border-color: #3f4046;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Unit 1: Basics of Distributed Systems</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/DC/dc_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/DC/dc_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Unit 1: Basics of Distributed Systems</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding the fundamentals of distributed computing</p>
+        </div>
+
+        <!-- Issues in Distributed Systems -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Issues in Distributed Systems</h3>
+                <div class="space-y-6">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-400 mb-3">Key Challenges</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Heterogeneity</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Different hardware, operating systems, and programming languages must work together seamlessly. This requires standardized protocols and interfaces.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Scalability</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Systems must handle growing numbers of users and resources without significant performance degradation. This involves efficient resource allocation and load balancing.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Openness</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Systems should be extensible and reimplementable. This requires well-defined interfaces and protocols that are publicly available.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Security</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Protection against unauthorized access and attacks is crucial. This includes authentication, authorization, and encryption mechanisms.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Failure Handling</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Systems must be resilient to partial failures. This involves fault detection, recovery mechanisms, and redundancy.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Concurrency</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Multiple users and resources must be managed efficiently. This requires synchronization mechanisms and conflict resolution.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-600 dark:text-blue-300 mb-2">Transparency</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Complexity should be hidden from users. This includes location, migration, replication, and failure transparency.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Facts Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Fun Facts & Humor</h3>
+                <div class="space-y-6">
+                    <div class="bg-pink-50 dark:bg-pink-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-pink-700 dark:text-pink-400 mb-3">Fun Fact</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Did you know? The first distributed system was actually a group of students passing notes in class! 
+                            They were just trying to share answers, but little did they know they were pioneering peer-to-peer communication! 
+                            🎵 "Passing notes in class, that's how we learned to share, now we call it distributed computing, but the concept was always there!" 🎵
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Relaxation Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Time to Relax! 😄</h3>
+                <div class="space-y-6">
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Joke of the Day</h4>
+                        <div id="jokeContainer" class="text-gray-700 dark:text-gray-300">
+                            <p class="mb-2">Loading joke...</p>
+                        </div>
+                        <button id="newJokeButton" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            Get Another Joke
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Models -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">System Models</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 dark:text-green-400 mb-3">Architectural Models</h4>
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Client-Server Model</li>
+                            <li>Peer-to-Peer Model</li>
+                            <li>Hybrid Model</li>
+                            <li>Mobile Code Model</li>
+                            <li>Thin Client Model</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 dark:bg-purple-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 dark:text-purple-400 mb-3">Fundamental Models</h4>
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Interaction Model</li>
+                            <li>Failure Model</li>
+                            <li>Security Model</li>
+                            <li>Timing Model</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RPC & RMI -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">RPC & RMI</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-3">Remote Procedure Call (RPC)</h4>
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Allows a program to call a procedure on another machine</li>
+                            <li>Transparent to the programmer</li>
+                            <li>Uses message passing for communication</li>
+                            <li>Handles parameter marshalling</li>
+                            <li>Provides error handling</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Remote Method Invocation (RMI)</h4>
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Java's implementation of RPC</li>
+                            <li>Object-oriented approach</li>
+                            <li>Supports distributed objects</li>
+                            <li>Provides garbage collection</li>
+                            <li>Includes security features</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process vs Thread -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Process vs Thread</h3>
+                <div class="overflow-x-auto">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr class="bg-gray-100 dark:bg-gray-700">
+                                <th class="text-left font-semibold text-gray-900 dark:text-white">Feature</th>
+                                <th class="text-left font-semibold text-gray-900 dark:text-white">Process</th>
+                                <th class="text-left font-semibold text-gray-900 dark:text-white">Thread</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 dark:text-gray-300">
+                            <tr>
+                                <td>Resource Allocation</td>
+                                <td>Independent resources</td>
+                                <td>Shares resources with parent process</td>
+                            </tr>
+                            <tr>
+                                <td>Memory Space</td>
+                                <td>Separate memory space</td>
+                                <td>Shares memory space</td>
+                            </tr>
+                            <tr>
+                                <td>Creation Cost</td>
+                                <td>High</td>
+                                <td>Low</td>
+                            </tr>
+                            <tr>
+                                <td>Communication</td>
+                                <td>IPC mechanisms required</td>
+                                <td>Direct communication possible</td>
+                            </tr>
+                            <tr>
+                                <td>Context Switching</td>
+                                <td>Slow</td>
+                                <td>Fast</td>
+                            </tr>
+                            <tr>
+                                <td>Dependency</td>
+                                <td>Independent</td>
+                                <td>Dependent on parent process</td>
+                            </tr>
+                            <tr>
+                                <td>Failure Impact</td>
+                                <td>Doesn't affect other processes</td>
+                                <td>Can affect other threads</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Joke API Integration
+        const jokeContainer = document.getElementById('jokeContainer');
+        const newJokeButton = document.getElementById('newJokeButton');
+
+        async function fetchJoke() {
+            try {
+                const response = await fetch('https://official-joke-api.appspot.com/jokes/random');
+                const joke = await response.json();
+                jokeContainer.innerHTML = `
+                    <p class="mb-2"><strong>Setup:</strong> ${joke.setup}</p>
+                    <p><strong>Punchline:</strong> ${joke.punchline}</p>
+                `;
+            } catch (error) {
+                jokeContainer.innerHTML = '<p>Oops! Could not load joke. Try again!</p>';
+            }
+        }
+
+        // Load initial joke
+        fetchJoke();
+
+        // Add click event for new joke button
+        newJokeButton.addEventListener('click', fetchJoke);
+    </script>
+</body>
+</html> 

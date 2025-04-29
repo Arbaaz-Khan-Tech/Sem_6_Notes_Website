@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Attacks & Threats</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.hidden {
+            display: none;
+        }
+
+        /* Attack Box */
+        .attack-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .dark .attack-box {
+            background: linear-gradient(135deg, #1a1b1e 0%, #2c2d31 100%);
+        }
+
+        /* Prevention Box */
+        .prevention-box {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .prevention-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: currentColor;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">CSS Attacks & Threats</h1>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Topics
+                        </a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden hidden">
+                <nav class="flex flex-col space-y-2 pb-4">
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Home
+                    </a>
+                    <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Topics
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">CSS Attacks & Threats</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Understanding Common Web Security Threats</p>
+        </div>
+
+        <!-- Attacks Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Common Attacks</h3>
+
+                <!-- Session Hijacking -->
+                <div class="space-y-6">
+                    <div class="bg-red-50 dark:bg-red-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-red-700 dark:text-red-400 mb-3">Session Hijacking</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-red-600 dark:text-red-300 mb-2">What is it?</h5>
+                                <p class="text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside mt-2">
+                                        <li>Unauthorized access to user sessions</li>
+                                        <li>Stealing session tokens/cookies</li>
+                                        <li>Impersonating legitimate users</li>
+                                    </ul>
+                                </p>
+                                <div class="mt-4">
+                                    <h6 class="font-semibold text-red-500 dark:text-red-400 mb-2">Real-Life Example:</h6>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        In 2011, the Firesheep extension demonstrated how easy it was to hijack sessions on public WiFi networks. It could intercept unencrypted session cookies from popular websites like Facebook and Twitter.
+                                    </p>
+                                </div>
+                                <div class="mt-4">
+                                    <h6 class="font-semibold text-red-500 dark:text-red-400 mb-2">Historical Incident:</h6>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        The 2013 Target data breach involved session hijacking, where attackers gained access to the company's network through a third-party vendor's credentials, leading to the theft of 40 million credit card records.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-red-600 dark:text-red-300 mb-2">Prevention & Best Practices</h5>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h6 class="font-semibold text-red-500 dark:text-red-400 mb-2">Server-Side:</h6>
+                                        <ul class="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300">
+                                            <li>Use secure session management</li>
+                                            <li>Implement session timeouts</li>
+                                            <li>Use HTTPS and secure cookies</li>
+                                            <li>Implement CSRF tokens</li>
+                                            <li>Use HTTP-only cookies</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-red-500 dark:text-red-400 mb-2">Code Example:</h6>
+                                        <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm font-mono text-gray-800 dark:text-gray-200">
+// Express.js session configuration
+app.use(session({
+    secret: 'your-secret-key',
+    cookie: {
+        secure: true,
+        httpOnly: true,
+        maxAge: 3600000 // 1 hour
+    },
+    resave: false,
+    saveUninitialized: false
+}));
+
+// CSRF protection middleware
+app.use(csrf());
+app.use((req, res, next) => {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    next();
+});</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phishing -->
+                    <div class="bg-orange-50 dark:bg-orange-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-orange-700 dark:text-orange-400 mb-3">Phishing</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-orange-600 dark:text-orange-300 mb-2">What is it?</h5>
+                                <p class="text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside mt-2">
+                                        <li>Deceptive emails/websites</li>
+                                        <li>Stealing sensitive information</li>
+                                        <li>Social engineering tactics</li>
+                                    </ul>
+                                </p>
+                                <div class="mt-4">
+                                    <h6 class="font-semibold text-orange-500 dark:text-orange-400 mb-2">Real-Life Example:</h6>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        The 2016 Democratic National Committee email leak was initiated through a phishing attack where staff members clicked on malicious links in emails that appeared to be from Google.
+                                    </p>
+                                </div>
+                                <div class="mt-4">
+                                    <h6 class="font-semibold text-orange-500 dark:text-orange-400 mb-2">Historical Incident:</h6>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        The 2014 Sony Pictures hack, which led to the leak of sensitive company data and employee information, was initiated through a sophisticated phishing campaign targeting company executives.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-orange-600 dark:text-orange-300 mb-2">Prevention & Best Practices</h5>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h6 class="font-semibold text-orange-500 dark:text-orange-400 mb-2">Technical Measures:</h6>
+                                        <ul class="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300">
+                                            <li>Implement SPF, DKIM, and DMARC</li>
+                                            <li>Use email filtering systems</li>
+                                            <li>Enable multi-factor authentication</li>
+                                            <li>Regular security training</li>
+                                            <li>Phishing simulation exercises</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-orange-500 dark:text-orange-400 mb-2">Code Example:</h6>
+                                        <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm font-mono text-gray-800 dark:text-gray-200">
+// Email validation and sanitization
+const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+};
+
+// URL validation
+const validateUrl = (url) => {
+    try {
+        new URL(url);
+        return true;
+    } catch {
+        return false;
+    }
+};
+
+// Content Security Policy
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'"],
+        fontSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'none'"]
+    }
+}));</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clickjacking -->
+                    <div class="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg">
+                        <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-3">Clickjacking</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-yellow-600 dark:text-yellow-300 mb-2">What is it?</h5>
+                                <p class="text-gray-700 dark:text-gray-300">
+                                    <ul class="list-disc list-inside mt-2">
+                                        <li>Deceptive UI overlays</li>
+                                        <li>Hidden malicious actions</li>
+                                        <li>User interaction manipulation</li>
+                                    </ul>
+                                </p>
+                                <div class="mt-4">
+                                    <h6 class="font-semibold text-yellow-500 dark:text-yellow-400 mb-2">Real-Life Example:</h6>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        In 2010, Facebook was vulnerable to clickjacking attacks where malicious websites could trick users into "liking" pages or sharing content without their knowledge.
+                                    </p>
+                                </div>
+                                <div class="mt-4">
+                                    <h6 class="font-semibold text-yellow-500 dark:text-yellow-400 mb-2">Historical Incident:</h6>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        The 2008 Twitter clickjacking worm spread rapidly when users clicked on what appeared to be a harmless link, but actually triggered multiple actions including following other users and posting tweets.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <h5 class="font-semibold text-yellow-600 dark:text-yellow-300 mb-2">Prevention & Best Practices</h5>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h6 class="font-semibold text-yellow-500 dark:text-yellow-400 mb-2">Technical Measures:</h6>
+                                        <ul class="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300">
+                                            <li>X-Frame-Options header</li>
+                                            <li>Content Security Policy</li>
+                                            <li>Frame-busting JavaScript</li>
+                                            <li>SameSite cookie attribute</li>
+                                            <li>Frame-ancestors directive</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-yellow-500 dark:text-yellow-400 mb-2">Code Example:</h6>
+                                        <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm font-mono text-gray-800 dark:text-gray-200">
+// Express.js security headers
+app.use(helmet.frameguard({ action: 'deny' }));
+
+// Content Security Policy
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        frameAncestors: ["'none'"]
+    }
+}));
+
+// Frame-busting JavaScript
+if (window.self !== window.top) {
+    window.top.location = window.self.location;
+}
+
+// SameSite cookie attribute
+app.use(session({
+    cookie: {
+        sameSite: 'strict',
+        secure: true
+    }
+}));</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Points Popup -->
+        <div id="importantPointsPopup" class="fixed bottom-4 right-4 bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg shadow-lg max-w-md">
+            <div class="flex justify-between items-start mb-4">
+                <h4 class="font-semibold text-yellow-700 dark:text-yellow-400">⚠️ Very Important to Remember!</h4>
+                <button id="closePopup" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Session Hijacking</span>: Protect user sessions</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Phishing</span>: Be aware of deceptive tactics</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Clickjacking</span>: Prevent UI manipulation</p>
+                <p class="text-gray-700 dark:text-gray-300">• <span class="font-semibold">Security</span>: Multiple layers of protection</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const importantPointsPopup = document.getElementById('importantPointsPopup');
+        const closePopup = document.getElementById('closePopup');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close popup
+        closePopup.addEventListener('click', () => {
+            importantPointsPopup.style.display = 'none';
+        });
+    </script>
+</body>
+</html> 

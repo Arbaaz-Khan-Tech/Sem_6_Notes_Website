@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptography & System Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#1a1b1e',
+                            card: '#2c2d31',
+                            border: '#3f4046',
+                            text: '#e4e5e7',
+                            muted: '#9ca3af',
+                            accent: '#3b82f6',
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark Mode Overrides */
+        .dark .bg-gray-900 {
+            background-color: #1a1b1e;
+        }
+        .dark .bg-gray-800 {
+            background-color: #2c2d31;
+        }
+        .dark .bg-gray-700 {
+            background-color: #3f4046;
+        }
+        .dark .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dark .text-gray-300 {
+            color: #e4e5e7;
+        }
+        .dark .border-gray-700 {
+            border-color: #3f4046;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Cryptography & System Security</h1>
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            Home
+                        </a>
+                        <a href="/CS/css_questions.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            CSS
+                        </a>
+                    </nav>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Important Topics for CSS Paper</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Click on any topic to learn more</p>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Block Ciphers & Modes -->
+            <a href="/CS/CSS_Block_Cip.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Block Ciphers & Modes</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">ECB vs. CBC, Modes of Operation</p>
+            </a>
+
+            <!-- Public Key Cryptography -->
+            <a href="/CS/CSS_Public_Key.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Public Key Cryptography</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">RSA, Diffie-Hellman Key Exchange</p>
+            </a>
+
+            <!-- Hash Functions -->
+            <a href="/CS/CSS_Hash_Fn.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Hash Functions</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">MD5, SHA-1, SHA-256</p>
+            </a>
+
+            <!-- SSL/TLS Protocols -->
+            <a href="/CS/CSS_Protocols.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">SSL/TLS Protocols</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Handshake Protocol, Security Features</p>
+            </a>
+
+            <!-- Digital Signatures & Certificates -->
+            <a href="/CS/CSS_Dig_Sign.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Digital Signatures & Certificates</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">RSA Signatures, X.509 Certificates</p>
+            </a>
+
+            <!-- Ciphers -->
+            <a href="/CS/CSS_Ciphers.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Ciphers</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Playfair, Poly-alphabetic Substitution</p>
+            </a>
+
+            <!-- Security Mechanisms -->
+            <a href="/CS/CSS_Sec_Mech.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-pink-100 dark:bg-pink-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Security Mechanisms</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Firewalls, Memory Protection</p>
+            </a>
+
+            <!-- Attacks & Threats -->
+            <a href="/CS/CSS_Attacks.html" class="topic-card bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="ml-4 text-xl font-semibold text-gray-900 dark:text-white">Attacks & Threats</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Session Hijacking, Phishing</p>
+            </a>
+        </div>
+
+        <!-- Cheat Sheet Section -->
+        <section class="mt-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Cheat Sheet: Cryptography & System Security</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Based on Mumbai University Syllabus & Previous Papers</p>
+
+                <!-- Block Ciphers & Modes -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">1. Block Ciphers & Modes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">ECB (Electronic Codebook)</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Encrypts each block independently</li>
+                                <li>Weakness: Identical plaintext blocks → identical ciphertext</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">CBC (Cipher Block Chaining)</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>XORs plaintext with previous ciphertext block</li>
+                                <li>Requires IV (Initialization Vector)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Public Key Cryptography -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">2. Public Key Cryptography</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">RSA</h4>
+                            <div class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <p><strong>Key Generation:</strong></p>
+                                <ol class="list-decimal list-inside">
+                                    <li>Choose primes (p, q)</li>
+                                    <li>Compute n = p × q, φ(n) = (p-1)(q-1)</li>
+                                    <li>Choose e s.t. gcd(e, φ(n)) = 1</li>
+                                    <li>Compute d = e⁻¹ mod φ(n)</li>
+                                </ol>
+                                <p><strong>Encryption:</strong> C = Mᵉ mod n</p>
+                                <p><strong>Decryption:</strong> M = Cᵈ mod n</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Diffie-Hellman</h4>
+                            <div class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <p><strong>Shared Key:</strong> K = gᵃᵇ mod p</p>
+                                <p><strong>Steps:</strong></p>
+                                <ol class="list-decimal list-inside">
+                                    <li>Alice sends A = gᵃ mod p</li>
+                                    <li>Bob sends B = gᵇ mod p</li>
+                                    <li>Shared key: K = Bᵃ mod p = Aᵇ mod p</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hash Functions -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">3. Hash Functions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">MD5</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>128-bit hash</li>
+                                <li>Vulnerable to collisions</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">SHA-1</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>160-bit hash</li>
+                                <li>Phased out (collisions)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">SHA-256</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>256-bit hash</li>
+                                <li>Secure for most uses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SSL/TLS Handshake -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">4. SSL/TLS Handshake Protocol</h3>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>ClientHello: Lists supported cipher suites</li>
+                            <li>ServerHello: Chooses cipher suite, sends certificate</li>
+                            <li>Key Exchange: Pre-master secret exchanged (RSA/DH)</li>
+                            <li>Finished: Encrypted handshake verification</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Digital Signatures & Certificates -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">5. Digital Signatures & Certificates</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">RSA Signature</h4>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Sign = Mᵈ mod n<br>
+                                Verify using Signᵉ mod n = M
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">X.509 Certificate Fields</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Version</li>
+                                <li>Serial Number</li>
+                                <li>Issuer</li>
+                                <li>Validity</li>
+                                <li>Subject</li>
+                                <li>Public Key</li>
+                                <li>Signature</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classical Ciphers -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">6. Classical Ciphers</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Playfair Cipher</h4>
+                            <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Create 5x5 matrix using keyword (remove duplicates, add remaining letters)</li>
+                                <li>Encrypt pairs of letters:
+                                    <ul class="list-disc list-inside ml-4 mt-2">
+                                        <li>Same row → shift right</li>
+                                        <li>Same column → shift down</li>
+                                        <li>Rectangle → swap corners</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Hill Cipher</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Encrypt using matrix multiplication: C = K·P mod 26</li>
+                                <li>Key matrix must be invertible modulo 26</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Mechanisms -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">7. Security Mechanisms</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Firewalls</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Packet-filtering (Network Layer)</li>
+                                <li>Stateful Inspection (Transport Layer)</li>
+                                <li>Proxy (Application Layer)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Memory Protection</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Address randomization</li>
+                                <li>Access control lists (ACLs)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threats & Attacks -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">8. Threats & Attacks</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Session Hijacking</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Stealing session IDs via MITM or XSS</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Phishing Types</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Spear</li>
+                                <li>Whaling</li>
+                                <li>Clone</li>
+                                <li>Vishing</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Clickjacking</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Tricking users to click hidden UI elements</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Security -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">9. Database Security Requirements</h3>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                            <li>Confidentiality</li>
+                            <li>Integrity</li>
+                            <li>Availability</li>
+                            <li>Access Control</li>
+                            <li>Auditing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Key Algorithms -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">10. Key Algorithms</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Triple DES</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Uses 3 keys (K1, K2, K3)</li>
+                                <li>3 stages: Encrypt-Decrypt-Encrypt</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">DES</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Block size: 64 bits</li>
+                                <li>Key size: 56 bits</li>
+                                <li>S-Box: Provides confusion</li>
+                                <li>Expansion Permutation: Expands 32-bit input to 48 bits</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Numericals Quick Guide -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">11. Numericals Quick Guide</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">RSA Example</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>p = 7, q = 13, e = 5</li>
+                                <li>n = 91, φ(n) = 72, d = 29 (since 5 × 29 mod 72 = 1)</li>
+                                <li>Encrypt M = 10: 10⁵ mod 91 = 82</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Diffie-Hellman Example</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>p = 23, g = 5, a = 6, b = 15</li>
+                                <li>Shared key: 5⁶×¹⁵ mod 23 = 2</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short Notes -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">12. Short Notes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">CSRF</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Forges unauthorized commands from a trusted user</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Penetration Testing Phases</h4>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                <li>Planning</li>
+                                <li>Scanning</li>
+                                <li>Exploitation</li>
+                                <li>Reporting</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-2">Cookies</h4>
+                            <p class="text-gray-700 dark:text-gray-300">Store session data; secure with HttpOnly and Secure flags</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predicted Question Paper Section -->
+        <section class="mt-16">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Predicted Question Paper 2025</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Based on Mumbai University Pattern</p>
+
+                <!-- Section I -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Section I (Compulsory)</h3>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                        <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-4">Q1. Attempt any Four:</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-gray-700 dark:text-gray-300 font-semibold mr-2">a.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Compare ECB and CBC modes with diagrams.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gray-700 dark:text-gray-300 font-semibold mr-2">b.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Explain the role of S-boxes in DES.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gray-700 dark:text-gray-300 font-semibold mr-2">c.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Differentiate MD5 and SHA-256.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gray-700 dark:text-gray-300 font-semibold mr-2">d.</span>
+                                <p class="text-gray-700 dark:text-gray-300">List security requirements for web applications.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gray-700 dark:text-gray-300 font-semibold mr-2">e.</span>
+                                <p class="text-gray-700 dark:text-gray-300">Explain Needham-Schroeder protocol.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section II -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Section II (Attempt Any Three)</h3>
+                    
+                    <!-- Question 2 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-8">
+                        <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-4">Q2.</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">a. RSA:</p>
+                                <p class="text-gray-700 dark:text-gray-300">Given primes (p=11), (q=13), and (e=7), compute private key (d). Encrypt (m=9).</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">b. Firewalls:</p>
+                                <p class="text-gray-700 dark:text-gray-300">Explain types of firewalls and their layers.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-8">
+                        <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-4">Q3.</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">a. Diffie-Hellman:</p>
+                                <p class="text-gray-700 dark:text-gray-300">With (p=17), (g=5), private keys (a=4), (b=6), compute shared key.</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">b. Playfair Cipher:</p>
+                                <p class="text-gray-700 dark:text-gray-300">Encrypt "CRYPTO" using Playfair cipher (keyword: "SECURITY").</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-8">
+                        <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-4">Q4.</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">a. SSL Handshake:</p>
+                                <p class="text-gray-700 dark:text-gray-300">Explain SSL handshake protocol steps.</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">b. X.509:</p>
+                                <p class="text-gray-700 dark:text-gray-300">What is X.509? Explain its fields and digital signature usage.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-8">
+                        <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-4">Q5.</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">a. Session Hijacking:</p>
+                                <p class="text-gray-700 dark:text-gray-300">Explain session hijacking and countermeasures.</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">b. DES vs AES:</p>
+                                <p class="text-gray-700 dark:text-gray-300">Compare DES and AES (key size, rounds, security).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                        <h4 class="font-semibold text-primary-600 dark:text-primary-400 mb-4">Q6.</h4>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">a. Short Notes:</p>
+                            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                                <li>Cross-site request forgery (CSRF)</li>
+                                <li>Penetration testing phases</li>
+                                <li>Role of cookies in web security</li>
+                                <li>Triple DES</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-600 dark:text-gray-400">Created with ❤️ by <a href="https://arbaaz.xyz" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">BAAZ</a></p>
+        </div>
+    </footer>
+    </main>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+</body>
+</html>
