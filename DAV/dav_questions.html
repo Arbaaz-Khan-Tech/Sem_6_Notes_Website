@@ -227,6 +227,283 @@
         </div>
     </main>
 
+    <!-- Cheat Sheet Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="bg-gradient-to-br from-primary-50/80 via-white/80 to-primary-100/80 dark:from-dark-card dark:via-dark-bg dark:to-dark-card rounded-3xl p-10 shadow-2xl">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary-700 dark:text-primary-300 tracking-tight">Cheat Sheet: Data Analytics & Visualization</h2>
+            <p class="text-center text-lg text-gray-700 dark:text-gray-300 mb-10">(Based on Mumbai University Syllabus & Previous Papers)</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Left Column -->
+                <div class="space-y-8">
+                    <!-- Data Analytics Lifecycle -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>🔄</span>Data Analytics Lifecycle</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200">6 Key Phases:</p>
+                        <ol class="list-decimal ml-6 space-y-1">
+                            <li><span class="font-semibold text-blue-700 dark:text-blue-300">Discovery</span> – Define problem, stakeholders, resources.</li>
+                            <li><span class="font-semibold text-green-700 dark:text-green-300">Data Preparation</span> – Clean, transform, load data (<span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">ETL</span>).</li>
+                            <li><span class="font-semibold text-pink-700 dark:text-pink-300">Model Planning</span> – Choose algorithms (<span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">regression</span>, <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">clustering</span>).</li>
+                            <li><span class="font-semibold text-purple-700 dark:text-purple-300">Model Building</span> – Train/test models.</li>
+                            <li><span class="font-semibold text-red-700 dark:text-red-300">Communication</span> – Visualize results (<span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">dashboards</span>, <span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">reports</span>).</li>
+                            <li><span class="font-semibold text-yellow-700 dark:text-yellow-300">Operationalize</span> – Deploy solutions.</li>
+                        </ol>
+                    </div>
+                    <!-- Regression Analysis -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>📈</span>Regression Analysis</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200"><span class="font-semibold text-blue-700 dark:text-blue-300">Linear Regression:</span></p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li>Equation: <span class="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">y = β₀ + β₁x</span></li>
+                            <li>Assumptions: Linear relationship, homoscedasticity, normality of residuals.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200"><span class="font-semibold text-pink-700 dark:text-pink-300">Logistic Regression:</span></p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li>Used for <span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">binary classification</span> (e.g., yes/no).</li>
+                            <li>Output: Probability (0 to 1) via <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">sigmoid function</span>.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200"><span class="font-semibold text-green-700 dark:text-green-300">Stepwise Regression:</span></p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Forward</span>: Add predictors one by one.</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Backward</span>: Remove least significant predictors.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Key Formulas:</p>
+                        <ul class="ml-6 space-y-1">
+                            <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Correlation (r)</span>: Measures linear relationship (-1 to 1).</li>
+                            <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Regression Coefficients</span>: β₁ = r·σy/σx, β₀ = ȳ - β₁x̄</li>
+                        </ul>
+                    </div>
+                    <!-- Time Series Analysis -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>⏳</span>Time Series Analysis</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Components:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Trend</span> (long-term movement)</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Seasonality</span> (repeating patterns)</li>
+                            <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Noise</span> (random fluctuations)</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Models:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">ARIMA(p,d,q)</span>: p: Autoregressive lags, d: Differencing order, q: Moving average terms.</li>
+                            <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">ARMA</span>: ARIMA without differencing (for stationary data).</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Box-Jenkins Methodology:</p>
+                        <ol class="list-decimal ml-6 space-y-1">
+                            <li>Identify model (ACF/PACF plots).</li>
+                            <li>Estimate parameters.</li>
+                            <li>Diagnose residuals.</li>
+                        </ol>
+                    </div>
+                    <!-- Text Analytics -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>📝</span>Text Analytics</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">TF-IDF:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Term Frequency (TF)</span>: Term count in doc / Total terms in doc.</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Inverse Document Frequency (IDF)</span>: log(Total docs / Docs containing term).</li>
+                            <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">TF-IDF</span> = TF × IDF.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Sentiment Analysis Methods:</p>
+                        <ul class="ml-6 space-y-1">
+                            <li>Lexicon-based (e.g., <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">VADER</span>).</li>
+                            <li>Machine learning (e.g., <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Naïve Bayes</span>, <span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">LSTM</span>).</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-8">
+                    <!-- Data Visualization -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>📊</span>Data Visualization</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Python Libraries:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Matplotlib</span>: Basic plots (line, bar, scatter).</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Seaborn</span>: Statistical visuals (heatmaps, boxplots).</li>
+                            <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Pandas</span>: Quick plots (df.plot()).</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">R Libraries:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">ggplot2</span>: Layered grammar of graphics.</li>
+                            <li><span class="bg-green-100 dark:bg-green-900 px-2 py-0.5 rounded">plotly</span>: Interactive plots.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Common Plots:</p>
+                        <ul class="ml-6 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Histogram</span>: Distribution of numerical data.</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Boxplot</span>: Outliers, quartiles.</li>
+                            <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Scatterplot</span>: Correlation between variables.</li>
+                        </ul>
+                    </div>
+                    <!-- Python/R Libraries -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>🐍</span>Python/R Libraries</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Pandas:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li>Key features: <span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">DataFrames</span>, <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">groupby</span>, <span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">merge</span>, <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">pivot_table</span>.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">NumPy vs. Pandas:</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">NumPy</span>: Numerical arrays, math operations.</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Pandas</span>: Labeled data, handling missing values.</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Data Import/Export in R:</p>
+                        <ul class="ml-6 space-y-1">
+                            <li>Read: <span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">read.csv()</span>, <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">read_excel()</span>.</li>
+                            <li>Write: <span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">write.csv()</span>.</li>
+                        </ul>
+                    </div>
+                    <!-- Statistical Tests & EDA -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>📊</span>Statistical Tests & EDA</h3>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Exploratory Data Analysis (EDA):</p>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li>Summary statistics (mean, median).</li>
+                            <li>Visualizations (histograms, scatterplots).</li>
+                            <li>Handle missing values (drop/impute).</li>
+                        </ul>
+                        <p class="mb-2 text-gray-700 dark:text-gray-200 font-semibold">Residual Analysis:</p>
+                        <ul class="ml-6 space-y-1">
+                            <li>Check for patterns (should be random).</li>
+                            <li>Q-Q Plot: Verify normality.</li>
+                        </ul>
+                    </div>
+                    <!-- Key Differences -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>⚡</span>Key Differences</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm text-left mt-2">
+                                <thead>
+                                    <tr class="bg-primary-100 dark:bg-dark-border">
+                                        <th class="px-4 py-2 font-bold text-gray-900 dark:text-white">Linear Regression</th>
+                                        <th class="px-4 py-2 font-bold text-gray-900 dark:text-white">Logistic Regression</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 dark:text-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">Predicts continuous values</td>
+                                        <td class="px-4 py-2">Predicts probabilities (0/1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Uses MSE loss</td>
+                                        <td class="px-4 py-2">Uses log-loss</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="min-w-full text-sm text-left mt-6">
+                                <thead>
+                                    <tr class="bg-primary-100 dark:bg-dark-border">
+                                        <th class="px-4 py-2 font-bold text-gray-900 dark:text-white">Matplotlib</th>
+                                        <th class="px-4 py-2 font-bold text-gray-900 dark:text-white">Seaborn</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 dark:text-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">Low-level, customizable</td>
+                                        <td class="px-4 py-2">High-level, statistical focus</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="min-w-full text-sm text-left mt-6">
+                                <thead>
+                                    <tr class="bg-primary-100 dark:bg-dark-border">
+                                        <th class="px-4 py-2 font-bold text-gray-900 dark:text-white">ARMA</th>
+                                        <th class="px-4 py-2 font-bold text-gray-900 dark:text-white">ARIMA</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 dark:text-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">For stationary data</td>
+                                        <td class="px-4 py-2">Includes differencing for non-stationary data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Quick Formulas -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>🧮</span>Quick Formulas</h3>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Regression Lines</span>: y on x: y - ȳ = r·σy/σx (x - x̄). x on y: Swap x and y.</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Correlation (r)</span>: r = Cov(x,y) / (σxσy).</li>
+                            <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">TF-IDF Example</span>: Doc: "The cat sat" → TF("cat") = 1/3. IDF("cat") = log(100/10) = 1 (if 10 docs contain "cat" out of 100).</li>
+                        </ul>
+                    </div>
+                    <!-- Short Notes -->
+                    <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                        <h3 class="font-bold text-primary-600 dark:text-primary-400 text-xl mb-2 flex items-center gap-2"><span>📝</span>Short Notes</h3>
+                        <ul class="ml-6 mb-2 space-y-1">
+                            <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Generalized Linear Model (GLM)</span>: Extends linear regression for non-normal distributions (e.g., logistic for binary data).</li>
+                            <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Box-Jenkins Intervention Analysis</span>: Adjusts time series models for external events (e.g., COVID impact on sales).</li>
+                            <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Clickjacking</span>: Attack tricking users to click hidden UI elements.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Predicted Question Paper Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="bg-gradient-to-br from-pink-50/80 via-white/80 to-blue-100/80 dark:from-dark-card dark:via-dark-bg dark:to-dark-card rounded-3xl p-10 shadow-2xl">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-10 text-pink-700 dark:text-pink-300 tracking-tight">Predicted Question Paper</h2>
+            <div class="space-y-10">
+                <!-- Section I -->
+                <div class="bg-white/80 dark:bg-dark-card border border-pink-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                    <h3 class="font-bold text-2xl mb-4 text-pink-600 dark:text-pink-300 flex items-center gap-2"><span>📝</span>Section I <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded text-pink-700 dark:text-pink-200 ml-2">Compulsory</span></h3>
+                    <p class="mb-4 text-gray-700 dark:text-gray-200 font-semibold">Q1. Attempt any <span class="text-pink-700 dark:text-pink-300">FOUR</span>:</p>
+                    <ul class="list-disc ml-8 space-y-2 text-gray-700 dark:text-gray-200">
+                        <li><span class="font-semibold text-blue-700 dark:text-blue-300">Explain the role of an analytic sandbox in data analytics.</span></li>
+                        <li><span class="font-semibold text-green-700 dark:text-green-300">Calculate regression equations from given data (e.g., age of husband and wife).</span></li>
+                        <li><span class="font-semibold text-purple-700 dark:text-purple-300">Differentiate ARMA and ARIMA models.</span></li>
+                        <li><span class="font-semibold text-yellow-700 dark:text-yellow-300">Compare TF-IDF with Bag-of-Words.</span></li>
+                        <li><span class="font-semibold text-pink-700 dark:text-pink-300">List key features of the Pandas library.</span></li>
+                    </ul>
+                </div>
+                <!-- Section II -->
+                <div class="bg-white/80 dark:bg-dark-card border border-blue-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                    <h3 class="font-bold text-2xl mb-4 text-blue-600 dark:text-blue-300 flex items-center gap-2"><span>📚</span>Section II <span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded text-blue-700 dark:text-blue-200 ml-2">Attempt any THREE</span></h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="mb-2 font-semibold text-gray-800 dark:text-gray-100">Q2.</p>
+                            <ul class="list-disc ml-8 space-y-1 text-gray-700 dark:text-gray-200">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Explain the Data Analytics Lifecycle phases with examples.</span></li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Fit an ARIMA model to a time series dataset and interpret results.</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="mb-2 font-semibold text-gray-800 dark:text-gray-100">Q3.</p>
+                            <ul class="list-disc ml-8 space-y-1 text-gray-700 dark:text-gray-200">
+                                <li><span class="text-pink-700 dark:text-pink-300 font-semibold">Perform sentiment analysis using TF-IDF on a sample text corpus.</span></li>
+                                <li><span class="text-yellow-700 dark:text-yellow-300 font-semibold">Create visualizations in Python (e.g., Seaborn) for a given dataset.</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="mb-2 font-semibold text-gray-800 dark:text-gray-100">Q4.</p>
+                            <ul class="list-disc ml-8 space-y-1 text-gray-700 dark:text-gray-200">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Compute two regression lines and estimate values (e.g., bacterial growth).</span></li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Explain how to detect dirty data using EDA in R.</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="mb-2 font-semibold text-gray-800 dark:text-gray-100">Q5.</p>
+                            <ul class="list-disc ml-8 space-y-1 text-gray-700 dark:text-gray-200">
+                                <li><span class="text-purple-700 dark:text-purple-300 font-semibold">Discuss Box-Jenkins methodology and its applications.</span></li>
+                                <li><span class="text-pink-700 dark:text-pink-300 font-semibold">Solve a logistic regression problem (e.g., promotional offer analysis).</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="mb-2 font-semibold text-gray-800 dark:text-gray-100">Q6. Short notes (any <span class='text-blue-700 dark:text-blue-300'>TWO</span>):</p>
+                            <ul class="list-disc ml-8 space-y-1 text-gray-700 dark:text-gray-200">
+                                <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Generalized Linear Model (GLM)</span></li>
+                                <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Exploratory Data Analysis (EDA) steps</span></li>
+                                <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Data import/export in R</span></li>
+                                <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Seaborn vs. Matplotlib</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

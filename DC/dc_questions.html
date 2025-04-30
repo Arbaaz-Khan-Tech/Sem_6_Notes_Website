@@ -214,6 +214,193 @@
         </div>
     </main>
 
+    <!-- Cheatsheet Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="bg-gradient-to-br from-primary-50/80 via-white/80 to-primary-100/80 dark:from-dark-card dark:via-dark-bg dark:to-dark-card rounded-3xl p-10 shadow-2xl">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary-700 dark:text-primary-300 tracking-tight">Cheatsheet</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Very Frequent Questions -->
+                <div class="space-y-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2"><span>🔥</span>Very Frequent Questions</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Issues in <span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Distributed Systems</span></span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1 text-gray-700 dark:text-gray-200">
+                                <li><span class="font-semibold text-blue-700 dark:text-blue-300">Transparency:</span> <span class="highlight">Access</span>, <span class="highlight">location</span>, <span class="highlight">concurrency</span>, <span class="highlight">replication</span>, <span class="highlight">failure</span>, <span class="highlight">mobility</span>.</li>
+                                <li><span class="font-semibold text-green-700 dark:text-green-300">Scalability:</span> Challenges with <span class="highlight">size</span>, <span class="highlight">geographical distribution</span>, and <span class="highlight">admin control</span>.</li>
+                                <li><span class="font-semibold text-yellow-700 dark:text-yellow-300">Fault Tolerance:</span> Detecting, masking, recovering from failures.</li>
+                                <li><span class="font-semibold text-red-700 dark:text-red-300">Security:</span> Authentication, confidentiality, integrity.</li>
+                                <li><span class="font-semibold text-purple-700 dark:text-purple-300">Concurrency & Resource Management</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Ricart-Agrawala <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Algorithm</span></span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Type: <span class="text-pink-700 dark:text-pink-300 font-semibold">Decentralized mutual exclusion</span></li>
+                                <li>Uses <span class="text-pink-700 dark:text-pink-300 font-semibold">timestamped REQUEST</span> messages</li>
+                                <li>CS entry: Sent REQUEST to all & received REPLY from all</li>
+                                <li>Message Complexity: <span class="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">2 × (N – 1)</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Remote Procedure Call (<span class="text-indigo-700 dark:text-indigo-300">RPC</span>)</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Allows client to invoke procedures on remote systems.</li>
+                                <li>Components: <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Client Stub</span>, <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Server Stub</span>, <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">RPC Runtime</span></li>
+                                <li>Steps:
+                                    <ol class="list-decimal ml-6">
+                                        <li>Client calls local stub.</li>
+                                        <li>Marshals request.</li>
+                                        <li>Server stub receives and executes.</li>
+                                        <li>Sends back result.</li>
+                                    </ol>
+                                </li>
+                                <li><span class="italic text-gray-500">Transparent to programmer.</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Load Sharing vs Task Assignment vs Load Balancing</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Load Sharing:</span> Distributes tasks to avoid idle resources.</li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Task Assignment:</span> Static decision; maps tasks to processors before execution.</li>
+                                <li><span class="text-yellow-700 dark:text-yellow-300 font-semibold">Load Balancing:</span> Dynamic distribution to maintain equal workload.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Data-Centric <span class="bg-green-100 dark:bg-green-900 px-2 py-0.5 rounded">Consistency Models</span></span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Strict:</span> Read returns most recent write.</li>
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Sequential:</span> Result of any execution is same as if ops were done in sequence.</li>
+                                <li><span class="text-purple-700 dark:text-purple-300 font-semibold">Causal:</span> Writes that are causally related must be seen in order.</li>
+                                <li><span class="text-yellow-700 dark:text-yellow-300 font-semibold">FIFO:</span> Writes from a process seen by all in order sent.</li>
+                                <li><span class="text-gray-700 dark:text-gray-300 font-semibold">Weak/Eventual:</span> No guarantees on real-time ordering.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Code Migration</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Moving code between systems for efficiency/security.</li>
+                                <li>Types:
+                                    <ul class="list-disc ml-6">
+                                        <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Strong Mobility</span>: Moves code + execution state.</li>
+                                        <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Weak Mobility</span>: Moves only code.</li>
+                                    </ul>
+                                </li>
+                                <li>Examples: <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Applets</span>, <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">mobile agents</span>.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">DFS Features + File Service Architecture</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="font-semibold text-blue-700 dark:text-blue-300">Features:</span> Transparency (location, access, concurrency), reliability, scalability, fault-tolerance.</li>
+                                <li><span class="font-semibold text-green-700 dark:text-green-300">Models:</span> <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Remote Service Model</span>, <span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Upload/Download Model</span>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Frequently Appeared Topics -->
+                <div class="space-y-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2"><span>🔁</span>Frequently Appeared Topics</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Suzuki-Kasami <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Algorithm</span></span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Token-based mutual exclusion. Only one token exists.</li>
+                                <li>Requesting process broadcasts request.</li>
+                                <li>Holder sends token if not using CS.</li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Efficient:</span> Message Complexity O(1) in absence of contention.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Maekawa's <span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Algorithm</span> + <span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Quorum Set</span></span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Each process has a voting set; must get permission from all in set.</li>
+                                <li>Quorum sets intersect (for safety).</li>
+                                <li>Reduces message complexity from <span class="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">O(N)</span> to <span class="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">O(√N)</span>.</li>
+                                <li>Can lead to deadlock — needs extra mechanism.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Election Algorithms</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Bully:</span> Process with highest ID wins. Sends ELECTION messages to higher IDs.</li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Generic:</span> Process initiates election. Candidate with best (lowest/highest) ID wins.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Logical vs Physical Clocks</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Physical Clocks:</span> Real-world time (NTP).</li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Logical Clocks:</span> Lamport: If a → b, then L(a) &lt; L(b). Vector Clocks: Tracks causality more precisely.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Client-Centric <span class="bg-green-100 dark:bg-green-900 px-2 py-0.5 rounded">Consistency Models</span></span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Suitable for mobile/disconnected systems.</li>
+                                <li>Models:
+                                    <ul class="list-disc ml-6">
+                                        <li><span class="bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded">Monotonic Reads</span>: Never see older data after seeing new.</li>
+                                        <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Monotonic Writes</span>: Writes follow order.</li>
+                                        <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Read Your Writes</span></li>
+                                        <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Writes Follow Reads</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Process vs Thread</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Process:</span> Independent execution, own memory space.</li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Thread:</span> Lightweight; shares memory with other threads in process.</li>
+                                <li>Threads are faster, better for parallel tasks.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Global Scheduling Features</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>Centralized vs Distributed</li>
+                                <li>Static vs Dynamic</li>
+                                <li>Preemptive vs Non-Preemptive</li>
+                                <li><span class="font-semibold text-green-700 dark:text-green-300">Goals:</span> Load balancing, minimizing execution time, fairness.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Message Communication Models</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="text-blue-700 dark:text-blue-300 font-semibold">Transient:</span> Message lost if receiver not ready.</li>
+                                <li><span class="text-green-700 dark:text-green-300 font-semibold">Persistent:</span> Stored in buffer until delivery.</li>
+                                <li>Synchronous vs Asynchronous</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Andrew File System (<span class="text-indigo-700 dark:text-indigo-300">AFS</span>)</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>DFS with client-side caching.</li>
+                                <li>Whole-file caching</li>
+                                <li>Callback mechanism for consistency.</li>
+                                <li>Scalable and efficient.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/80 dark:bg-dark-card border border-primary-100 dark:border-dark-border rounded-xl p-6 shadow hover:shadow-lg transition-all">
+                            <span class="font-bold text-primary-600 dark:text-primary-400 text-lg">Fault Tolerance</span>
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li><span class="font-semibold text-blue-700 dark:text-blue-300">Techniques:</span>
+                                    <ul class="list-disc ml-6">
+                                        <li><span class="bg-pink-100 dark:bg-pink-900 px-2 py-0.5 rounded">Replication</span>: Active/passive</li>
+                                        <li><span class="bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 rounded">Checkpointing & Rollback</span></li>
+                                        <li><span class="bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded">Redundancy</span>: Hardware/software</li>
+                                    </ul>
+                                </li>
+                                <li><span class="font-semibold text-green-700 dark:text-green-300">Goals:</span> Continue operation in presence of faults.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
