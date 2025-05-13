@@ -176,20 +176,38 @@
                         <h4 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">V.V.V. Important: Model Components</h4>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
-                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">AR (AutoRegressive)</h5>
-                                <p class="text-gray-700 dark:text-gray-300">Uses past values to predict future values</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Formula: y_t = c + Σ(φ_i * y_{t-i}) + ε_t</p>
+                                <h5 class="font-semibold text-blue-700 dark:text-blue-400">AR (Autoregressive)</h5>
+                                <p class="text-gray-700 dark:text-gray-300">Uses past values to predict the current value</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                                    Formula: 
+                                    <span class="font-mono text-blue-800 dark:text-blue-300">
+                                        y<sub>t</sub> = c + &Sigma;(φ<sub>i</sub> · y<sub>t-i</sub>) + ε<sub>t</sub>
+                                    </span>
+                                </p>
                             </div>
+                            
                             <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
                                 <h5 class="font-semibold text-green-700 dark:text-green-400">MA (Moving Average)</h5>
                                 <p class="text-gray-700 dark:text-gray-300">Uses past errors to predict future values</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Formula: y_t = μ + Σ(θ_i * ε_{t-i}) + ε_t</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                                    Formula: 
+                                    <span class="font-mono text-green-800 dark:text-green-300">
+                                        y<sub>t</sub> = μ + &Sigma;(θ<sub>i</sub> · ε<sub>t-i</sub>) + ε<sub>t</sub>
+                                    </span>
+                                </p>
                             </div>
+                            
                             <div class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg">
                                 <h5 class="font-semibold text-purple-700 dark:text-purple-400">I (Integrated)</h5>
                                 <p class="text-gray-700 dark:text-gray-300">Difference the data to make it stationary</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Formula: Δ^d y_t = (1-B)^d y_t</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                                    Formula: 
+                                    <span class="font-mono text-purple-800 dark:text-purple-300">
+                                        Δ<sup>d</sup> y<sub>t</sub> = (1 - B)<sup>d</sup> y<sub>t</sub>
+                                    </span>
+                                </p>
                             </div>
+                            
                         </div>
                     </div>
 
