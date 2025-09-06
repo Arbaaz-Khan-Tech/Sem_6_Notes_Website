@@ -1,10 +1,278 @@
- <article class="glass rounded-xl p-6 transform hover:scale-105 transition-all">
-                    <div class="text-4xl text-space-400 mb-4">
-                        <i class="fas fa-shield-alt"></i>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks Concepts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neuralDark: '#0f172a',
+                        neuralBlue: '#3b82f6',
+                        neuralPurple: '#8b5cf6',
+                        neuralPink: '#ec4899',
+                        neuralCyan: '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .section-container {
+            transition: all 0.3s ease;
+        }
+        .section-container:hover {
+            transform: translateY(-5px);
+        }
+        code {
+            background-color: #1e293b;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            color: #f8fafc;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-neuralDark to-slate-900 text-slate-200 min-h-screen">
+    <header class="container mx-auto px-4 py-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-neuralBlue to-neuralPurple">Neural Networks Concepts</h1>
+        <p class="text-xl text-slate-400 max-w-3xl mx-auto">A comprehensive guide to understanding multilayer perceptrons, activation functions, backpropagation, and more</p>
+    </header>
+
+    <main class="container mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Question 1 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralBlue flex items-center justify-center text-white font-bold mr-3">1</div>
+                <h2 class="text-2xl font-bold text-neuralBlue">Multilayer Perceptron (MLP)</h2>
+            </div>
+            <div class="space-y-4">
+                <p>A Multilayer Perceptron (MLP) is a class of feedforward artificial neural network that consists of at least three layers of nodes: an input layer, one or more hidden layers, and an output layer.</p>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Representation Power</h3>
+                    <p>MLPs are universal function approximators - they can represent any continuous function given sufficient neurons and layers. This makes them extremely powerful for complex pattern recognition tasks.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Difference from Simple Feedforward Network</h3>
+                    <p>While all MLPs are feedforward networks, not all feedforward networks are MLPs. The key distinction is that MLPs must have multiple layers (at least one hidden layer) and typically use nonlinear activation functions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 2 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralPurple flex items-center justify-center text-white font-bold mr-3">2</div>
+                <h2 class="text-2xl font-bold text-neuralPurple">Activation Functions</h2>
+            </div>
+            <div class="space-y-4">
+                <p>Activation functions introduce non-linearity into neural networks, allowing them to learn complex patterns and relationships in data.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h3 class="font-bold text-neuralCyan mb-2">ReLU</h3>
+                        <p><code>f(x) = max(0, x)</code></p>
+                        <p class="mt-2">Pros: Computationally efficient, reduces vanishing gradient. Cons: Can cause "dying ReLU" problem.</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Cryptography and System Security</h3>
-                    <p class="text-space-200 mb-4">Explore cryptographic algorithms, security protocols, and system protection methods. Understand how to secure digital information and systems.</p>
-                    <a href="CS/css_questions.html" class="inline-block px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
-                        View Notes
-                    </a>
-                </article>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h3 class="font-bold text-neuralCyan mb-2">Leaky ReLU</h3>
+                        <p><code>f(x) = max(αx, x)</code></p>
+                        <p class="mt-2">Pros: Prevents dying ReLU problem. Cons: Results not always consistent.</p>
+                    </div>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h3 class="font-bold text-neuralCyan mb-2">Sigmoid</h3>
+                        <p><code>f(x) = 1 / (1 + e^{-x})</code></p>
+                        <p class="mt-2">Pros: Smooth gradient, output between 0-1. Cons: Prone to vanishing gradients, computationally expensive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 3 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralPink flex items-center justify-center text-white font-bold mr-3">3</div>
+                <h2 class="text-2xl font-bold text-neuralPink">Backpropagation</h2>
+            </div>
+            <div class="space-y-4">
+                <p>Backpropagation is the algorithm used to train neural networks by efficiently calculating the gradient of the loss function with respect to each weight.</p>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Process</h3>
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li>Forward pass: Compute outputs</li>
+                        <li>Calculate loss between predictions and true values</li>
+                        <li>Backward pass: Compute gradients of loss with respect to weights</li>
+                        <li>Update weights using optimization algorithm (e.g., gradient descent)</li>
+                        <li>Repeat until convergence</li>
+                    </ol>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Learning Parameters</h3>
+                    <p>Backpropagation uses the chain rule to compute gradients layer by layer, moving backward from the output layer to the input layer. These gradients indicate how to adjust weights to minimize loss.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 4 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralCyan flex items-center justify-center text-white font-bold mr-3">4</div>
+                <h2 class="text-2xl font-bold text-neuralCyan">Gradient Descent Algorithms</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralBlue mb-2">Stochastic Gradient Descent (SGD)</h3>
+                    <p>Updates parameters for each training example.</p>
+                    <p class="mt-2"><span class="font-bold text-green-400">Advantages:</span> Fast convergence, escapes local minima.</p>
+                    <p><span class="font-bold text-red-400">Disadvantages:</span> Noisy updates, may not converge to minimum.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralPurple mb-2">Mini-Batch Gradient Descent</h3>
+                    <p>Updates parameters using a small batch of training examples.</p>
+                    <p class="mt-2"><span class="font-bold text-green-400">Advantages:</span> Balance between efficiency and stability.</p>
+                    <p><span class="font-bold text-red-400">Disadvantages:</span> Requires tuning of batch size.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralPink mb-2">Momentum-Based</h3>
+                    <p>Accumulates velocity in direction of consistent gradient.</p>
+                    <p class="mt-2"><span class="font-bold text-green-400">Advantages:</span> Faster convergence, reduces oscillations.</p>
+                    <p><span class="font-bold text-red-400">Disadvantages:</span> Additional hyperparameter to tune.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 5 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralBlue flex items-center justify-center text-white font-bold mr-3">5</div>
+                <h2 class="text-2xl font-bold text-neuralBlue">Supervised vs. Unsupervised Learning</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Supervised Learning</h3>
+                    <p>Uses labeled data to learn mapping from inputs to outputs.</p>
+                    <p class="mt-2"><span class="font-bold">Example:</span> Convolutional Neural Networks (CNNs) for image classification.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Unsupervised Learning</h3>
+                    <p>Finds patterns in unlabeled data without predefined outputs.</p>
+                    <p class="mt-2"><span class="font-bold">Example:</span> Autoencoders for dimensionality reduction or anomaly detection.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Key Differences</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Supervised learning uses labeled data; unsupervised uses unlabeled data</li>
+                        <li>Supervised predicts outputs; unsupervised discovers patterns</li>
+                        <li>Supervised evaluated on accuracy; unsupervised on subjective metrics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 6 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralPurple flex items-center justify-center text-white font-bold mr-3">6</div>
+                <h2 class="text-2xl font-bold text-neuralPurple">Loss Functions</h2>
+            </div>
+            <div class="space-y-4">
+                <p>Loss functions measure how well a model's predictions match the true values, providing a metric to optimize during training.</p>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Squared Error Loss</h3>
+                    <p><code>L = (y - ŷ)²</code></p>
+                    <p class="mt-2">Measures the square of the difference between predicted and true values. Typically used for regression problems where the output is continuous.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Cross-Entropy Loss</h3>
+                    <p><code>L = -Σ y log(ŷ)</code></p>
+                    <p class="mt-2">Measures the difference between probability distributions. Typically used for classification problems, especially when using softmax output activation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 7 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralPink flex items-center justify-center text-white font-bold mr-3">7</div>
+                <h2 class="text-2xl font-bold text-neuralPink">Vanishing & Exploding Gradients</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Vanishing Gradients</h3>
+                    <p>Gradients become extremely small during backpropagation, causing early layers to learn very slowly.</p>
+                    <p class="mt-2"><span class="font-bold">Causes:</span> Activation functions like sigmoid/tanh, deep networks, improper weight initialization.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Exploding Gradients</h3>
+                    <p>Gradients become extremely large, causing unstable training and numerical overflow.</p>
+                    <p class="mt-2"><span class="font-bold">Causes:</span> Deep networks, large weight values, inappropriate learning rate.</p>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralCyan mb-2">Mitigation Techniques</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Use ReLU/Leaky ReLU activation functions</li>
+                        <li>Proper weight initialization (e.g., Xavier, He)</li>
+                        <li>Batch normalization</li>
+                        <li>Gradient clipping (for exploding gradients)</li>
+                        <li>Residual connections</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 8 -->
+        <section class="section-container bg-slate-800 p-6 rounded-xl shadow-lg md:col-span-2">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-neuralCyan flex items-center justify-center text-white font-bold mr-3">8</div>
+                <h2 class="text-2xl font-bold text-neuralCyan">Batch Normalization</h2>
+            </div>
+            <div class="space-y-4">
+                <p>Batch Normalization is a technique that normalizes the inputs to each layer to reduce internal covariate shift and stabilize training.</p>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralBlue mb-2">How It Helps</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Allows higher learning rates</li>
+                        <li>Reduces sensitivity to weight initialization</li>
+                        <li>Acts as a regularizer, reducing need for dropout</li>
+                        <li>Mitigates vanishing/exploding gradient problems</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-slate-700 p-4 rounded-lg">
+                    <h3 class="font-bold text-neuralPurple mb-2">Improving Training & Performance</h3>
+                    <p>By normalizing activations at each layer, BatchNorm reduces internal covariate shift (change in network activation distributions due to parameter updates). This leads to:</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li>Faster convergence</li>
+                        <li>More stable training</li>
+                        <li>Better generalization performance</li>
+                        <li>Reduced overfitting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-slate-500">
+        <p>Neural Networks Concepts Explorer | Created with Tailwind CSS</p>
+    </footer>
+</body>
+</html>
